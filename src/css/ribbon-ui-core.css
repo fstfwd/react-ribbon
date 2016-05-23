@@ -1,0 +1,94 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+#RibbonUI {
+	background-color: #FFF;
+	overflow: hidden;
+	color: #444;
+	font-size: 12px;
+	font-family: 'Segoe UI';
+}
+
+#RibbonUI > .ui-ribbon-title {
+	text-align: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+#RibbonUI a {
+	color: #444444;
+	cursor: default;
+	text-decoration: none;
+	outline: none;
+}
+
+#RibbonUI .ui-ribbon-border-bottom {
+	border-bottom: 1px solid #D4D4D4;
+}
+
+#RibbonUI .ui-ribbon-border-left {
+	borde-left: 1px solid #D4D4D4;
+}
+
+#RibbonUI .ui-ribbon-border-right {
+	border-right: 1px solid #D4D4D4;
+}
+
+#RibbonUI .ui-ribbon-border-top {
+	border-top: 1px solid #D4D4D4;
+}
+
+.ui-ribbon-nopadding {
+	padding: 0;
+}
+
+.ui-ribbon-nomargin {
+	margin: 0;
+}
+
+.ui-ribbon-relative {
+	position: relative;
+}
+
+.ui-ribbon-absolute {
+	position: absolute;
+}
+
+.ui-ribbon-invisible {
+	display: none;
+}
+
+.ui-ribbon-center {
+	text-align: center;
+}
+
+.ui-ribbon-left {
+	float: left;
+}
+
+.ui-ribbon-right {
+	float: right;
+}
+
+.ui-ribbon-inline {
+	display: inline-block;
+}
+
+.ui-ribbon-disabled {
+	opacity: 0.4;
+	filter: alpha( opacity=40 );
+}
+
+.ui-ribbon-uppercase {
+	text-transform: uppercase;
+}
+
+.ui-ribbon-nowrap {
+	white-space: nowrap;
+}
+
+.ui-ribbon-v-scroll {
+	overflow-y: scroll;
+}

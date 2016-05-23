@@ -1,0 +1,22 @@
+#RibbonUI li[role=ui-ribbon-tab].ui-ribbon-tab-application {
+	background-color: #2b579a;
+	color: #FFF;
+	border: 1px solid #2b579a !important;
+}
+
+#RibbonUI li[role=ui-ribbon-tab]:not(.ui-ribbon-tab-application):hover {
+	color: #2b579a;
+}
+
+#RibbonUI ul[role=ui-ribbon-tabs] li.ui-ribbon-active[role=ui-ribbon-tab] {
+	color: #2b579a;
+}
+
+#RibbonUI .ui-ribbon-button.ui-ribbon-active {
+	background-color: #a3bde3;
+}
+
+#RibbonUI a:not(.ui-ribbon-disabled) .ui-ribbon-button-big:not(.ui-ribbon-active):hover, 
+#RibbonUI a:not(.ui-ribbon-disabled) .ui-ribbon-button-small:not(.ui-ribbon-active):hover {
+	background-color: #d5e1f2;
+}
