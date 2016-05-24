@@ -51,6 +51,23 @@ export default class Ribbon extends React.Component {
 	}
 
 	/**
+	 * Add new tab by given data.
+	 * @param {RibbonTabData} tabData - Ribbon tab data for creating new tab.
+	 * @return {RibbonTab} - Rendered RibbonTab component.
+	 */
+	addTab( tabData ) {
+		const idx = this.tabs.findIndex( ( tab ) => ( tab.id == tabData.id || tab.name === tabData.name ) );
+		if( !(tabData instanceof RibbonTabData) || idx !== -1 )
+			return console.log( '%c[Ribbon] Input tabData is invalid or duplicate.', 'color:red;' );
+
+		tabData.actived = ( this.tabs.length === 1 );
+		const tabs = this.state.tabs.concat( tabData );
+		this.setState({ tabs });
+
+		return this.tabs[ this.tabs.length - 1 ];
+	}
+
+	/**
 	 * Active target tab by given id.
 	 * @param {string} tabId - Tab Id.
 	 */
@@ -63,8 +80,6 @@ export default class Ribbon extends React.Component {
 
 		this.state.tabs.forEach( updateTab );
 		this.tabs.forEach( updateTab );
-
-		console.log( this.tabs );
 	}
 
 	/**
@@ -107,12 +122,12 @@ export default class Ribbon extends React.Component {
 		};
 
 		const updateTab = ( id, data ) => {
-			let tabs = this.state.tabs; 
+			let tabs = scope.state.tabs;
 			const tab = tabs.find( ( tab ) => tab.id === id );
 			if( !tab ) return;
 
 			Object.assign( tab, data );
-			this.setState({ tabs });
+			scope.setState({ tabs });
 		};
 
 		const createTab = ( tab ) => {
@@ -140,7 +155,7 @@ export default class Ribbon extends React.Component {
 					<div id="ui-ribbon-main" className="ui-ribbon-main ui-ribbon-border-bottom">
 						<div className="ui-ribbon-tab-container ui-ribbon-border-bottom">
 							<ul role="ui-ribbon-tabs" className="ui-ribbon-nowrap ui-ribbon-nopadding ui-ribbon-nomargin">
-							{ otherTabs.map( createTab ) }
+								{ otherTabs.map( createTab ) }
 							</ul>
 						</div>
 					</div>

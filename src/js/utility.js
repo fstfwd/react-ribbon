@@ -19,6 +19,21 @@ export const newGUID = () => {
 };
 
 /**
+ * Find proper (first) item suited with input condition in an array.
+ * @param {array} items -	Array of searching target.
+ * @param {func} predicate - Predicate function for describe which item is goingo to return.
+ * @return {object} - Target item.
+ */
+export const findItem = ( items = [], predicate ) => {
+	predicate = ( predicate instanceof Function ) ? predicate : ( item ) => { return true };
+
+	for( let i = 0; i < items.length; i++ ) {
+		let item = items[i];
+		if( predicate( item ) ) return item;
+	}
+};
+
+/**
  * Create namespace.
  * @param {string} s - namespace (e.g. 'RiibonUI.Ribbon').
  * @return {Object} - Namespace,
@@ -33,19 +48,4 @@ export const namespace = ( s ) => {
 	}
 
 	return ns;
-};
-
-/**
- * Find proper item suited with input condition in an array.
- * @param {array} items -	Array of searching target.
- * @param {func} comp - Condition	function for identifying specific item in the array.
- * @return {object} - Target result.
- */
-export const findItem = ( items = [], comp ) => {
-	comp = ( comp instanceof Function ) ? comp : ( item ) => { return true };
-
-	for( let i = 0; i < items.length; i++ ) {
-		let item = items[i];
-		if( comp( item ) ) return item;
-	}
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import RibbonBase from './RibbonBase';
+import RibbonPanel from './RibbonPanel';
+import RibbonPanelData from './data/RibbonPanelData';
 import { newGUID } from './utility';
 
 const Panels = Symbol( 'panels' );
@@ -29,29 +31,6 @@ export default class RibbonTab extends RibbonBase {
 		this[Panels] = [];
 
 		this.handleClick = this.handleClick.bind( this );
-	}
-
-	/**
-	 * Instance name shown on the user interface, might be a localized string.
-	 * @param {string} - Instance name.
-	 * @override
-	 */
-	get displayName() {
-		return super.displayName;
-	}
-
-	/**
-	 * Instance name shown on the user interface, might be a localized string.
-	 * @param {string} name - Instance name.
-	 * @override
-	 */
-	set displayName( name ) {
-		if( typeof name !== 'string' ) throw 'Input type should be a string.';
-
-		const onStateChange = this.props.onStateChange;
-		onStateChange && onStateChange( this.id, { displayName: name } );
-
-		super.displayName = name;
 	}
 
 	/**
@@ -92,6 +71,28 @@ export default class RibbonTab extends RibbonBase {
 		return this[Panels];
 	}
 
+	/**
+	 * Add new panel by given data.
+	 * @param {RibbonPanelData} panelData - Ribbon panel data for creating new panel.
+	 * @return {RibbonPanel} - Rendered RibbonPanel component.
+	 */
+	addPanel( panelData ) {
+		const idx = this.panels.findIndex( ( panel ) => ( panel.id == panelData.id || panel.name === panelData.name ) );
+		if( !(panelData instanceof RibbonPanelData) || idx !== -1 )
+			return console.log( '%c[RibbonPanel] Input panelData is invalid or duplicate.', 'color:red;' );
+
+		panelData.seperator = ( this.panels.length !== 0 );
+		const panels = this.state.panels.concat( panelData );
+
+		const prop = { panels };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		this.setState( prop );
+
+		return this.panels[ this.panels.length -1 ];
+	}
+
 	componentWillUpdate( nextProps, nextState ) {
 		this[Panels].length = 0;
 	}
@@ -107,9 +108,36 @@ export default class RibbonTab extends RibbonBase {
 	}
 
 	render() {
+		const scope = this;
+		const panels = this.state.panels;
 		const dynCSS = ClassNames({
 			'ui-ribbon-active': this.actived
 		});
+
+		const updatePanel = ( id, data ) => {
+			let panels = scope.state.panels;
+			const panel = panels.find( ( panel ) => panel.id === id );
+			if( !panel ) return;
+
+			Object.assign( panel, data );
+			scope.setState({ panels });
+		};
+
+		const createPanel = ( panel ) => {
+			return (
+				<RibbonPanel
+					key={ panel.id }
+					id={ panel.id }
+					name={ panel.name }
+					displayName={ panel.displayName }
+					enabled={ panel.enabled }
+					hidden={ panel.hidden }
+					seperator={ panel.seperator }
+					items={ panel.items }
+					onStateChange={ updatePanel }
+					ref={ ( c ) => { if( c ) scope.panels.push( c ) } } />
+			);
+		};
 
 		return (
 			<li
@@ -121,7 +149,7 @@ export default class RibbonTab extends RibbonBase {
 
 				<span className="ui-ribbon-uppercase">{ this.displayName }</span>
 				<div className="ui-ribbon-tab-contents ui-ribbon-absolute">
-
+					{ panels.map( createPanel ) }
 				</div>
 			</li>
 		);
@@ -132,7 +160,7 @@ RibbonTab.propTypes = {
 	id: React.PropTypes.string.isRequired,
 	type: React.PropTypes.string.isRequired,
 	actived: React.PropTypes.bool,
-	//panels: React.PropTypes.arrayOf( React.PropTypes.instanceOf(  ) ),
+	panels: React.PropTypes.arrayOf( React.PropTypes.instanceOf( RibbonPanelData ) ),
 	onStateChange: React.PropTypes.func
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { newGUID } from './utility';
 
 /**
  * RibbonBase
@@ -55,7 +56,11 @@ export default class RibbonBase extends React.Component {
 	set displayName( name ) {
 		if( typeof name !== 'string' ) throw 'Input type should be a string.';
 
-		this.setState({ displayName: name });
+		const prop = { displayName: name };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		this.setState( prop );
 	}
 
 	/**
@@ -71,7 +76,13 @@ export default class RibbonBase extends React.Component {
 	 * @param {bool} [enabled = true] - If false, make instance be disabled.
 	 */
 	set enabled( enabled = true ) {
-		this.setState({ enabled: ( enabled === true ) });
+		const isisEnabled = ( enabled === true );
+
+		const prop = { enabled: isEnabled };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		this.setState( prop );
 	}
 
 	/**
@@ -90,7 +101,11 @@ export default class RibbonBase extends React.Component {
 		const isHidden = ( hidden === true );
 		const isEnabled = !isHidden;
 
-		this.setState({ hidden: isHidden, enabled: isEnabled });
+		const prop = { hidden: isHidden, enabled: isEnabled };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		this.setState( prop );
 	}
 }
 
@@ -99,10 +114,12 @@ RibbonBase.propTypes = {
 	name: React.PropTypes.string.isRequired,
 	displayName: React.PropTypes.string,
 	enabled: React.PropTypes.boolean,
-	hidden: React.PropTypes.boolean
+	hidden: React.PropTypes.boolean,
+	onStateChange: React.PropTypes.func
 };
 
 RibbonBase.defaultProps = {
+	id: newGUID(),
 	enabled: true,
 	hidden: false
 };
