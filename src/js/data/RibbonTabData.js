@@ -1,5 +1,4 @@
 import RibbonBaseData from './RibbonBaseData';
-import { newGUID } from '../utility';
 
 const	Actived = Symbol( 'actived' );
 const Panels = Symbol( 'panels' );

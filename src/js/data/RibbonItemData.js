@@ -1,5 +1,4 @@
 import RibbonBaseData from './RibbonBaseData';
-import { newGUID } from '../utility';
 
 const	Actived = Symbol( 'actived' );
 
@@ -25,12 +24,12 @@ export default class RibbonItemData extends RibbonBaseData {
 	 * @return {string} - Item type for identification.
 	 */
 	get type() {
-		return 'ui-ribbon-button';
+		return 'ui-ribbon-panel-item';
 	}
 
 	/**
 	 * Item actived state.
-	 * @return {bool} - If true, it repsents tab is selected currently.
+	 * @return {bool} - If true, it repsents item is actived currently.
 	 */
 	get actived() {
 		return this[Actived]
@@ -38,7 +37,7 @@ export default class RibbonItemData extends RibbonBaseData {
 
 	/**
 	 * Item actived state.
-	 * @return {bool} [actived = false] - If true, it repsents tab is selected currently.
+	 * @return {bool} [actived = false] - If true, it repsents item is actived currently.
 	 */
 	set actived( actived = false ) {
 		this[Actived] = ( actived === true );

@@ -1,7 +1,12 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import RibbonBase from './RibbonBase';
-import RibbonItemData from './data/RibbonItemData'
+import RibbonItem from './RibbonItem';
+import RibbonButton from './RibbonButton';
+import RibbonPushButton from './RibbonPushButton';
+import RibbonItemData from './data/RibbonItemData';
+import RibbonButtonData from './data/RibbonButtonData';
+import RibbonPushButtonData from './data/RibbonPushButtonData';
 import { newGUID } from './utility';
 
 const Items = Symbol( 'items' );
@@ -43,6 +48,27 @@ export default class RibbonPanel extends RibbonBase {
 		return this[Items];
 	}
 
+	/**
+	 * Add new RibbonItem by given data.
+	 * @param {RibbonItemData} itemData - Ribbon item data for creating new item on the panel.
+	 * @return {RibbonItem} - Rendered RibbonItem component.
+	 */
+	addItem( itemData ) {
+		const idx = this.items.findIndex( ( item ) => ( item.id == itemData.id || item.name === itemData.name ) );
+		if( !(itemData instanceof RibbonItemData) || idx !== -1 )
+			return console.log( '%c[RibbonPanel] Input itemData is invalid or duplicate.', 'color:red;' );
+
+		const items = this.state.items.concat( itemData );
+
+		const prop = { items };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		this.setState( prop );
+
+		return this.items[ this.items.length -1 ];
+	}
+
 	componentWillUpdate( nextProps, nextState ) {
 		this[Items].length = 0;
 	}
@@ -65,7 +91,32 @@ export default class RibbonPanel extends RibbonBase {
 		};
 
 		const createItem = ( item ) => {
+			let result;
+			switch( item.type ) {
+				case 'ui-ribbon-button-big':
+					result = (
+						<RibbonPushButton
+							key={ item.id }
+							id={ item.id }
+							name={ item.name }
+							displayName={ item.displayName }
+							enabled={ item.enabled }
+							hidden={ item.hidden }
+							type={ item.type }
+							actived={ item.actived }
+							icon={ item.icon }
+							tooltip={ item.tooltip }
+							toggleable={ item.toggleable }
+							clickHandler={ item.clickHandler }
+							onStateChange={ updateItem }
+							ref={ ( c ) => { if( c ) scope.items.push( c ) } } />
+					);
+					break;
+				default:
+					break;
+				}
 
+			return result;
 		};
 
 		const createSeperator = ( seperator = true ) => {

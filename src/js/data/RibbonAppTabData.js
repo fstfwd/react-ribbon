@@ -1,5 +1,4 @@
 import RibbonTabData from './RibbonTabData';
-import { newGUID } from '../utility';
 
 /**
  * RibbonAppTabData

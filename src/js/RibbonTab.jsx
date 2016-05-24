@@ -79,7 +79,7 @@ export default class RibbonTab extends RibbonBase {
 	addPanel( panelData ) {
 		const idx = this.panels.findIndex( ( panel ) => ( panel.id == panelData.id || panel.name === panelData.name ) );
 		if( !(panelData instanceof RibbonPanelData) || idx !== -1 )
-			return console.log( '%c[RibbonPanel] Input panelData is invalid or duplicate.', 'color:red;' );
+			return console.log( '%c[RibbonTab] Input panelData is invalid or duplicate.', 'color:red;' );
 
 		panelData.seperator = ( this.panels.length !== 0 );
 		const panels = this.state.panels.concat( panelData );

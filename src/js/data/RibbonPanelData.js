@@ -1,5 +1,4 @@
 import RibbonBaseData from './RibbonBaseData';
-import { newGUID } from '../utility';
 
 const Seperator = Symbol( 'seperator' );
 const Items = Symbol( 'items' );
