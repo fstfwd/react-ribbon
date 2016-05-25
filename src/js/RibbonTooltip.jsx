@@ -82,9 +82,23 @@ export default class RibbonTooltip extends RibbonBase {
 		this.setState( prop );
 	}
 
+	/**
+	 * Make this tooltip appear.
+	 */
+	show() {
+		this.hidden = false;
+	}
+
+	/**
+	 * Make this tooltip disappear.
+	 */
+	hide() {
+		this.hidden = true;
+	}
+
 	render() {
 		const dynCSS = ClassNames({
-			'ui-ribbon-button-tooltip-visible': ( this.hidden === false )
+			'ui-ribbon-tooltip-visible': ( this.hidden === false )
 		});
 
 		const createTitle = () => {
@@ -98,7 +112,7 @@ export default class RibbonTooltip extends RibbonBase {
 		};
 
 		return (
-			<div id={ this.id } className={ "ui-ribbon-button-tooltip-visible " + dynCSS }>
+			<div id={ this.id } className={ "ui-ribbon-tooltip " + dynCSS }>
 				{ createTitle() }
 				{ createContent() }
 			</div>

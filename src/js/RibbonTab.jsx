@@ -120,7 +120,12 @@ export default class RibbonTab extends RibbonBase {
 			if( !panel ) return;
 
 			Object.assign( panel, data );
-			scope.setState({ panels });
+
+			const prop = { panels };
+			const onStateChange = scope.props.onStateChange;
+			onStateChange && onStateChange( scope.id, prop );
+
+			scope.setState( prop );
 		};
 
 		const createPanel = ( panel ) => {

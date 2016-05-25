@@ -116,7 +116,18 @@ export default class RibbonButton extends RibbonItem {
 	 * @return {RibbonTooltip} - Rendered RibbonTooltip component.
 	 */
 	get tooltip() {
-		return this.refs.toolitp;
+		return this.refs.tooltip;
+	}
+
+	set tooltip( tooltip ) {
+		if( !(tooltip instanceof RibbonTooltipData) )
+			throw '[RibbonButton] Input tooltip data is invalid.';
+
+		const prop = { tooltip };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		this.setState( prop );
 	}
 
 	/**
@@ -125,19 +136,24 @@ export default class RibbonButton extends RibbonItem {
 	 */
 	createTooltip() {
 		const scope = this;
-		const data = this.state.toolitp;
+		const data = this.state.tooltip;
 		if( !data ) return;
 
 		if( !(data instanceof RibbonTooltipData) && data )
 			return console.log( '%c[RibbonButton] Input tooltip data is invalid.', 'color:red;' );
 
 		const updateTooltip = ( id, data ) => {
-			let tooltip = scope.state.toolitp;
+			let tooltip = scope.state.tooltip;
 
 			if( tooltip.id !== id ) return;
 
 			Object.assign( tooltip, data );
-			scope.setState({ tooltip });
+
+			const prop = { tooltip };
+			const onStateChange = scope.props.onStateChange;
+			onStateChange && onStateChange( scope.id, prop );
+
+			scope.setState( prop );
 		};
 
 		return (
@@ -168,7 +184,7 @@ export default class RibbonButton extends RibbonItem {
 	 * Button hovering over event handler.
 	 */
 	handleMouseOver() {
-		const tooltip = this.toolitp;
+		const tooltip = this.tooltip;
 		tooltip && tooltip.show();
 	}
 
@@ -176,13 +192,13 @@ export default class RibbonButton extends RibbonItem {
 	 * Button hovering out event handler.
 	 */
 	handleMouseOut() {
-		const tooltip = this.toolitp;
+		const tooltip = this.tooltip;
 		tooltip && tooltip.hide();
 	}
 
 	render() {
 		const outerDynCSS = ClassNames({
-			'ui-ribbon-disabled': this.disabled
+			'ui-ribbon-disabled': ( this.enabled === false )
 		});
 
 		const innerDynCSS = ClassNames({

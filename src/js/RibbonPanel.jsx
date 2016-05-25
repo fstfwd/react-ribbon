@@ -87,7 +87,12 @@ export default class RibbonPanel extends RibbonBase {
 			if( !item ) return;
 
 			Object.assign( item, data );
-			scope.setState({ items });
+
+			const prop = { items };
+			const onStateChange = scope.props.onStateChange;
+			onStateChange && onStateChange( scope.id, prop );
+
+			scope.setState( prop );
 		};
 
 		const createItem = ( item ) => {

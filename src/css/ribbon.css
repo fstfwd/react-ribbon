@@ -108,7 +108,7 @@
 	position: relative;
 }
 
-#RibbonUI .ui-ribbon-button-tooltip {
+#RibbonUI .ui-ribbon-tooltip {
 	top: 89px;
 	white-space: normal;
 	box-shadow: 3px 3px 3px #E0E0E0;
@@ -128,7 +128,7 @@
 	width: 180px;
 }
 
-#RibbonUI .ui-ribbon-button-tooltip p {
+#RibbonUI .ui-ribbon-tooltip p {
 	line-height: 14px;
 }
 
@@ -145,7 +145,7 @@
 	to { opacity: 1; }
 }
 
-#RibbonUI .ui-ribbon-button-tooltip-visible {
+#RibbonUI .ui-ribbon-tooltip-visible {
 	display: block;
 	-webkit-animation: fadeIn 3s;
 	animation: fadeIn 3s;

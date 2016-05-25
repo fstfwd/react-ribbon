@@ -35,7 +35,7 @@ gulp.task( 'scripts', function() {
 });
 
 gulp.task( 'styleSheets', function() {
-	return gulp.src( './src/css/*.css' )
+	return gulp.src( './src/css/index.css' )
 					.pipe( concat( 'bundle.css' ) )
 					.pipe( sourcemaps.init( { loadMaps: true } ) )
 					.pipe( cleanCSS() )

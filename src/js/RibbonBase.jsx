@@ -76,7 +76,7 @@ export default class RibbonBase extends React.Component {
 	 * @param {bool} [enabled = true] - If false, make instance be disabled.
 	 */
 	set enabled( enabled = true ) {
-		const isisEnabled = ( enabled === true );
+		const isEnabled = ( enabled === true );
 
 		const prop = { enabled: isEnabled };
 		const onStateChange = this.props.onStateChange;
