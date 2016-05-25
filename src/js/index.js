@@ -37,7 +37,11 @@ const RibbonUI = {
 	Data
 };
 
-window.RibbonUI =	RibbonUI;
+/**
+ * Expose to global.
+ */
+Utility.namespace( 'React.Windows' );
+React.Windows = RibbonUI;
 
 export default RibbonUI;
 
