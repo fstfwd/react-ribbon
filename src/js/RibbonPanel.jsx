@@ -4,9 +4,11 @@ import RibbonBase from './RibbonBase';
 import RibbonItem from './RibbonItem';
 import RibbonButton from './RibbonButton';
 import RibbonPushButton from './RibbonPushButton';
+import RibbonToggleButton from './RibbonToggleButton';
 import RibbonItemData from './data/RibbonItemData';
 import RibbonButtonData from './data/RibbonButtonData';
 import RibbonPushButtonData from './data/RibbonPushButtonData';
+import RibbonToggleButtonData from './data/RibbonToggleButtonData';
 import { newGUID } from './utility';
 
 const Items = Symbol( 'items' );
@@ -99,8 +101,9 @@ export default class RibbonPanel extends RibbonBase {
 			let result;
 			switch( item.type ) {
 				case 'ui-ribbon-button-big':
+					const RibbonPushButtonLike = ( item.role === 'ui-ribbon-button-toggle' ) ? RibbonToggleButton : RibbonPushButton;
 					result = (
-						<RibbonPushButton
+						<RibbonPushButtonLike
 							key={ item.id }
 							id={ item.id }
 							name={ item.name }

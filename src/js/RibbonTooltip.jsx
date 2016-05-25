@@ -63,6 +63,7 @@ export default class RibbonTooltip extends RibbonBase {
 	/**
 	 * Instance is hidden or not.
 	 * @return {bool} - If false, instance is going to disppear on the UI.
+	 * @override
 	 */
 	get hidden() {
 		return this.state.hidden;
@@ -71,6 +72,7 @@ export default class RibbonTooltip extends RibbonBase {
 	/**
 	 * Instance is hidden or not.
 	 * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+	 * @override
 	 */
 	set hidden( hidden = false ) {
 		const isHidden = ( hidden === true );

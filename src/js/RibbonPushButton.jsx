@@ -3,12 +3,12 @@ import ClassNames from 'classnames';
 import RibbonButton from './RibbonButton';
 
 /**
- * PushButton
+ * RibbonPushButton
  * @class
  */
-export default class PushButton extends RibbonButton {
+export default class RibbonPushButton extends RibbonButton {
 	/**
-	 * PushButton constructor
+	 * RibbonPushButton constructor
 	 * @param {object} props - React component properties
 	 */
 	constructor( props ) {
@@ -24,11 +24,11 @@ export default class PushButton extends RibbonButton {
 	}
 }
 
-PushButton.propTypes = {
+RibbonPushButton.propTypes = {
 	type: React.PropTypes.string.isRequired,
 	onStateChange: React.PropTypes.func
 };
 
-PushButton.defaultProps = {
+RibbonPushButton.defaultProps = {
 	type: 'ui-ribbon-button-big'
 };

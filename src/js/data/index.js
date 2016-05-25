@@ -6,6 +6,7 @@ import RibbonPanelData from './RibbonPanelData';
 import RibbonItemData from './RibbonItemData';
 import RibbonButtonData from './RibbonButtonData';
 import RibbonPushButtonData from './RibbonPushButtonData';
+import RibbonToggleButtonData from './RibbonToggleButtonData';
 import RibbonTooltipData from './RibbonTooltipData';
 
 const Data = {
@@ -17,6 +18,7 @@ const Data = {
 	RibbonItemData,
 	RibbonButtonData,
 	RibbonPushButtonData,
+	RibbonToggleButtonData,
 	RibbonTooltipData
 };
 

@@ -18,6 +18,7 @@ export default class RibbonPushButtonData extends RibbonButtonData {
 	/**
 	 * Button type.
 	 * @return {string} -	Button type for identification.
+	 * @override
 	 */
 	get type() {
 		return 'ui-ribbon-button-big';

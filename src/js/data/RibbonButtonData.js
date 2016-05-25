@@ -29,6 +29,7 @@ export default class RibbonButtonData extends RibbonItemData {
 	/**
 	 * Button role.
 	 * @return {string}
+	 * @override
 	 */
 	get role() {
 		return 'ui-ribbon-button';
@@ -76,7 +77,7 @@ export default class RibbonButtonData extends RibbonItemData {
 	 * @return {bool} - If true, it repsents button is toggled currently.
 	 */
 	get toggleable() {
-		return this[Toggleable]
+		return this[Toggleable];
 	}
 
 	/**
