@@ -1,30 +1,25 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import RibbonBase from './RibbonBase';
 import RibbonItem from './RibbonItem';
 import RibbonButton from './RibbonButton';
 import RibbonPushButton from './RibbonPushButton';
 import RibbonToggleButton from './RibbonToggleButton';
-import RibbonGroup from './RibbonGroup';
-import RibbonRadioButtonGroup from './RibbonRadioButtonGroup';
 import RibbonItemData from './data/RibbonItemData';
 import RibbonButtonData from './data/RibbonButtonData';
 import RibbonPushButtonData from './data/RibbonPushButtonData';
 import RibbonToggleButtonData from './data/RibbonToggleButtonData';
-import RibbonGroupData from './data/RibbonGroupData';
-import RibbonRadioButtonGroupData from './data/RibbonRadioButtonGroupData';
 import { newGUID } from './utility';
 
 const Items = Symbol( 'items' );
 
 /**
- * RibbonPanel
- * @extends RibbonBase
+ * RibbonGroup
+ * @extends RibbonItem
  * @class
  */
-export default class RibbonPanel extends RibbonBase {
+export default class RibbonGroup extends RibbonItem {
 	/**
-	 * RibbonPanel constructor
+	 * RibbonGroup constructor
 	 * @param {object} props - React component properties
 	 */
 	constructor( props ) {
@@ -39,30 +34,22 @@ export default class RibbonPanel extends RibbonBase {
 	}
 
 	/**
-	 * Panel has seperator or not.
-	 * @return {bool} - If true, panel will be seperated with other panels by a panel seperator.
-	 */
-	get seperator() {
-		return this.props.seperator;
-	}
-
-	/**
 	 * Panel's children items
-	 * @return {[RibbonItemData]} - Ribbon item data.
+	 * @return {[RibbonButtonData]} - Ribbon item data.
 	 */
 	get items() {
 		return this[Items];
 	}
 
 	/**
-	 * Add new RibbonItem by given data.
-	 * @param {RibbonItemData} itemData - Ribbon item data for creating new item on the panel.
-	 * @return {RibbonItem} - Rendered RibbonItem component.
+	 * Add new RibbonButton by given data.
+	 * @param {RibbonButtonData} itemData - Ribbon button data for creating new item in the RibbonGroup.
+	 * @return {RibbonButton} - Rendered RibbonButton component.
 	 */
 	addItem( itemData ) {
 		const idx = this.items.findIndex( ( item ) => ( item.id == itemData.id || item.name === itemData.name ) );
-		if( !(itemData instanceof RibbonItemData) || idx !== -1 )
-			return console.log( '%c[RibbonPanel] Input itemData is invalid or duplicate.', 'color:red;' );
+		if( !(itemData instanceof RibbonButtonData) || idx !== -1 )
+			return console.log( '%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;' );
 
 		const items = this.state.items.concat( itemData );
 
@@ -82,10 +69,6 @@ export default class RibbonPanel extends RibbonBase {
 	render() {
 		const scope = this;
 		const items = this.state.items;
-		const dynCSS = ClassNames({
-			'ui-ribbon-empty': ( items.length === 0 ),
-			'ui-riibon-panel-single-btn': ( items.length === 1 ),
-		});
 
 		const updateItem = ( id, data ) => {
 			let items = scope.state.items;
@@ -104,24 +87,6 @@ export default class RibbonPanel extends RibbonBase {
 		const createItem = ( item ) => {
 			let result;
 			switch( item.type ) {
-				case 'ui-ribbon-radio-group':
-				case 'ui-ribbon-group':
-					const RibbonGroupLike = ( item.type === 'ui-ribbon-group' ) ? RibbonGroup : RibbonRadioButtonGroup;
-					result = (
-						<RibbonGroupLike
-							key={ item.id }
-							id={ item.id }
-							name={ item.name }
-							displayName={ item.displayName }
-							enabled={ item.enabled }
-							hidden={ item.hidden }
-							type={ item.type }
-							items={ item.items }
-							actived={ item.actived }
-							onStateChange={ updateItem }
-							ref={ ( c ) => { if( c ) scope.items.push( c ) } } />
-					);
-					break;
 				case 'ui-ribbon-button-big':
 					const RibbonPushButtonLike = ( item.role === 'ui-ribbon-button-toggle' ) ? RibbonToggleButton : RibbonPushButton;
 					result = (
@@ -149,42 +114,25 @@ export default class RibbonPanel extends RibbonBase {
 			return result;
 		};
 
-		const createSeperator = ( seperator = true ) => {
-			if( seperator )
-				return(
-					<div className="ui-ribbon-panel-seperator ui-ribbon-relative ui-ribbon-inline"></div>
-				);
-		};
-
 		return (
 			<div
 				key={ this.id }
-				className="ui-ribbon-panel-container ui-ribbon-relative ui-ribbon-inline">
-				{ createSeperator( this.seperator ) }
+				id={ this.id }
+				className="ui-ribbon-group ui-ribbon-inline">
 
-				<div className={ "ui-ribbon-panel ui-ribbon-relative ui-ribbon-inline " + dynCSS }>
-					<div className="ui-ribbon-panel-contents">
-						{ items.map( createItem ) }
-
-						<div className="ui-ribbon-panel-legend ui-ribbon-absolute">
-							{ this.displayName }
-						</div>
-					</div>
-				</div>
+				{ items.map( createItem ) }
 			</div>
 		);
 	}
 }
 
-RibbonPanel.propTypes = {
+RibbonGroup.propTypes = {
 	id: React.PropTypes.string.isRequired,
-	seperator: React.PropTypes.bool,
-	items: React.PropTypes.arrayOf( React.PropTypes.instanceOf( RibbonItemData ) ),
+	items: React.PropTypes.arrayOf( React.PropTypes.instanceOf( RibbonButtonData ) ),
 	onStateChange: React.PropTypes.func
 };
 
-RibbonPanel.defaultProps = {
+RibbonGroup.defaultProps = {
 	id: newGUID(),
-	seperator: true,
 	items: []
 };

@@ -8,6 +8,8 @@ import RibbonButtonData from './RibbonButtonData';
 import RibbonPushButtonData from './RibbonPushButtonData';
 import RibbonToggleButtonData from './RibbonToggleButtonData';
 import RibbonTooltipData from './RibbonTooltipData';
+import RibbonGroupData from './RibbonGroupData';
+import RibbonRadioButtonGroupData from './RibbonRadioButtonGroupData';
 
 const Data = {
 	RibbonBaseData,
@@ -19,7 +21,9 @@ const Data = {
 	RibbonButtonData,
 	RibbonPushButtonData,
 	RibbonToggleButtonData,
-	RibbonTooltipData
+	RibbonTooltipData,
+	RibbonGroupData,
+	RibbonRadioButtonGroupData
 };
 
 export default Data;

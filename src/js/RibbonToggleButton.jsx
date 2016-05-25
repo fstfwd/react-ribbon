@@ -31,6 +31,9 @@ export default class RibbonToggleButton extends RibbonPushButton {
 			const onStateChange = this.props.onStateChange;
 			onStateChange && onStateChange( this.id, prop );
 
+			const onGroupCurrentChange = this.props.onGroupCurrentChange;
+			onGroupCurrentChange && onGroupCurrentChange();
+
 			this.setState( prop );
 		}
 
@@ -42,6 +45,7 @@ export default class RibbonToggleButton extends RibbonPushButton {
 RibbonToggleButton.propTypes = {
 	type: React.PropTypes.string.isRequired,
 	role: React.PropTypes.string.isRequired,
+	onGroupCurrentChange: React.PropTypes.func,
 	onStateChange: React.PropTypes.func
 };
 
