@@ -49,3 +49,11 @@ export const namespace = ( s ) => {
 
 	return ns;
 };
+
+const utility = {
+	newGUID,
+	findItem,
+	namespace
+};
+
+export default utility;
