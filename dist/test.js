@@ -19859,7 +19859,7 @@ Ribbon.defaultProps = {
 	tabs: []
 };
 
-},{"./RibbonTab":178,"./RibbonTitlebar":182,"./data/RibbonAppTabData":185,"./data/RibbonTabData":193,"./data/RibbonTitlebarData":194,"./utility":199,"react":168}],170:[function(require,module,exports){
+},{"./RibbonTab":178,"./RibbonTitlebar":182,"./data/RibbonAppTabData":185,"./data/RibbonTabData":193,"./data/RibbonTitlebarData":194,"./utility":203,"react":168}],170:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20041,7 +20041,7 @@ RibbonBase.defaultProps = {
 	hidden: false
 };
 
-},{"./utility":199,"react":168}],171:[function(require,module,exports){
+},{"./utility":203,"react":168}],171:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20386,7 +20386,7 @@ RibbonButton.defaultProps = {
 	toggleable: false
 };
 
-},{"./RibbonItem":174,"./RibbonTooltip":184,"./data/RibbonTooltipData":196,"./utility":199,"classnames":1,"react":168}],172:[function(require,module,exports){
+},{"./RibbonItem":174,"./RibbonTooltip":184,"./data/RibbonTooltipData":196,"./utility":203,"classnames":1,"react":168}],172:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20798,7 +20798,7 @@ RibbonGroup.defaultProps = {
 	items: []
 };
 
-},{"./RibbonButton":171,"./RibbonItem":174,"./RibbonPushButton":176,"./RibbonToggleButton":183,"./data/RibbonButtonData":187,"./data/RibbonItemData":189,"./data/RibbonPushButtonData":191,"./data/RibbonToggleButtonData":195,"./utility":199,"classnames":1,"react":168}],174:[function(require,module,exports){
+},{"./RibbonButton":171,"./RibbonItem":174,"./RibbonPushButton":176,"./RibbonToggleButton":183,"./data/RibbonButtonData":187,"./data/RibbonItemData":189,"./data/RibbonPushButtonData":191,"./data/RibbonToggleButtonData":195,"./utility":203,"classnames":1,"react":168}],174:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20914,7 +20914,7 @@ RibbonItem.defaultProps = {
 	actived: false
 };
 
-},{"./RibbonBase":170,"./utility":199,"classnames":1,"react":168}],175:[function(require,module,exports){
+},{"./RibbonBase":170,"./utility":203,"classnames":1,"react":168}],175:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21197,7 +21197,7 @@ RibbonPanel.defaultProps = {
 	items: []
 };
 
-},{"./RibbonBase":170,"./RibbonButton":171,"./RibbonGroup":173,"./RibbonItem":174,"./RibbonPushButton":176,"./RibbonRadioButtonGroup":177,"./RibbonToggleButton":183,"./data/RibbonButtonData":187,"./data/RibbonGroupData":188,"./data/RibbonItemData":189,"./data/RibbonPushButtonData":191,"./data/RibbonRadioButtonGroupData":192,"./data/RibbonToggleButtonData":195,"./utility":199,"classnames":1,"react":168}],176:[function(require,module,exports){
+},{"./RibbonBase":170,"./RibbonButton":171,"./RibbonGroup":173,"./RibbonItem":174,"./RibbonPushButton":176,"./RibbonRadioButtonGroup":177,"./RibbonToggleButton":183,"./data/RibbonButtonData":187,"./data/RibbonGroupData":188,"./data/RibbonItemData":189,"./data/RibbonPushButtonData":191,"./data/RibbonRadioButtonGroupData":192,"./data/RibbonToggleButtonData":195,"./utility":203,"classnames":1,"react":168}],176:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21466,7 +21466,7 @@ _RibbonGroup3.default.defaultProps = {
 	items: []
 };
 
-},{"./RibbonGroup":173,"./RibbonToggleButton":183,"./data/RibbonToggleButtonData":195,"./utility":199,"classnames":1,"react":168}],178:[function(require,module,exports){
+},{"./RibbonGroup":173,"./RibbonToggleButton":183,"./data/RibbonToggleButtonData":195,"./utility":203,"classnames":1,"react":168}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21717,7 +21717,7 @@ RibbonTab.defaultProps = {
 	panels: []
 };
 
-},{"./RibbonBase":170,"./RibbonPanel":175,"./data/RibbonPanelData":190,"./utility":199,"classnames":1,"react":168}],179:[function(require,module,exports){
+},{"./RibbonBase":170,"./RibbonPanel":175,"./data/RibbonPanelData":190,"./utility":203,"classnames":1,"react":168}],179:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22695,7 +22695,7 @@ var RibbonBaseData = function () {
 
 exports.default = RibbonBaseData;
 
-},{"../utility":199}],187:[function(require,module,exports){
+},{"../utility":203}],187:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23610,7 +23610,7 @@ var RibbonTooltipData = function (_RibbonBaseData) {
 
 exports.default = RibbonTooltipData;
 
-},{"../utility":199,"./RibbonBaseData":186}],197:[function(require,module,exports){
+},{"../utility":203,"./RibbonBaseData":186}],197:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23802,7 +23802,221 @@ exports.RibbonTask = _RibbonTask2.default;
 exports.Utility = _utility2.default;
 exports.Data = _data2.default;
 
-},{"./Ribbon":169,"./RibbonBase":170,"./RibbonButton":171,"./RibbonCtrl":172,"./RibbonGroup":173,"./RibbonItem":174,"./RibbonPanel":175,"./RibbonPushButton":176,"./RibbonRadioButtonGroup":177,"./RibbonTab":178,"./RibbonTask":179,"./RibbonTaskExecuter":180,"./RibbonTaskManager":181,"./RibbonTitlebar":182,"./RibbonToggleButton":183,"./RibbonTooltip":184,"./data":197,"./utility":199}],199:[function(require,module,exports){
+},{"./Ribbon":169,"./RibbonBase":170,"./RibbonButton":171,"./RibbonCtrl":172,"./RibbonGroup":173,"./RibbonItem":174,"./RibbonPanel":175,"./RibbonPushButton":176,"./RibbonRadioButtonGroup":177,"./RibbonTab":178,"./RibbonTask":179,"./RibbonTaskExecuter":180,"./RibbonTaskManager":181,"./RibbonTitlebar":182,"./RibbonToggleButton":183,"./RibbonTooltip":184,"./data":197,"./utility":203}],199:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _ = require('../');
+
+var ns = _.Utility.namespace('React.Windows');
+
+if (!ns.ribbonCtrlInst) ns.ribbonCtrlInst = new _.RibbonCtrl();
+
+exports.default = ns.ribbonCtrlInst;
+
+},{"../":198}],200:[function(require,module,exports){
+'use strict';
+
+var _modules = require('./modules');
+
+var _modules2 = _interopRequireDefault(_modules);
+
+var _DemoTask = require('./tasks/DemoTask');
+
+var _DemoTask2 = _interopRequireDefault(_DemoTask);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var init = function init() {
+	_modules2.default.container = document.getElementById('ribbon-root');
+	_modules2.default.run().then(function (self) {
+		// Execute demo task.
+		self.executeTask('React.Windows.RibbonDemoTask', null);
+	}).catch(function (error) {
+		console.warn(error);
+	});
+};
+
+window.onload = function () {
+	init();
+};
+
+},{"./modules":201,"./tasks/DemoTask":202}],201:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Data = exports.Utility = exports.RibbonTask = undefined;
+
+var _ = require('../');
+
+Object.defineProperty(exports, 'RibbonTask', {
+  enumerable: true,
+  get: function get() {
+    return _.RibbonTask;
+  }
+});
+Object.defineProperty(exports, 'Utility', {
+  enumerable: true,
+  get: function get() {
+    return _.Utility;
+  }
+});
+Object.defineProperty(exports, 'Data', {
+  enumerable: true,
+  get: function get() {
+    return _.Data;
+  }
+});
+
+var _RibbonCtrl = require('./RibbonCtrl');
+
+var _RibbonCtrl2 = _interopRequireDefault(_RibbonCtrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+if (!_RibbonCtrl2.default) console.error('[RibbonTest] Failed to create ribbonCtrl instance.');
+
+exports.default = _RibbonCtrl2.default;
+
+},{"../":198,"./RibbonCtrl":199}],202:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _modules = require('../modules');
+
+var _modules2 = _interopRequireDefault(_modules);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RibbonTabData = _modules.Data.RibbonTabData;
+var RibbonPanelData = _modules.Data.RibbonPanelData;
+var RibbonPushButtonData = _modules.Data.RibbonPushButtonData;
+var RibbonToggleButtonData = _modules.Data.RibbonToggleButtonData;
+var RibbonTooltipData = _modules.Data.RibbonTooltipData;
+var RibbonRadioButtonGroupData = _modules.Data.RibbonRadioButtonGroupData;
+
+/**
+ * RibbonDemoTask
+ * @extends RibbonTask
+ * @class
+ */
+
+var RibbonDemoTask = function (_RibbonTask) {
+	_inherits(RibbonDemoTask, _RibbonTask);
+
+	/**
+  * RibbonDemoTask constructor.
+  * @param {Ribbon} ribbon - Rendered Ribbon component.
+  * @param {object} options - Task options.
+  */
+
+	function RibbonDemoTask(ribbon, options) {
+		_classCallCheck(this, RibbonDemoTask);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(RibbonDemoTask).call(this, ribbon, options));
+	}
+
+	/**
+  * Execute task content.
+  * @return {bool} If true, it represents this task was executed by the Ribbon.
+  */
+
+
+	_createClass(RibbonDemoTask, [{
+		key: 'execute',
+		value: function execute() {
+			try {
+				// Create tab.
+				var ribbon = this.ribbon;
+				var tabData = new RibbonTabData('DemoBasicTab', 'Basic');
+				var tab = ribbon.addTab(tabData);
+
+				// Create panel.
+				var spatialPanelData = new RibbonPanelData('DemoSpatialPanel', 'Spatial');
+				var spatialPanel = tab.addPanel(spatialPanelData);
+
+				// Create buttons.
+				var dwnBtnData = new RibbonPushButtonData('DemoSpatialDwnBtn', 'Download');
+				var dwnBtn = spatialPanel.addItem(dwnBtnData);
+				dwnBtn.icon = 'img/db_download.png';
+				dwnBtn.clickHandler = function () {
+					alert('DemoSpatialDwnBtn Clicked!');
+				};
+
+				var clsBtnData = new RibbonPushButtonData('DemoSpatialCleanBtn', 'Clean');
+				var clsBtn = spatialPanel.addItem(clsBtnData);
+				clsBtn.icon = 'img/db_remove.png';
+				clsBtn.clickHandler = function () {
+					alert('DemoSpatialCleanBtn Clicked!');
+				};
+
+				// Create panel.
+				var navPanelData = new RibbonPanelData('DemoNavPanel', 'Navigation');
+				var navPanel = tab.addPanel(navPanelData);
+
+				// Create button gruop.
+				var radioBtnGroupData = new RibbonRadioButtonGroupData('DemoNavBtnGroup', 'NavBtnGroup');
+				var radioBtnGroup = navPanel.addItem(radioBtnGroupData);
+
+				// Add buttons to gruop.
+				var panBtnData = new RibbonToggleButtonData('DemoPanBtn', 'Pan');
+				var panBtn = radioBtnGroup.addItem(panBtnData);
+				panBtn.icon = 'img/pan.png';
+				panBtn.clickHandler = function () {
+					alert('DemoPanBtn Clicked!');
+				};
+
+				var orbitBtnData = new RibbonToggleButtonData('DemoOrbitBtn', 'Orbit');
+				var orbitBtn = radioBtnGroup.addItem(orbitBtnData);
+				orbitBtn.icon = 'img/orbit.png';
+				orbitBtn.clickHandler = function () {
+					alert('DemoOrbitBtn Clicked!');
+				};
+			} catch (error) {
+				console.warn(error);
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
+   * Discard all changes.
+   * @return {bool} If true, it represents changes made by this task was removed from the Ribbon.
+   */
+
+	}, {
+		key: 'discard',
+		value: function discard() {
+			return true;
+		}
+	}]);
+
+	return RibbonDemoTask;
+}(_modules.RibbonTask);
+
+exports.default = RibbonDemoTask;
+;
+
+_modules2.default.registerTask('React.Windows.RibbonDemoTask', RibbonDemoTask);
+
+},{"../modules":201}],203:[function(require,module,exports){
 'use strict';
 
 /**
@@ -23870,7 +24084,7 @@ var utility = {
 
 exports.default = utility;
 
-},{}]},{},[198])
+},{}]},{},[200])
 
 
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=test.js.map

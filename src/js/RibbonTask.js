@@ -50,6 +50,6 @@ export default class RibbonTask {
 	 * @return {bool} If true, it represents changes made by this task was removed from the Ribbon.
 	 */
 	discard() {
-		return false;
+		return true;
 	}
 }

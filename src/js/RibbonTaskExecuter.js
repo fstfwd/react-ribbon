@@ -54,7 +54,7 @@ export default class RibbonTaskExecuter {
 	 * @param {string} taskId - Task Identification.
 	 * @return {bool} - If task is not registered or failed to execute, it will return false.
 	 */
-	executeTask( taskId, options ) {
+	execute( taskId, options ) {
 		let result = false;
 
 		if( !this.getTask( taskId ) ) {
@@ -67,13 +67,13 @@ export default class RibbonTaskExecuter {
 				if( result === true ) {
 					this[Tasks][taskId] = task;
 
-					console.log( 'Task executed: ' + taskId );
+					console.log( '[RibbonTaskExecuter] Task executed: `%s`.', taskId );
 				}
 			} else {
-				console.log( 'Task not found: ' + taskId );
+				console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
 			}
 		} else {
-			console.log( 'Task already executed: ' + taskId );
+			console.log( '[RibbonTaskExecuter] Task already executed: `%s`.', taskId );
 		}
 
 		return result;
@@ -84,18 +84,18 @@ export default class RibbonTaskExecuter {
 	 * @param {string} taskId - Task Identification.
 	 * @return {bool} - If task is not registered or failed to discard changes, it will return false.
 	 */
-	discardTask( taskId ) {
+	discard( taskId ) {
 		let result = false;
 		const task = this.getTask( taskId );
 
 		if( !task ) {
-			console.log( 'Task not found: ' + taskId );
+			console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
 		} else {
 			result = task.discard();
-			if( !result ) throw 'Failed to discard changes : ' + taskId;
+			if( !result ) throw 'Failed to discard chnages in task: `' + taskId + '`.';
 
 			delete this[Tasks][taskId];
-			console.log( '[RibbonTaskExecuter] Content discarded : ' + taskId );
+			console.log( '[RibbonTaskExecuter] Task content discarded: `%s`.', taskId );
 		}
 
 		return result;

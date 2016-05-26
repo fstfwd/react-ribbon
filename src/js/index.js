@@ -30,6 +30,7 @@ const RibbonUI = {
 	RibbonToggleButton,
 	RibbonGroup,
 	RibbonRadioButtonGroup,
+	RibbonCtrl,
 	RibbonTask,
 	RibbonTaskManager,
 	RibbonTaskExecuter,
@@ -43,5 +44,13 @@ const RibbonUI = {
 Utility.namespace( 'React.Windows' );
 React.Windows = RibbonUI;
 
+/**
+ * Module exposure.
+ */
 export default RibbonUI;
-
+export {
+	RibbonCtrl,
+	RibbonTask,
+	Utility,
+	Data
+};

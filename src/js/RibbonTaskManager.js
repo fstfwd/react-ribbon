@@ -12,7 +12,7 @@ const Tasks = Symbol( 'tasks' );
  * @return {bool} - If true, it reprents task is a instance of the RibbonTask.
  */
 const checkTaskType = ( task ) => {
-	if( task instanceof RibbonTask ) return true;
+	if( task.prototype instanceof RibbonTask ) return true;
 	return false;
 };
 

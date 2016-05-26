@@ -16,13 +16,10 @@ const TaskExecuter = Symbol( 'taskExecuter' );
 export default class RibbonCtrl {
 	/**
 	 * RibbonCtrl constructor
-	 * @param {HTMLElement} container - React render target DOM element.
 	 */
-	constructor( container ) {
-		if( !container ) throw '[RibbonCtrl] Input continer must be a	HTML DOM element.';
-
-		this[Container] = container;
+	constructor() {
 		this[TaskManager] = new RibbonTaskManager();
+		this[Container] = undefined;
 		this[MainRibbon] = undefined;
 		this[TaskExecuter] = undefined;
 	}
@@ -44,6 +41,16 @@ export default class RibbonCtrl {
 	}
 
 	/**
+	 * Ribbon container
+	 * @param {HTMLElement} container - React render target DOM element.
+	 */
+	set container( container ) {
+		if( !(container instanceof HTMLElement) ) throw '[RibbonCtrl] Input container must be a HTML DOM element.';
+
+		this[Container] = container;
+	}
+
+	/**
 	 * RibbonTaskManager instance.
 	 * @return {RibbonTaskManager}
 	 */
@@ -52,9 +59,62 @@ export default class RibbonCtrl {
 	}
 
 	/**
+	 * RibbonTaskExecuter instance.
+	 * @return {RibbonTaskExecuter}
+	 */
+	get taskExecuter() {
+		return this[TaskExecuter];
+	}
+
+	/**
+	 * Register RibbonTask.
+	 * @param {string} taskId - Task Identification.
+	 * @param {RibbonTask} task - Content instance of RibbonTask.
+	 * @return {bool} - If task is not type of RibbonTask or registered, it will return false.
+	 */
+	registerTask( taskId, task ) {
+		if( !this.taskManager ) return false;
+
+		return this.taskManager.register( taskId, task );
+	}
+
+	/**
+	 * Unregister RibbonTask.
+	 * @param {string} taskId - Task Identification.
+	 * @return {bool} - If task is not registered, it will return false.
+	 */
+	unregisterTask( taskId ) {
+		if( !this.taskManager ) return false;
+
+		return this.taskManager.unregister( taskId );
+	}
+
+	/**
+	 * Execute registered RibbonTask.
+	 * @param {string} taskId - Task Identification.
+	 * @return {bool} - If task is not registered or failed to execute, it will return false.
+	 */
+	executeTask( taskId, options ) {
+		if( !this.taskExecuter ) return false;
+
+		return this.taskExecuter.execute( taskId, options );
+	}
+
+	/**
+	 * Discard executed RibbonTask.
+	 * @param {string} taskId - Task Identification.
+	 * @return {bool} - If task is not registered or failed to discard changes, it will return false.
+	 */
+	discardTask( taskId ) {
+		if( !this.taskExecuter ) return false;
+
+		return this.taskExecuter.discard( taskId );
+	}
+
+	/**
 	 * Start UI rendering.
 	 * @return {Promise} - Result.
-	 * @resolve {Ribbon} - Rendered Ribbon component.
+	 * @resolve {RibbonCtrl} - Self RibbonCtrl instance.
 	 * @reject {object} - Errors.
 	 */
 	run() {
@@ -62,16 +122,13 @@ export default class RibbonCtrl {
 
 		return new Promise( ( resolve, reject ) => {
 			try {
+				const container = scope.container;
+				const taskManager = scope.taskManager;
 
-				this[MainRibbon] = ReactDOM.render(
-					<Ribbon />,
-					scope.container
-				);
+				scope[MainRibbon] = ReactDOM.render( <Ribbon />, container );
+				scope[TaskExecuter] = new RibbonTaskExecuter( scope.mainRibbon, taskManager );
 
-				this[TaskExecuter] = new RibbonTaskExecuter( scope.mainRibbon, scope.taskManager );
-
-				resolve( scope.TaskExecuter );
-
+				resolve( scope );
 			} catch( error ) {
 				reject( error );
 			}

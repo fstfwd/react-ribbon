@@ -29,7 +29,25 @@ gulp.task( 'scripts', function() {
 		.pipe( source( 'bundle.js' ) )
 		.pipe( buffer() )
 		.pipe( sourcemaps.init( { loadMaps: true } ) )
-		.pipe( sourcemaps.write() )
+		.pipe( sourcemaps.write( './' ) )
+		.pipe( gulp.dest( 'dist' ) )
+		.pipe( connect.reload() );
+});
+
+gulp.task( 'scripts:test', function() {
+	browserify( './src/js/test/index.js', {
+		extensions: [ '', '.js', '.jsx'],
+		debug: true
+	})
+		.transform( babelify, {
+				presets: [ 'es2015', 'react' ]
+		})
+		.bundle()
+		.on( 'error', gutil.log )
+		.pipe( source( 'test.js' ) )
+		.pipe( buffer() )
+		.pipe( sourcemaps.init( { loadMaps: true } ) )
+		.pipe( sourcemaps.write( './' ) )
 		.pipe( gulp.dest( 'dist' ) )
 		.pipe( connect.reload() );
 });
@@ -39,7 +57,7 @@ gulp.task( 'styleSheets', function() {
 					.pipe( concat( 'bundle.css' ) )
 					.pipe( sourcemaps.init( { loadMaps: true } ) )
 					.pipe( cleanCSS() )
-					.pipe( sourcemaps.write() )
+					.pipe( sourcemaps.write( './' ) )
 					.pipe( gulp.dest( 'dist' ) )
 					.pipe( connect.reload() );
 });
@@ -52,7 +70,8 @@ gulp.task('html', function () {
 gulp.task( 'watch', function() {
 	gulp.watch( [ 'index.html' ], [ 'html' ] );
 	gulp.watch( [ './src/css/*.css' ], [ 'styleSheets' ] );
-	gulp.watch( [ './src/js/*.{js,jsx}', './src/js/data/*.{js,jsx}' ], [ 'scripts' ] );
+	gulp.watch( [ './src/js/*.{js,jsx}', './src/js/data/*.{js,jsx}' ], [ 'scripts', 'scripts:test' ] );
+	gulp.watch( [ './src/js/test/*.{js,jsx}', './src/js/test/**/*.{js,jsx}' ], [ 'scripts:test' ] );
 });
 
-gulp.task( 'default', [ 'connect', 'scripts', 'styleSheets', 'html', 'watch' ] );
+gulp.task( 'default', [ 'connect', 'scripts', 'scripts:test', 'styleSheets', 'html', 'watch' ] );
