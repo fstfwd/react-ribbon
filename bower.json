@@ -1,0 +1,30 @@
+{
+  "name": "react-ribbon",
+  "description": "Office Ribbon like ui written in ReactJS.",
+  "main": [
+    "./dist/bundle.js",
+    "./dist/bundle.css"
+  ],
+  "authors": [
+    "yiskang"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Ribbon",
+    "React",
+    "UI"
+  ],
+  "homepage": "https://github.com/yiskang/react-ribbon",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.1.0",
+    "classnames": "^2.2.5"
+  }
+}
