@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>React Ribbon Demo</title>
+		<link rel="stylesheet" type="text/css" href="./dist/bundle.css" />
+
+		<script type="text/javascript" src="./lib/react.min.js"></script>
+		<script type="text/javascript" src="./lib/react-dom.min.js"></script>
+		<script type="text/javascript" src="./lib/classnames.js"></script>
+		<script type="text/javascript" src="./lib/jquery.min.js"></script>
+		<script type="text/javascript" src="./dist/test.js"></script>
+	</head>
+	<body>
+		<div id="ribbon-root"></div>
+		<div id="ribbon-content" style="padding: 10px 5px;position: absolute;top: 140px;bottom: 0;">
+			<h2 style="margin: 0;">Functions</h2>
+
+			<h3 style="margin-bottom: 0;">Tabs</h3>
+			<div>
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-active-tab-basic">Active Tab Basic</a>
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-active-tab-test">Active Tab Test</a>
+			</div>
+			<div style="margin-top:10px;">
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-deactive-tab-basic">Deactive Tab Basic</a>
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-deactive-tab-test">Deactive Tab Test</a>
+			</div>
+
+			<h3 style="margin-bottom: 0;">Buttons</h3>
+			<div>
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-active-button-download">Active Button	Download</a>
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-enable-button-download">Enable Button	Download</a>
+			</div>
+			<div style="margin-top:10px;">
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-deactive-button-download">Deactive Button	Download</a>
+				<a href="javascript:void(0)" style="padding-right: 40px;" id="demo-disable-button-download">Disable Button	Download</a>
+			</div>
+		</div>
+		<div style="position: absolute;bottom: 0;width: 32px;height: 32px; margin: 5px;">
+			<a href="https://github.com/yiskang/react-ribbon" title="Check me out on Github" target="_blank">
+				<img alt="Check me out on Github" src="./img/GitHub-Mark-32px.png"/>
+			</a>
+		</div>
+	</body>
+</html>
