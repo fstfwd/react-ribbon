@@ -75,34 +75,42 @@ export default class RibbonDemoTask extends RibbonTask {
 
 			$('#demo-active-tab-basic').click( () => {
 				tab.actived = true;
+				console.log( 'Set tab actived status to true: ', tab.actived === true );
 			});
 
 			$('#demo-deactive-tab-basic').click( () => {
 				tab.actived = false;
+				console.log( 'Set tab actived status to false: ', tab.actived === false );
 			});
 
 			$('#demo-active-tab-test').click( () => {
 				testTab.actived = true;
+				console.log( 'Set tab actived status to true: ', testTab.actived === true );
 			});
 
 			$('#demo-deactive-tab-test').click( () => {
 				testTab.actived = false;
+				console.log( 'Set tab actived status to false: ', testTab.actived === false );
 			});
 
 			$('#demo-active-button-download').click( () => {
 				dwnBtn.actived = true;
+				console.log( 'Set button actived status to true: ', dwnBtn.actived === true );
 			});
 
 			$('#demo-deactive-button-download').click( () => {
 				dwnBtn.actived = false;
+				console.log( 'Set button actived status to false: ', dwnBtn.actived === false );
 			});
 
 			$('#demo-enable-button-download').click( () => {
 				dwnBtn.enabled = true;
+				console.log( 'Set button enabled status to true: ', dwnBtn.enabled === true );
 			});
 
 			$('#demo-disable-button-download').click( () => {
 				dwnBtn.enabled = false;
+				console.log( 'Set button enabled status to false: ', dwnBtn.enabled === false );
 			});
 		} catch( error ) {
 			console.warn( error );

@@ -2,6 +2,8 @@
 
 React-Ribbon is a set of [React](http://facebook.github.io/react/) components that implement partial specification of [Microsoft's Windows Ribbon Framework](https://msdn.microsoft.com/zh-tw/library/windows/desktop/dd316910).
 
+Here is the [Demo](http://yiskang.github.io/react-ribbon/).
+
 ## Dependencies
 
 - react: ^15.0.2
@@ -63,7 +65,13 @@ React-Ribbon is a set of [React](http://facebook.github.io/react/) components th
   npm install
   ```
 
-4.  Run dev server
+4.  Install dependencies of bower package.
+
+  ```bash
+  bower install
+  ```
+
+5.  Run dev server
 
   ```bash
   gulp
