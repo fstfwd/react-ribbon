@@ -63,12 +63,12 @@ gulp.task( 'styleSheets', function() {
 });
 
 gulp.task('html', function () {
-	gulp.src( '*.html' )
+	gulp.src( './test/*.html' )
 		.pipe( connect.reload() );
 });
 
 gulp.task( 'watch', function() {
-	gulp.watch( [ 'index.html' ], [ 'html' ] );
+	gulp.watch( [ './test/*.html' ], [ 'html' ] );
 	gulp.watch( [ './src/css/*.css' ], [ 'styleSheets' ] );
 	gulp.watch( [ './src/js/*.{js,jsx}', './src/js/data/*.{js,jsx}' ], [ 'scripts', 'scripts:test' ] );
 	gulp.watch( [ './src/js/test/*.{js,jsx}', './src/js/test/**/*.{js,jsx}' ], [ 'scripts:test' ] );

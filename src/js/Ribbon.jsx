@@ -74,12 +74,10 @@ export default class Ribbon extends React.Component {
 	activeTabById( tabId ) {
 		if( typeof tabId !== 'string' ) return console.log( '%c[Ribbon] TabId should be a string.', 'color:red;' );
 
-		const updateTab = ( tab ) => {
-			tab.actived = ( tab.id === tabId ) ? true : false;
-		};
+		const tab = this.tabs.find( ( tab ) => tab.id === tabId );
+		if( !tab ) throw '[Ribbon] Input tab id not exists.';
 
-		this.state.tabs.forEach( updateTab );
-		this.tabs.forEach( updateTab );
+		tab.actived = true;
 	}
 
 	/**
@@ -128,6 +126,13 @@ export default class Ribbon extends React.Component {
 
 			Object.assign( tab, data );
 			scope.setState({ tabs });
+
+			// For de/activating tab by changing tab's actived property.
+			if( data.hasOwnProperty( 'actived' ) && data.actived ) {
+				scope.tabs.map( ( tab ) => {
+					if( tab.id !== id ) tab.actived = false;
+				});
+			}
 		};
 
 		const createTab = ( tab ) => {

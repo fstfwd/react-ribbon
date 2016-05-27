@@ -126,12 +126,12 @@ var Ribbon = function (_React$Component) {
 		value: function activeTabById(tabId) {
 			if (typeof tabId !== 'string') return console.log('%c[Ribbon] TabId should be a string.', 'color:red;');
 
-			var updateTab = function updateTab(tab) {
-				tab.actived = tab.id === tabId ? true : false;
-			};
+			var tab = this.tabs.find(function (tab) {
+				return tab.id === tabId;
+			});
+			if (!tab) throw '[Ribbon] Input tab id not exists.';
 
-			this.state.tabs.forEach(updateTab);
-			this.tabs.forEach(updateTab);
+			tab.actived = true;
 		}
 
 		/**
@@ -185,6 +185,13 @@ var Ribbon = function (_React$Component) {
 
 				Object.assign(tab, data);
 				scope.setState({ tabs: tabs });
+
+				// For de/activating tab by changing tab's actived property.
+				if (data.hasOwnProperty('actived') && data.actived) {
+					scope.tabs.map(function (tab) {
+						if (tab.id !== id) tab.actived = false;
+					});
+				}
 			};
 
 			var createTab = function createTab(tab) {
@@ -2694,6 +2701,7 @@ var RibbonToggleButton = function (_RibbonPushButton) {
 				var onStateChange = this.props.onStateChange;
 				onStateChange && onStateChange(this.id, prop);
 
+				// For de/activating button by changing button's actived property.
 				var onGroupCurrentChange = this.props.onGroupCurrentChange;
 				onGroupCurrentChange && onGroupCurrentChange();
 

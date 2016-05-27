@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import ribbonCtrl, { RibbonTask, Data, Utility } from '../modules';
 
 const {
@@ -35,6 +36,9 @@ export default class RibbonDemoTask extends RibbonTask {
 			const tabData = new RibbonTabData( 'DemoBasicTab', 'Basic' );
 			const tab = ribbon.addTab( tabData );
 
+			const testTabData = new RibbonTabData( 'DemoTestTab', 'Test' );
+			const testTab = ribbon.addTab( testTabData );
+
 			// Create panel.
 			const spatialPanelData = new RibbonPanelData( 'DemoSpatialPanel', 'Spatial' );
 			const spatialPanel = tab.addPanel( spatialPanelData );
@@ -68,6 +72,38 @@ export default class RibbonDemoTask extends RibbonTask {
 			const orbitBtn = radioBtnGroup.addItem( orbitBtnData );
 			orbitBtn.icon = 'img/orbit.png';
 			orbitBtn.clickHandler = () => { alert( 'DemoOrbitBtn Clicked!' ); };
+
+			$('#demo-active-tab-basic').click( () => {
+				tab.actived = true;
+			});
+
+			$('#demo-deactive-tab-basic').click( () => {
+				tab.actived = false;
+			});
+
+			$('#demo-active-tab-test').click( () => {
+				testTab.actived = true;
+			});
+
+			$('#demo-deactive-tab-test').click( () => {
+				testTab.actived = false;
+			});
+
+			$('#demo-active-button-download').click( () => {
+				dwnBtn.actived = true;
+			});
+
+			$('#demo-deactive-button-download').click( () => {
+				dwnBtn.actived = false;
+			});
+
+			$('#demo-enable-button-download').click( () => {
+				dwnBtn.enabled = true;
+			});
+
+			$('#demo-disable-button-download').click( () => {
+				dwnBtn.enabled = false;
+			});
 		} catch( error ) {
 			console.warn( error );
 			return false;

@@ -31,6 +31,7 @@ export default class RibbonToggleButton extends RibbonPushButton {
 			const onStateChange = this.props.onStateChange;
 			onStateChange && onStateChange( this.id, prop );
 
+			// For de/activating button by changing button's actived property.
 			const onGroupCurrentChange = this.props.onGroupCurrentChange;
 			onGroupCurrentChange && onGroupCurrentChange();
 

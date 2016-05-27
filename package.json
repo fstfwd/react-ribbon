@@ -47,12 +47,14 @@
   "browser": {
     "react": "./test/bower_components/react/react.min.js",
     "react-dom": "./test/bower_components/react/react-dom.min.js",
-    "classnames": "./test/bower_components/classnames/index.js"
+    "classnames": "./test/bower_components/classnames/index.js",
+    "jquery": "./test/bower_components/jquery/dist/jquery.min.js"
   },
   "browserify-shim": {
     "react": "global:React",
     "react-dom": "global:ReactDOM",
-    "classnames": "global:classNames"
+    "classnames": "global:classNames",
+    "jquery": "global:$"
   },
   "browserify": {
     "transform": [

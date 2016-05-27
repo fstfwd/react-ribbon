@@ -40,7 +40,7 @@ React-Ribbon is a set of [React](http://facebook.github.io/react/) components th
 
 		```html
 		<script type="text/javascript" src="{module_dir}/dist/bundle.js" />
-		link rel="stylesheet" type="text/css" href="{module_dir}/dist/bundle.css" />
+		<link rel="stylesheet" type="text/css" href="{module_dir}/dist/bundle.css" />
 		```
 
 ## Development

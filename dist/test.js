@@ -126,12 +126,12 @@ var Ribbon = function (_React$Component) {
 		value: function activeTabById(tabId) {
 			if (typeof tabId !== 'string') return console.log('%c[Ribbon] TabId should be a string.', 'color:red;');
 
-			var updateTab = function updateTab(tab) {
-				tab.actived = tab.id === tabId ? true : false;
-			};
+			var tab = this.tabs.find(function (tab) {
+				return tab.id === tabId;
+			});
+			if (!tab) throw '[Ribbon] Input tab id not exists.';
 
-			this.state.tabs.forEach(updateTab);
-			this.tabs.forEach(updateTab);
+			tab.actived = true;
 		}
 
 		/**
@@ -185,6 +185,13 @@ var Ribbon = function (_React$Component) {
 
 				Object.assign(tab, data);
 				scope.setState({ tabs: tabs });
+
+				// For de/activating tab by changing tab's actived property.
+				if (data.hasOwnProperty('actived') && data.actived) {
+					scope.tabs.map(function (tab) {
+						if (tab.id !== id) tab.actived = false;
+					});
+				}
 			};
 
 			var createTab = function createTab(tab) {
@@ -2694,6 +2701,7 @@ var RibbonToggleButton = function (_RibbonPushButton) {
 				var onStateChange = this.props.onStateChange;
 				onStateChange && onStateChange(this.id, prop);
 
+				// For de/activating button by changing button's actived property.
 				var onGroupCurrentChange = this.props.onGroupCurrentChange;
 				onGroupCurrentChange && onGroupCurrentChange();
 
@@ -4314,6 +4322,7 @@ if (!_RibbonCtrl2.default) console.error('[RibbonTest] Failed to create ribbonCt
 exports.default = _RibbonCtrl2.default;
 
 },{"../":30,"./RibbonCtrl":31}],34:[function(require,module,exports){
+(function (global){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4321,6 +4330,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
 
 var _modules = require('../modules');
 
@@ -4371,53 +4384,92 @@ var RibbonDemoTask = function (_RibbonTask) {
 	_createClass(RibbonDemoTask, [{
 		key: 'execute',
 		value: function execute() {
+			var _this2 = this;
+
 			try {
-				// Create tab.
-				var ribbon = this.ribbon;
-				var tabData = new RibbonTabData('DemoBasicTab', 'Basic');
-				var tab = ribbon.addTab(tabData);
+				(function () {
+					// Create tab.
+					var ribbon = _this2.ribbon;
+					var tabData = new RibbonTabData('DemoBasicTab', 'Basic');
+					var tab = ribbon.addTab(tabData);
 
-				// Create panel.
-				var spatialPanelData = new RibbonPanelData('DemoSpatialPanel', 'Spatial');
-				var spatialPanel = tab.addPanel(spatialPanelData);
+					var testTabData = new RibbonTabData('DemoTestTab', 'Test');
+					var testTab = ribbon.addTab(testTabData);
 
-				// Create buttons.
-				var dwnBtnData = new RibbonPushButtonData('DemoSpatialDwnBtn', 'Download');
-				var dwnBtn = spatialPanel.addItem(dwnBtnData);
-				dwnBtn.icon = 'img/db_download.png';
-				dwnBtn.clickHandler = function () {
-					alert('DemoSpatialDwnBtn Clicked!');
-				};
+					// Create panel.
+					var spatialPanelData = new RibbonPanelData('DemoSpatialPanel', 'Spatial');
+					var spatialPanel = tab.addPanel(spatialPanelData);
 
-				var clsBtnData = new RibbonPushButtonData('DemoSpatialCleanBtn', 'Clean');
-				var clsBtn = spatialPanel.addItem(clsBtnData);
-				clsBtn.icon = 'img/db_remove.png';
-				clsBtn.clickHandler = function () {
-					alert('DemoSpatialCleanBtn Clicked!');
-				};
+					// Create buttons.
+					var dwnBtnData = new RibbonPushButtonData('DemoSpatialDwnBtn', 'Download');
+					var dwnBtn = spatialPanel.addItem(dwnBtnData);
+					dwnBtn.icon = 'img/db_download.png';
+					dwnBtn.clickHandler = function () {
+						alert('DemoSpatialDwnBtn Clicked!');
+					};
 
-				// Create panel.
-				var navPanelData = new RibbonPanelData('DemoNavPanel', 'Navigation');
-				var navPanel = tab.addPanel(navPanelData);
+					var clsBtnData = new RibbonPushButtonData('DemoSpatialCleanBtn', 'Clean');
+					var clsBtn = spatialPanel.addItem(clsBtnData);
+					clsBtn.icon = 'img/db_remove.png';
+					clsBtn.clickHandler = function () {
+						alert('DemoSpatialCleanBtn Clicked!');
+					};
 
-				// Create button gruop.
-				var radioBtnGroupData = new RibbonRadioButtonGroupData('DemoNavBtnGroup', 'NavBtnGroup');
-				var radioBtnGroup = navPanel.addItem(radioBtnGroupData);
+					// Create panel.
+					var navPanelData = new RibbonPanelData('DemoNavPanel', 'Navigation');
+					var navPanel = tab.addPanel(navPanelData);
 
-				// Add buttons to gruop.
-				var panBtnData = new RibbonToggleButtonData('DemoPanBtn', 'Pan');
-				var panBtn = radioBtnGroup.addItem(panBtnData);
-				panBtn.icon = 'img/pan.png';
-				panBtn.clickHandler = function () {
-					alert('DemoPanBtn Clicked!');
-				};
+					// Create button gruop.
+					var radioBtnGroupData = new RibbonRadioButtonGroupData('DemoNavBtnGroup', 'NavBtnGroup');
+					var radioBtnGroup = navPanel.addItem(radioBtnGroupData);
 
-				var orbitBtnData = new RibbonToggleButtonData('DemoOrbitBtn', 'Orbit');
-				var orbitBtn = radioBtnGroup.addItem(orbitBtnData);
-				orbitBtn.icon = 'img/orbit.png';
-				orbitBtn.clickHandler = function () {
-					alert('DemoOrbitBtn Clicked!');
-				};
+					// Add buttons to gruop.
+					var panBtnData = new RibbonToggleButtonData('DemoPanBtn', 'Pan');
+					var panBtn = radioBtnGroup.addItem(panBtnData);
+					panBtn.icon = 'img/pan.png';
+					panBtn.clickHandler = function () {
+						alert('DemoPanBtn Clicked!');
+					};
+
+					var orbitBtnData = new RibbonToggleButtonData('DemoOrbitBtn', 'Orbit');
+					var orbitBtn = radioBtnGroup.addItem(orbitBtnData);
+					orbitBtn.icon = 'img/orbit.png';
+					orbitBtn.clickHandler = function () {
+						alert('DemoOrbitBtn Clicked!');
+					};
+
+					(0, _jquery2.default)('#demo-active-tab-basic').click(function () {
+						tab.actived = true;
+					});
+
+					(0, _jquery2.default)('#demo-deactive-tab-basic').click(function () {
+						tab.actived = false;
+					});
+
+					(0, _jquery2.default)('#demo-active-tab-test').click(function () {
+						testTab.actived = true;
+					});
+
+					(0, _jquery2.default)('#demo-deactive-tab-test').click(function () {
+						testTab.actived = false;
+					});
+
+					(0, _jquery2.default)('#demo-active-button-download').click(function () {
+						dwnBtn.actived = true;
+					});
+
+					(0, _jquery2.default)('#demo-deactive-button-download').click(function () {
+						dwnBtn.actived = false;
+					});
+
+					(0, _jquery2.default)('#demo-enable-button-download').click(function () {
+						dwnBtn.enabled = true;
+					});
+
+					(0, _jquery2.default)('#demo-disable-button-download').click(function () {
+						dwnBtn.enabled = false;
+					});
+				})();
 			} catch (error) {
 				console.warn(error);
 				return false;
@@ -4445,6 +4497,8 @@ exports.default = RibbonDemoTask;
 ;
 
 _modules2.default.registerTask('React.Windows.RibbonDemoTask', RibbonDemoTask);
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"../modules":33}],35:[function(require,module,exports){
 'use strict';

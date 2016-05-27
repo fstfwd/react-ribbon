@@ -4,6 +4,11 @@
 	border: 1px solid #2b579a !important;
 }
 
+#RibbonUI li[role=ui-ribbon-tab].ui-ribbon-tab-application:hover {
+	background-color: #3e6db5;
+	border: 1px solid #3e6db5 !important;
+}
+
 #RibbonUI li[role=ui-ribbon-tab]:not(.ui-ribbon-tab-application):hover {
 	color: #2b579a;
 }
