@@ -4440,34 +4440,42 @@ var RibbonDemoTask = function (_RibbonTask) {
 
 					(0, _jquery2.default)('#demo-active-tab-basic').click(function () {
 						tab.actived = true;
+						console.log('Set tab actived status to true: ', tab.actived === true);
 					});
 
 					(0, _jquery2.default)('#demo-deactive-tab-basic').click(function () {
 						tab.actived = false;
+						console.log('Set tab actived status to false: ', tab.actived === false);
 					});
 
 					(0, _jquery2.default)('#demo-active-tab-test').click(function () {
 						testTab.actived = true;
+						console.log('Set tab actived status to true: ', testTab.actived === true);
 					});
 
 					(0, _jquery2.default)('#demo-deactive-tab-test').click(function () {
 						testTab.actived = false;
+						console.log('Set tab actived status to false: ', testTab.actived === false);
 					});
 
 					(0, _jquery2.default)('#demo-active-button-download').click(function () {
 						dwnBtn.actived = true;
+						console.log('Set button actived status to true: ', dwnBtn.actived === true);
 					});
 
 					(0, _jquery2.default)('#demo-deactive-button-download').click(function () {
 						dwnBtn.actived = false;
+						console.log('Set button actived status to false: ', dwnBtn.actived === false);
 					});
 
 					(0, _jquery2.default)('#demo-enable-button-download').click(function () {
 						dwnBtn.enabled = true;
+						console.log('Set button enabled status to true: ', dwnBtn.enabled === true);
 					});
 
 					(0, _jquery2.default)('#demo-disable-button-download').click(function () {
 						dwnBtn.enabled = false;
+						console.log('Set button enabled status to false: ', dwnBtn.enabled === false);
 					});
 				})();
 			} catch (error) {
