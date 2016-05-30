@@ -55,6 +55,52 @@ export default class RibbonPanel extends RibbonBase {
 	}
 
 	/**
+	 * Instance edis/en-able status.
+	 * @return {bool} - If false, make instance be disabled.
+	 */
+	get enabled() {
+		return super.enabled;
+	}
+
+	/**
+	 * Instance edis/en-able status.
+	 * @param {bool} [enabled = true] - If false, make instance be disabled.
+	 */
+	set enabled( enabled = true ) {
+		if( this.hidden ) return;
+
+		const isEnabled = ( enabled === true );
+		super.enabled = isEnabled;
+
+		// Cascaded applying changes
+		this.items.map( ( item ) => {
+			item.enabled = isEnabled;
+		});
+	}
+
+	/**
+	 * Instance is hidden or not.
+	 * @return {bool} - If false, instance is going to disppear on the UI.
+	 */
+	get hidden() {
+		return super.hidden;
+	}
+
+	/**
+	 * Instance is hidden or not.
+	 * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+	 */
+	set hidden( hidden = false ) {
+		const isHidden = ( hidden === true );
+		super.hidden = isHidden;
+
+		// Cascaded applying changes
+		this.items.map( ( item ) => {
+			item.hidden = isHidden;
+		});
+	}
+
+	/**
 	 * Add new RibbonItem by given data.
 	 * @param {RibbonItemData} itemData - Ribbon item data for creating new item on the panel.
 	 * @return {RibbonItem} - Rendered RibbonItem component.
@@ -82,9 +128,20 @@ export default class RibbonPanel extends RibbonBase {
 	render() {
 		const scope = this;
 		const items = this.state.items;
-		const dynCSS = ClassNames({
+
+		const outerDynCSS = ClassNames({
+			'ui-ribbon-disabled': ( this.enabled === false ),
+			'ui-ribbon-invisible': this.hidden,
+			'ui-ribbon-inline': ( this.hidden === false )
+		});
+
+		const innerDynCSS = ClassNames({
 			'ui-ribbon-empty': ( items.length === 0 ),
 			'ui-riibon-panel-single-btn': ( items.length === 1 ),
+		});
+
+		const legendDynCSS = ClassNames({
+			'ui-ribbon-disabled': ( this.enabled === false )
 		});
 
 		const updateItem = ( id, data ) => {
@@ -159,14 +216,14 @@ export default class RibbonPanel extends RibbonBase {
 		return (
 			<div
 				key={ this.id }
-				className="ui-ribbon-panel-container ui-ribbon-relative ui-ribbon-inline">
+				className={ "ui-ribbon-panel-container ui-ribbon-relative " + outerDynCSS }>
 				{ createSeperator( this.seperator ) }
 
-				<div className={ "ui-ribbon-panel ui-ribbon-relative ui-ribbon-inline " + dynCSS }>
+				<div className={ "ui-ribbon-panel ui-ribbon-relative ui-ribbon-inline " + innerDynCSS }>
 					<div className="ui-ribbon-panel-contents">
 						{ items.map( createItem ) }
 
-						<div className="ui-ribbon-panel-legend ui-ribbon-absolute">
+						<div className={ "ui-ribbon-panel-legend ui-ribbon-absolute " + legendDynCSS }>
 							{ this.displayName }
 						</div>
 					</div>

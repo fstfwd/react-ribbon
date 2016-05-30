@@ -198,7 +198,8 @@ export default class RibbonButton extends RibbonItem {
 
 	render() {
 		const outerDynCSS = ClassNames({
-			'ui-ribbon-disabled': ( this.enabled === false )
+			'ui-ribbon-disabled': ( this.enabled === false ),
+			'ui-ribbon-invisible': this.hidden
 		});
 
 		const innerDynCSS = ClassNames({

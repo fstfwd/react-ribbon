@@ -16,8 +16,13 @@ export default class RibbonPushButton extends RibbonButton {
 	}
 
 	render() {
+		const dynCSS = ClassNames({
+			'ui-ribbon-disabled': ( this.enabled === false ),
+			'ui-ribbon-invisible': this.hidden
+		});
+
 		return (
-			<div className="ui-ribbon-button-group ui-ribbon-inline">
+			<div className={ "ui-ribbon-button-group ui-ribbon-inline " + dynCSS }>
 				{ super.render() }
 			</div>
 		);

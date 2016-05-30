@@ -42,6 +42,52 @@ export default class RibbonGroup extends RibbonItem {
 	}
 
 	/**
+	 * Instance edis/en-able status.
+	 * @return {bool} - If false, make instance be disabled.
+	 */
+	get enabled() {
+		return super.enabled;
+	}
+
+	/**
+	 * Instance edis/en-able status.
+	 * @param {bool} [enabled = true] - If false, make instance be disabled.
+	 */
+	set enabled( enabled = true ) {
+		if( this.hidden ) return;
+
+		const isEnabled = ( enabled === true );
+		super.enabled = isEnabled;
+
+		// Cascaded applying changes
+		this.items.map( ( item ) => {
+			item.enabled = isEnabled;
+		});
+	}
+
+	/**
+	 * Instance is hidden or not.
+	 * @return {bool} - If false, instance is going to disppear on the UI.
+	 */
+	get hidden() {
+		return super.hidden;
+	}
+
+	/**
+	 * Instance is hidden or not.
+	 * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+	 */
+	set hidden( hidden = false ) {
+		const isHidden = ( hidden === true );
+		super.hidden = isHidden;
+
+		// Cascaded applying changes
+		this.items.map( ( item ) => {
+			item.hidden = isHidden;
+		});
+	}
+
+	/**
 	 * Add new RibbonButton by given data.
 	 * @param {RibbonButtonData} itemData - Ribbon button data for creating new item in the RibbonGroup.
 	 * @return {RibbonButton} - Rendered RibbonButton component.
@@ -114,11 +160,16 @@ export default class RibbonGroup extends RibbonItem {
 			return result;
 		};
 
+		const dynCSS = ClassNames({
+			'ui-ribbon-disabled': ( this.enabled === false ),
+			'ui-ribbon-invisible': this.hidden
+		});
+
 		return (
 			<div
 				key={ this.id }
 				id={ this.id }
-				className="ui-ribbon-group ui-ribbon-inline">
+				className={ "ui-ribbon-group ui-ribbon-inline " + dynCSS }>
 
 				{ items.map( createItem ) }
 			</div>

@@ -119,6 +119,25 @@ export default class Ribbon extends React.Component {
 			);
 		};
 
+		const nextOpt = ( id, data ) => {
+			// For de/activating tab by changing tab's actived property.
+			if( data.hasOwnProperty( 'actived' ) ) {
+				if( data.actived === true ) {
+					scope.tabs.map( ( tab ) => {
+						if( tab.id !== id ) tab.actived = false;
+					});
+				} else {
+					// For activing other tab while current tab is diabled.
+					if( data.hasOwnProperty( 'enabled' ) && ( data.enabled === false ) ) {
+						const tab = scope.tabs.find( ( tab ) => ( tab.id !== id && tab.enabled === true && tab.type !== 'ui-ribbon-tab-application' ) );
+						if( !tab ) return;
+
+						tab.actived = true;
+					}
+				}
+			}
+		};
+
 		const updateTab = ( id, data ) => {
 			let tabs = scope.state.tabs;
 			const tab = tabs.find( ( tab ) => tab.id === id );
@@ -127,12 +146,7 @@ export default class Ribbon extends React.Component {
 			Object.assign( tab, data );
 			scope.setState({ tabs });
 
-			// For de/activating tab by changing tab's actived property.
-			if( data.hasOwnProperty( 'actived' ) && data.actived ) {
-				scope.tabs.map( ( tab ) => {
-					if( tab.id !== id ) tab.actived = false;
-				});
-			}
+			nextOpt( id, data );
 		};
 
 		const createTab = ( tab ) => {

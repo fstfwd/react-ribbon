@@ -42,6 +42,63 @@ export default class RibbonTab extends RibbonBase {
 	}
 
 	/**
+	 * Instance edis/en-able status.
+	 * @return {bool} - If false, make instance be disabled.
+	 */
+	get enabled() {
+		return super.enabled;
+	}
+
+	/**
+	 * Instance edis/en-able status.
+	 * @param {bool} [enabled = true] - If false, make instance be disabled.
+	 */
+	set enabled( enabled = true ) {
+		if( this.hidden ) return;
+
+		const isEnabled = ( enabled === true );
+
+		const prop = { enabled: isEnabled, actived: false };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		// Cascaded applying changes
+		this.panels.map( ( panel ) => {
+			panel.enabled = isEnabled;
+		});
+
+		this.setState( prop );
+	}
+
+	/**
+	 * Instance is hidden or not.
+	 * @return {bool} - If false, instance is going to disppear on the UI.
+	 */
+	get hidden() {
+		return super.hidden;
+	}
+
+	/**
+	 * Instance is hidden or not.
+	 * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+	 */
+	set hidden( hidden = false ) {
+		const isHidden = ( hidden === true );
+		const isEnabled = !isHidden;
+
+		const prop = { hidden: isHidden, enabled: isEnabled, actived: false };
+		const onStateChange = this.props.onStateChange;
+		onStateChange && onStateChange( this.id, prop );
+
+		// Cascaded applying changes
+		this.panels.map( ( panel ) => {
+			panel.hidden = isHidden;
+		});
+
+		this.setState( prop );
+	}
+
+	/**
 	 * Tab actived state.
 	 * @return {bool} - If true, it repsents tab is selected currently.
 	 */
@@ -111,7 +168,10 @@ export default class RibbonTab extends RibbonBase {
 		const scope = this;
 		const panels = this.state.panels;
 		const dynCSS = ClassNames({
-			'ui-ribbon-active': this.actived
+			'ui-ribbon-active': this.actived,
+			'ui-ribbon-disabled': ( this.enabled === false ),
+			'ui-ribbon-invisible': this.hidden,
+			'ui-ribbon-inline': ( this.hidden === false )
 		});
 
 		const updatePanel = ( id, data ) => {
@@ -148,7 +208,7 @@ export default class RibbonTab extends RibbonBase {
 			<li
 				key={ this.id }
 				id={ this.id }
-				className={ this.type + " ui-ribbon-inline " + dynCSS }
+				className={ this.type + " " + dynCSS }
 				role="ui-ribbon-tab"
 				onClick={ this.handleClick } >
 

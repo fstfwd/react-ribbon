@@ -108,12 +108,17 @@ export default class RibbonRadioButtonGroup extends RibbonGroup {
 					ref={ ( c ) => { if( c ) scope.items.push( c ) } } />
 			);
 		};
-	 
-	 return (
+
+		const dynCSS = ClassNames({
+			'ui-ribbon-disabled': ( this.enabled === false ),
+			'ui-ribbon-invisible': this.hidden
+		});
+
+		return (
 			<div
 				key={ this.id }
 				id={ this.id }
-				className="ui-ribbon-group ui-ribbon-inline">
+				className={ "ui-ribbon-group ui-ribbon-inline " + dynCSS }>
 
 				{ items.map( createItem ) }
 			</div>
