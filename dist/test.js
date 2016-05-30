@@ -176,6 +176,27 @@ var Ribbon = function (_React$Component) {
 					onStateChange: updateTitlebar });
 			};
 
+			var nextOpt = function nextOpt(id, data) {
+				// For de/activating tab by changing tab's actived property.
+				if (data.hasOwnProperty('actived')) {
+					if (data.actived === true) {
+						scope.tabs.map(function (tab) {
+							if (tab.id !== id) tab.actived = false;
+						});
+					} else {
+						// For activing other tab while current tab is diabled.
+						if (data.hasOwnProperty('enabled') && data.enabled === false) {
+							var tab = scope.tabs.find(function (tab) {
+								return tab.id !== id && tab.enabled === true && tab.type !== 'ui-ribbon-tab-application';
+							});
+							if (!tab) return;
+
+							tab.actived = true;
+						}
+					}
+				}
+			};
+
 			var updateTab = function updateTab(id, data) {
 				var tabs = scope.state.tabs;
 				var tab = tabs.find(function (tab) {
@@ -186,12 +207,7 @@ var Ribbon = function (_React$Component) {
 				Object.assign(tab, data);
 				scope.setState({ tabs: tabs });
 
-				// For de/activating tab by changing tab's actived property.
-				if (data.hasOwnProperty('actived') && data.actived) {
-					scope.tabs.map(function (tab) {
-						if (tab.id !== id) tab.actived = false;
-					});
-				}
+				nextOpt(id, data);
 			};
 
 			var createTab = function createTab(tab) {
@@ -382,6 +398,8 @@ var RibbonBase = function (_React$Component) {
 		,
 		set: function set() {
 			var enabled = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+			if (this.hidden) return;
 
 			var isEnabled = enabled === true;
 
@@ -607,7 +625,8 @@ var RibbonButton = function (_RibbonItem) {
 		key: 'render',
 		value: function render() {
 			var outerDynCSS = (0, _classnames2.default)({
-				'ui-ribbon-disabled': this.enabled === false
+				'ui-ribbon-disabled': this.enabled === false,
+				'ui-ribbon-invisible': this.hidden
 			});
 
 			var innerDynCSS = (0, _classnames2.default)({
@@ -1009,6 +1028,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _set = function set(object, property, value, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent !== null) { set(parent, property, value, receiver); } } else if ("value" in desc && desc.writable) { desc.value = value; } else { var setter = desc.set; if (setter !== undefined) { setter.call(receiver, value); } } return value; };
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
 var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1176,12 +1199,17 @@ var RibbonGroup = function (_RibbonItem) {
 				return result;
 			};
 
+			var dynCSS = (0, _classnames2.default)({
+				'ui-ribbon-disabled': this.enabled === false,
+				'ui-ribbon-invisible': this.hidden
+			});
+
 			return _react2.default.createElement(
 				'div',
 				{
 					key: this.id,
 					id: this.id,
-					className: 'ui-ribbon-group ui-ribbon-inline' },
+					className: "ui-ribbon-group ui-ribbon-inline " + dynCSS },
 				items.map(createItem)
 			);
 		}
@@ -1189,6 +1217,64 @@ var RibbonGroup = function (_RibbonItem) {
 		key: 'items',
 		get: function get() {
 			return this[Items];
+		}
+
+		/**
+   * Instance edis/en-able status.
+   * @return {bool} - If false, make instance be disabled.
+   */
+
+	}, {
+		key: 'enabled',
+		get: function get() {
+			return _get(Object.getPrototypeOf(RibbonGroup.prototype), 'enabled', this);
+		}
+
+		/**
+   * Instance edis/en-able status.
+   * @param {bool} [enabled = true] - If false, make instance be disabled.
+   */
+		,
+		set: function set() {
+			var enabled = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+			if (this.hidden) return;
+
+			var isEnabled = enabled === true;
+			_set(Object.getPrototypeOf(RibbonGroup.prototype), 'enabled', isEnabled, this);
+
+			// Cascaded applying changes
+			this.items.map(function (item) {
+				item.enabled = isEnabled;
+			});
+		}
+
+		/**
+   * Instance is hidden or not.
+   * @return {bool} - If false, instance is going to disppear on the UI.
+   */
+
+	}, {
+		key: 'hidden',
+		get: function get() {
+			return _get(Object.getPrototypeOf(RibbonGroup.prototype), 'hidden', this);
+		}
+
+		/**
+   * Instance is hidden or not.
+   * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+   */
+		,
+		set: function set() {
+			var hidden = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+			var isHidden = hidden === true;
+			_set(Object.getPrototypeOf(RibbonGroup.prototype), 'hidden', isHidden, this);
+
+			// Cascaded applying changes
+			this.items.map(function (item) {
+				item.hidden = isHidden;
+			});
 		}
 	}]);
 
@@ -1340,6 +1426,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _set = function set(object, property, value, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent !== null) { set(parent, property, value, receiver); } } else if ("value" in desc && desc.writable) { desc.value = value; } else { var setter = desc.set; if (setter !== undefined) { setter.call(receiver, value); } } return value; };
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
 var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1480,9 +1570,20 @@ var RibbonPanel = function (_RibbonBase) {
 		value: function render() {
 			var scope = this;
 			var items = this.state.items;
-			var dynCSS = (0, _classnames2.default)({
+
+			var outerDynCSS = (0, _classnames2.default)({
+				'ui-ribbon-disabled': this.enabled === false,
+				'ui-ribbon-invisible': this.hidden,
+				'ui-ribbon-inline': this.hidden === false
+			});
+
+			var innerDynCSS = (0, _classnames2.default)({
 				'ui-ribbon-empty': items.length === 0,
 				'ui-riibon-panel-single-btn': items.length === 1
+			});
+
+			var legendDynCSS = (0, _classnames2.default)({
+				'ui-ribbon-disabled': this.enabled === false
 			});
 
 			var updateItem = function updateItem(id, data) {
@@ -1559,18 +1660,18 @@ var RibbonPanel = function (_RibbonBase) {
 				'div',
 				{
 					key: this.id,
-					className: 'ui-ribbon-panel-container ui-ribbon-relative ui-ribbon-inline' },
+					className: "ui-ribbon-panel-container ui-ribbon-relative " + outerDynCSS },
 				createSeperator(this.seperator),
 				_react2.default.createElement(
 					'div',
-					{ className: "ui-ribbon-panel ui-ribbon-relative ui-ribbon-inline " + dynCSS },
+					{ className: "ui-ribbon-panel ui-ribbon-relative ui-ribbon-inline " + innerDynCSS },
 					_react2.default.createElement(
 						'div',
 						{ className: 'ui-ribbon-panel-contents' },
 						items.map(createItem),
 						_react2.default.createElement(
 							'div',
-							{ className: 'ui-ribbon-panel-legend ui-ribbon-absolute' },
+							{ className: "ui-ribbon-panel-legend ui-ribbon-absolute " + legendDynCSS },
 							this.displayName
 						)
 					)
@@ -1592,6 +1693,64 @@ var RibbonPanel = function (_RibbonBase) {
 		key: 'items',
 		get: function get() {
 			return this[Items];
+		}
+
+		/**
+   * Instance edis/en-able status.
+   * @return {bool} - If false, make instance be disabled.
+   */
+
+	}, {
+		key: 'enabled',
+		get: function get() {
+			return _get(Object.getPrototypeOf(RibbonPanel.prototype), 'enabled', this);
+		}
+
+		/**
+   * Instance edis/en-able status.
+   * @param {bool} [enabled = true] - If false, make instance be disabled.
+   */
+		,
+		set: function set() {
+			var enabled = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+			if (this.hidden) return;
+
+			var isEnabled = enabled === true;
+			_set(Object.getPrototypeOf(RibbonPanel.prototype), 'enabled', isEnabled, this);
+
+			// Cascaded applying changes
+			this.items.map(function (item) {
+				item.enabled = isEnabled;
+			});
+		}
+
+		/**
+   * Instance is hidden or not.
+   * @return {bool} - If false, instance is going to disppear on the UI.
+   */
+
+	}, {
+		key: 'hidden',
+		get: function get() {
+			return _get(Object.getPrototypeOf(RibbonPanel.prototype), 'hidden', this);
+		}
+
+		/**
+   * Instance is hidden or not.
+   * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+   */
+		,
+		set: function set() {
+			var hidden = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+			var isHidden = hidden === true;
+			_set(Object.getPrototypeOf(RibbonPanel.prototype), 'hidden', isHidden, this);
+
+			// Cascaded applying changes
+			this.items.map(function (item) {
+				item.hidden = isHidden;
+			});
 		}
 	}]);
 
@@ -1670,9 +1829,14 @@ var RibbonPushButton = function (_RibbonButton) {
 	_createClass(RibbonPushButton, [{
 		key: 'render',
 		value: function render() {
+			var dynCSS = (0, _classnames2.default)({
+				'ui-ribbon-disabled': this.enabled === false,
+				'ui-ribbon-invisible': this.hidden
+			});
+
 			return _react2.default.createElement(
 				'div',
-				{ className: 'ui-ribbon-button-group ui-ribbon-inline' },
+				{ className: "ui-ribbon-button-group ui-ribbon-inline " + dynCSS },
 				_get(Object.getPrototypeOf(RibbonPushButton.prototype), 'render', this).call(this)
 			);
 		}
@@ -1841,12 +2005,17 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 					} });
 			};
 
+			var dynCSS = (0, _classnames2.default)({
+				'ui-ribbon-disabled': this.enabled === false,
+				'ui-ribbon-invisible': this.hidden
+			});
+
 			return _react2.default.createElement(
 				'div',
 				{
 					key: this.id,
 					id: this.id,
-					className: 'ui-ribbon-group ui-ribbon-inline' },
+					className: "ui-ribbon-group ui-ribbon-inline " + dynCSS },
 				items.map(createItem)
 			);
 		}
@@ -1900,6 +2069,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
 
@@ -2021,7 +2192,10 @@ var RibbonTab = function (_RibbonBase) {
 			var scope = this;
 			var panels = this.state.panels;
 			var dynCSS = (0, _classnames2.default)({
-				'ui-ribbon-active': this.actived
+				'ui-ribbon-active': this.actived,
+				'ui-ribbon-disabled': this.enabled === false,
+				'ui-ribbon-invisible': this.hidden,
+				'ui-ribbon-inline': this.hidden === false
 			});
 
 			var updatePanel = function updatePanel(id, data) {
@@ -2061,7 +2235,7 @@ var RibbonTab = function (_RibbonBase) {
 				{
 					key: this.id,
 					id: this.id,
-					className: this.type + " ui-ribbon-inline " + dynCSS,
+					className: this.type + " " + dynCSS,
 					role: 'ui-ribbon-tab',
 					onClick: this.handleClick },
 				_react2.default.createElement(
@@ -2080,6 +2254,75 @@ var RibbonTab = function (_RibbonBase) {
 		key: 'type',
 		get: function get() {
 			return this.props.type;
+		}
+
+		/**
+   * Instance edis/en-able status.
+   * @return {bool} - If false, make instance be disabled.
+   */
+
+	}, {
+		key: 'enabled',
+		get: function get() {
+			return _get(Object.getPrototypeOf(RibbonTab.prototype), 'enabled', this);
+		}
+
+		/**
+   * Instance edis/en-able status.
+   * @param {bool} [enabled = true] - If false, make instance be disabled.
+   */
+		,
+		set: function set() {
+			var enabled = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+			if (this.hidden) return;
+
+			var isEnabled = enabled === true;
+
+			var prop = { enabled: isEnabled, actived: false };
+			var onStateChange = this.props.onStateChange;
+			onStateChange && onStateChange(this.id, prop);
+
+			// Cascaded applying changes
+			this.panels.map(function (panel) {
+				panel.enabled = isEnabled;
+			});
+
+			this.setState(prop);
+		}
+
+		/**
+   * Instance is hidden or not.
+   * @return {bool} - If false, instance is going to disppear on the UI.
+   */
+
+	}, {
+		key: 'hidden',
+		get: function get() {
+			return _get(Object.getPrototypeOf(RibbonTab.prototype), 'hidden', this);
+		}
+
+		/**
+   * Instance is hidden or not.
+   * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+   */
+		,
+		set: function set() {
+			var hidden = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+			var isHidden = hidden === true;
+			var isEnabled = !isHidden;
+
+			var prop = { hidden: isHidden, enabled: isEnabled, actived: false };
+			var onStateChange = this.props.onStateChange;
+			onStateChange && onStateChange(this.id, prop);
+
+			// Cascaded applying changes
+			this.panels.map(function (panel) {
+				panel.hidden = isHidden;
+			});
+
+			this.setState(prop);
 		}
 
 		/**
@@ -4512,7 +4755,7 @@ _modules2.default.registerTask('React.Windows.RibbonDemoTask', RibbonDemoTask);
 'use strict';
 
 /**
- * Create new GUID based on timeStamp.
+ * Create new RFC4122 v4 GUID based on timeStamp.
  * @return {string}	- New guid
  */
 
@@ -4522,13 +4765,24 @@ Object.defineProperty(exports, "__esModule", {
 var newGUID = exports.newGUID = function newGUID() {
 	var d = new Date().getTime();
 
-	var guid = 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
+	var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
 		var r = (d + Math.random() * 16) % 16 | 0;
 		d = Math.floor(d / 16);
-		return (c == 'x' ? r : r & 0x7 | 0x8).toString(16);
+		return (c == 'x' ? r : r & 0x3 | 0x8).toString(16);
 	});
 
 	return guid;
+};
+
+/**
+ * Check input is GUID.
+ * @param {string} - Target guid.
+ * @return {bool} -	If the input is a GUID, then return true.
+ */
+var isGUID = exports.isGUID = function isGUID(guid) {
+	//const pattern = /^[0-9a-f]{4}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{4}$/i;
+	var pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+	return pattern.test(guid);
 };
 
 /**
@@ -4570,6 +4824,7 @@ var namespace = exports.namespace = function namespace(s) {
 
 var utility = {
 	newGUID: newGUID,
+	isGUID: isGUID,
 	findItem: findItem,
 	namespace: namespace
 };
