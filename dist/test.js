@@ -4755,7 +4755,7 @@ _modules2.default.registerTask('React.Windows.RibbonDemoTask', RibbonDemoTask);
 'use strict';
 
 /**
- * Create new GUID based on timeStamp.
+ * Create new RFC4122 v4 GUID based on timeStamp.
  * @return {string}	- New guid
  */
 
@@ -4765,13 +4765,24 @@ Object.defineProperty(exports, "__esModule", {
 var newGUID = exports.newGUID = function newGUID() {
 	var d = new Date().getTime();
 
-	var guid = 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
+	var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
 		var r = (d + Math.random() * 16) % 16 | 0;
 		d = Math.floor(d / 16);
-		return (c == 'x' ? r : r & 0x7 | 0x8).toString(16);
+		return (c == 'x' ? r : r & 0x3 | 0x8).toString(16);
 	});
 
 	return guid;
+};
+
+/**
+ * Check input is GUID.
+ * @param {string} - Target guid.
+ * @return {bool} -	If the input is a GUID, then return true.
+ */
+var isGUID = exports.isGUID = function isGUID(guid) {
+	//const pattern = /^[0-9a-f]{4}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{4}$/i;
+	var pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+	return pattern.test(guid);
 };
 
 /**
@@ -4813,6 +4824,7 @@ var namespace = exports.namespace = function namespace(s) {
 
 var utility = {
 	newGUID: newGUID,
+	isGUID: isGUID,
 	findItem: findItem,
 	namespace: namespace
 };
