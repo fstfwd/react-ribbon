@@ -1902,6 +1902,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Current = Symbol('current');
+var Default = Symbol('default');
 
 /**
  * RibbonRadioButtonGroup
@@ -1923,18 +1924,26 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RibbonRadioButtonGroup).call(this, props));
 
 		_this[Current] = undefined;
+		_this[Default] = undefined;
 		return _this;
 	}
 
 	/**
-  * Current actived RibbonToggleButton;
+  * Current actived RibbonToggleButton.
   * @return {string} - RibbonToggleButton id.
   */
 
 
 	_createClass(RibbonRadioButtonGroup, [{
-		key: 'addItem',
+		key: 'resetCurrent',
 
+
+		/**
+   * Reset current item to the default.
+   */
+		value: function resetCurrent() {
+			this.current = this.default;
+		}
 
 		/**
    * Add new RibbonToggleButton by given data.
@@ -1942,12 +1951,15 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
    * @return {RibbonToggleButton} - Rendered RibbonToggleButton component.
    * @override
    */
+
+	}, {
+		key: 'addItem',
 		value: function addItem(itemData) {
 			if (!(itemData instanceof _RibbonToggleButtonData2.default)) return console.log('%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;');
 
 			var item = _get(Object.getPrototypeOf(RibbonRadioButtonGroup.prototype), 'addItem', this).call(this, itemData);
 
-			if (!this.current) this.current = item.id;
+			if (!this.default) this.default = item.id;
 
 			return item;
 		}
@@ -1961,9 +1973,6 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 				if (typeof id !== 'string' || scope.current === id) return;
 
 				scope.current = id;
-				scope.items.map(function (item) {
-					if (item.id !== id) item.actived = false;
-				});
 			};
 
 			var updateItem = function updateItem(id, data) {
@@ -2026,18 +2035,53 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 		}
 
 		/**
-   * Current actived RibbonToggleButton;
+   * Current actived RibbonToggleButton.
    * @param {string} id - RibbonToggleButton id.
    */
 		,
 		set: function set(id) {
+			if (this.current === id) return;
+
+			var current = this.items.find(function (item) {
+				return item.id === id;
+			});
+			if (!current) throw '[RibbonRadioButtonGroup] Input id not exists.';
+
+			current.actived = true;
+			this[Current] = current.id;
+
+			this.items.map(function (item) {
+				if (item.id !== id) item.actived = false;
+			});
+		}
+
+		/**
+   * Default actived RibbonToggleButton.
+   * @return {string} - RibbonToggleButton id.
+   */
+
+	}, {
+		key: 'default',
+		get: function get() {
+			return this[Default];
+		}
+
+		/**
+   * Default actived RibbonToggleButton.
+   * @param {string} - RibbonToggleButton id.
+   */
+		,
+		set: function set(id) {
+			if (this.default === id) return;
+
 			var item = this.items.find(function (item) {
 				return item.id === id;
 			});
 			if (!item) throw '[RibbonRadioButtonGroup] Input id not exists.';
 
-			item.actived = true;
-			this[Current] = item.id;
+			if (!this.current) this.current = id;
+
+			this[Default] = id;
 		}
 	}]);
 
