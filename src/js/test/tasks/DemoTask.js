@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import $ from 'jquery';
 import ribbonCtrl, { RibbonTask, Data, Utility } from '../modules';
 

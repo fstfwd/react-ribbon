@@ -1,9 +1,13 @@
-import { Utility } from '../';
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import { RibbonCtrl } from '../';
 
-let ns = Utility.namespace( 'React.Windows' );
-
-if( !ns.ribbonCtrlInst )
-	ns.ribbonCtrlInst = new RibbonCtrl();
-
-export default ns.ribbonCtrlInst;
+/**
+ * Singleton pattern approach for RibbonCtrl.
+ * @return {RibbonCtrl} - RibbonCtrl instance.
+ */
+export default new RibbonCtrl();

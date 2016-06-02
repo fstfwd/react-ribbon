@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Ribbon from './Ribbon';

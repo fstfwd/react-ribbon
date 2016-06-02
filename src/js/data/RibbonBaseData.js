@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import { newGUID } from '../utility';
 
 const Id = Symbol( 'id' );

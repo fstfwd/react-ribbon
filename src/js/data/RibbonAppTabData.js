@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import RibbonTabData from './RibbonTabData';
 
 /**

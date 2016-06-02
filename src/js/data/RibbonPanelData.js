@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import RibbonBaseData from './RibbonBaseData';
 
 const Seperator = Symbol( 'seperator' );

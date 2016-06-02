@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import React from 'react';
 import ClassNames from 'classnames';
 import RibbonButton from './RibbonButton';

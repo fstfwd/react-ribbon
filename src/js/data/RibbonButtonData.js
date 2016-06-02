@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import RibbonItemData from './RibbonItemData';
 import RibbonTooltipData from './RibbonTooltipData';
 

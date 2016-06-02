@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import React from 'react';
 import RibbonTabData from './data/RibbonTabData';
 import RibbonAppTabData from './data/RibbonAppTabData';

@@ -1,3 +1,9 @@
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
+'use strict';
+
 import React from 'react';
 import ClassNames from 'classnames';
 import RibbonGroup from './RibbonGroup';
@@ -44,7 +50,10 @@ export default class RibbonRadioButtonGroup extends RibbonGroup {
 		if( !current ) throw '[RibbonRadioButtonGroup] Input id not exists.'
 
 		current.actived = true;
-		this[Current] = current.id;
+		this[Current] = id;
+
+		if( !this.default )
+			this.default = id;
 
 		this.items.map( ( item ) => {
 			if( item.id !== id ) item.actived = false;
@@ -69,10 +78,10 @@ export default class RibbonRadioButtonGroup extends RibbonGroup {
 		const item = this.items.find( ( item ) => item.id === id );
 		if( !item ) throw '[RibbonRadioButtonGroup] Input id not exists.'
 
+		this[Default] = id;
+
 		if( !this.current )
 			this.current = id;
-
-		this[Default] = id;
 	}
 
 	/**
