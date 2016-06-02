@@ -44,10 +44,8 @@ export default class RibbonRadioButtonGroup extends RibbonGroup {
 	 * @param {string} id - RibbonToggleButton id.
 	 */
 	set current( id ) {
-		if( this.current === id ) return;
-
-		const current = this.items.find( ( item ) => item.id === id );
-		if( !current ) throw '[RibbonRadioButtonGroup] Input id not exists.'
+		const current = this.items.find( ( item ) => item.id === id && item.enabled );
+		if( !current ) throw '[RibbonRadioButtonGroup] Input id not exists or disabled.'
 
 		current.actived = true;
 		this[Current] = id;
@@ -73,10 +71,8 @@ export default class RibbonRadioButtonGroup extends RibbonGroup {
 	 * @param {string} - RibbonToggleButton id.
 	 */
 	set default( id ) {
-		if( this.default === id ) return;
-
-		const item = this.items.find( ( item ) => item.id === id );
-		if( !item ) throw '[RibbonRadioButtonGroup] Input id not exists.'
+		const item = this.items.find( ( item ) => item.id === id && item.enabled );
+		if( !item ) throw '[RibbonRadioButtonGroup] Input id not exists or disabled.'
 
 		this[Default] = id;
 
@@ -114,7 +110,7 @@ export default class RibbonRadioButtonGroup extends RibbonGroup {
 		const items = this.state.items;
 
 		const updateCurrentItem = ( id ) => {
-			if( typeof id !== 'string' || scope.current === id ) return;
+			if( typeof id !== 'string' ) return;
 
 			scope.current = id;
 		};
