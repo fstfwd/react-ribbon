@@ -2006,7 +2006,7 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 			var items = this.state.items;
 
 			var updateCurrentItem = function updateCurrentItem(id) {
-				if (typeof id !== 'string' || scope.current === id) return;
+				if (typeof id !== 'string') return;
 
 				scope.current = id;
 			};
@@ -2076,12 +2076,10 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
    */
 		,
 		set: function set(id) {
-			if (this.current === id) return;
-
 			var current = this.items.find(function (item) {
-				return item.id === id;
+				return item.id === id && item.enabled;
 			});
-			if (!current) throw '[RibbonRadioButtonGroup] Input id not exists.';
+			if (!current) throw '[RibbonRadioButtonGroup] Input id not exists or disabled.';
 
 			current.actived = true;
 			this[Current] = id;
@@ -2110,12 +2108,10 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
    */
 		,
 		set: function set(id) {
-			if (this.default === id) return;
-
 			var item = this.items.find(function (item) {
-				return item.id === id;
+				return item.id === id && item.enabled;
 			});
-			if (!item) throw '[RibbonRadioButtonGroup] Input id not exists.';
+			if (!item) throw '[RibbonRadioButtonGroup] Input id not exists or disabled.';
 
 			this[Default] = id;
 
@@ -3050,11 +3046,11 @@ var RibbonToggleButton = function (_RibbonPushButton) {
 				var onStateChange = this.props.onStateChange;
 				onStateChange && onStateChange(this.id, prop);
 
+				this.setState(prop);
+
 				// For de/activating button by changing button's actived property.
 				var onGroupCurrentChange = this.props.onGroupCurrentChange;
 				onGroupCurrentChange && onGroupCurrentChange();
-
-				this.setState(prop);
 			}
 
 			var clickHandler = this.props.clickHandler;
