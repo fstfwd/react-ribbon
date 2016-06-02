@@ -1,5 +1,9 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -278,6 +282,10 @@ Ribbon.defaultProps = {
 
 },{"./RibbonTab":10,"./RibbonTitlebar":14,"./data/RibbonAppTabData":17,"./data/RibbonTabData":25,"./data/RibbonTitlebarData":26,"./utility":35}],2:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -465,6 +473,10 @@ RibbonBase.defaultProps = {
 
 },{"./utility":35}],3:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -814,6 +826,10 @@ RibbonButton.defaultProps = {
 
 },{"./RibbonItem":6,"./RibbonTooltip":16,"./data/RibbonTooltipData":28,"./utility":35}],4:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1020,6 +1036,10 @@ exports.default = RibbonCtrl;
 
 },{"./Ribbon":1,"./RibbonTaskExecuter":12,"./RibbonTaskManager":13}],5:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1299,6 +1319,10 @@ RibbonGroup.defaultProps = {
 
 },{"./RibbonButton":3,"./RibbonItem":6,"./RibbonPushButton":8,"./RibbonToggleButton":15,"./data/RibbonButtonData":19,"./data/RibbonItemData":21,"./data/RibbonPushButtonData":23,"./data/RibbonToggleButtonData":27,"./utility":35}],6:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1418,6 +1442,10 @@ RibbonItem.defaultProps = {
 
 },{"./RibbonBase":2,"./utility":35}],7:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1777,6 +1805,10 @@ RibbonPanel.defaultProps = {
 
 },{"./RibbonBase":2,"./RibbonButton":3,"./RibbonGroup":5,"./RibbonItem":6,"./RibbonPushButton":8,"./RibbonRadioButtonGroup":9,"./RibbonToggleButton":15,"./data/RibbonButtonData":19,"./data/RibbonGroupData":20,"./data/RibbonItemData":21,"./data/RibbonPushButtonData":23,"./data/RibbonRadioButtonGroupData":24,"./data/RibbonToggleButtonData":27,"./utility":35}],8:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1861,6 +1893,10 @@ RibbonPushButton.defaultProps = {
 
 },{"./RibbonButton":3}],9:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1902,6 +1938,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Current = Symbol('current');
+var Default = Symbol('default');
 
 /**
  * RibbonRadioButtonGroup
@@ -1923,18 +1960,26 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RibbonRadioButtonGroup).call(this, props));
 
 		_this[Current] = undefined;
+		_this[Default] = undefined;
 		return _this;
 	}
 
 	/**
-  * Current actived RibbonToggleButton;
+  * Current actived RibbonToggleButton.
   * @return {string} - RibbonToggleButton id.
   */
 
 
 	_createClass(RibbonRadioButtonGroup, [{
-		key: 'addItem',
+		key: 'resetCurrent',
 
+
+		/**
+   * Reset current item to the default.
+   */
+		value: function resetCurrent() {
+			this.current = this.default;
+		}
 
 		/**
    * Add new RibbonToggleButton by given data.
@@ -1942,12 +1987,15 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
    * @return {RibbonToggleButton} - Rendered RibbonToggleButton component.
    * @override
    */
+
+	}, {
+		key: 'addItem',
 		value: function addItem(itemData) {
 			if (!(itemData instanceof _RibbonToggleButtonData2.default)) return console.log('%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;');
 
 			var item = _get(Object.getPrototypeOf(RibbonRadioButtonGroup.prototype), 'addItem', this).call(this, itemData);
 
-			if (!this.current) this.current = item.id;
+			if (!this.default) this.default = item.id;
 
 			return item;
 		}
@@ -1961,9 +2009,6 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 				if (typeof id !== 'string' || scope.current === id) return;
 
 				scope.current = id;
-				scope.items.map(function (item) {
-					if (item.id !== id) item.actived = false;
-				});
 			};
 
 			var updateItem = function updateItem(id, data) {
@@ -2026,18 +2071,55 @@ var RibbonRadioButtonGroup = function (_RibbonGroup) {
 		}
 
 		/**
-   * Current actived RibbonToggleButton;
+   * Current actived RibbonToggleButton.
    * @param {string} id - RibbonToggleButton id.
    */
 		,
 		set: function set(id) {
+			if (this.current === id) return;
+
+			var current = this.items.find(function (item) {
+				return item.id === id;
+			});
+			if (!current) throw '[RibbonRadioButtonGroup] Input id not exists.';
+
+			current.actived = true;
+			this[Current] = id;
+
+			if (!this.default) this.default = id;
+
+			this.items.map(function (item) {
+				if (item.id !== id) item.actived = false;
+			});
+		}
+
+		/**
+   * Default actived RibbonToggleButton.
+   * @return {string} - RibbonToggleButton id.
+   */
+
+	}, {
+		key: 'default',
+		get: function get() {
+			return this[Default];
+		}
+
+		/**
+   * Default actived RibbonToggleButton.
+   * @param {string} - RibbonToggleButton id.
+   */
+		,
+		set: function set(id) {
+			if (this.default === id) return;
+
 			var item = this.items.find(function (item) {
 				return item.id === id;
 			});
 			if (!item) throw '[RibbonRadioButtonGroup] Input id not exists.';
 
-			item.actived = true;
-			this[Current] = item.id;
+			this[Default] = id;
+
+			if (!this.current) this.current = id;
 		}
 	}]);
 
@@ -2062,6 +2144,10 @@ _RibbonGroup3.default.defaultProps = {
 
 },{"./RibbonGroup":5,"./RibbonToggleButton":15,"./data/RibbonToggleButtonData":27,"./utility":35}],10:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2389,6 +2475,10 @@ RibbonTab.defaultProps = {
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./RibbonBase":2,"./RibbonPanel":7,"./data/RibbonPanelData":22,"./utility":35}],11:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2482,6 +2572,10 @@ var RibbonTask = function () {
 exports.default = RibbonTask;
 
 },{"./Ribbon":1}],12:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2645,6 +2739,10 @@ var RibbonTaskExecuter = function () {
 exports.default = RibbonTaskExecuter;
 
 },{"./Ribbon":1,"./RibbonTaskManager":13}],13:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2764,6 +2862,10 @@ exports.default = RibbonTaskManager;
 
 },{"./RibbonTask":11}],14:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2876,6 +2978,10 @@ RibbonTitlebar.propTypes = {
 
 },{"./RibbonBase":2}],15:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2978,6 +3084,10 @@ RibbonToggleButton.defaultProps = {
 
 },{"./RibbonPushButton":8}],16:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3178,6 +3288,10 @@ RibbonTooltip.propTypes = {
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./RibbonBase":2}],17:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3239,6 +3353,10 @@ var RibbonAppTabData = function (_RibbonTabData) {
 exports.default = RibbonAppTabData;
 
 },{"./RibbonTabData":25}],18:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3377,6 +3495,10 @@ var RibbonBaseData = function () {
 exports.default = RibbonBaseData;
 
 },{"../utility":35}],19:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3541,6 +3663,10 @@ var RibbonButtonData = function (_RibbonItemData) {
 exports.default = RibbonButtonData;
 
 },{"./RibbonItemData":21,"./RibbonTooltipData":28}],20:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3629,6 +3755,10 @@ var RibbonGroupData = function (_RibbonItemData) {
 exports.default = RibbonGroupData;
 
 },{"./RibbonItemData":21}],21:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3716,6 +3846,10 @@ var RibbonItemData = function (_RibbonBaseData) {
 exports.default = RibbonItemData;
 
 },{"./RibbonBaseData":18}],22:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3816,6 +3950,10 @@ var RibbonPanelData = function (_RibbonBaseData) {
 exports.default = RibbonPanelData;
 
 },{"./RibbonBaseData":18}],23:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3877,6 +4015,10 @@ var RibbonPushButtonData = function (_RibbonButtonData) {
 exports.default = RibbonPushButtonData;
 
 },{"./RibbonButtonData":19}],24:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3938,6 +4080,10 @@ var RibbonRadioButtonGroupData = function (_RibbonGroupData) {
 exports.default = RibbonRadioButtonGroupData;
 
 },{"./RibbonGroupData":20}],25:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4049,6 +4195,10 @@ var RibbonTabData = function (_RibbonBaseData) {
 exports.default = RibbonTabData;
 
 },{"./RibbonBaseData":18}],26:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4118,6 +4268,10 @@ var RibbonTitlebarData = function (_RibbonBaseData) {
 exports.default = RibbonTitlebarData;
 
 },{"./RibbonBaseData":18}],27:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4191,6 +4345,10 @@ var RibbonToggleButtonData = function (_RibbonPushButtonData) {
 exports.default = RibbonToggleButtonData;
 
 },{"./RibbonPushButtonData":23}],28:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4292,6 +4450,10 @@ var RibbonTooltipData = function (_RibbonBaseData) {
 exports.default = RibbonTooltipData;
 
 },{"../utility":35,"./RibbonBaseData":18}],29:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4366,6 +4528,10 @@ var Data = {
 exports.default = Data;
 
 },{"./RibbonAppTabData":17,"./RibbonBaseData":18,"./RibbonButtonData":19,"./RibbonGroupData":20,"./RibbonItemData":21,"./RibbonPanelData":22,"./RibbonPushButtonData":23,"./RibbonRadioButtonGroupData":24,"./RibbonTabData":25,"./RibbonTitlebarData":26,"./RibbonToggleButtonData":27,"./RibbonTooltipData":28}],30:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4484,22 +4650,35 @@ exports.Utility = _utility2.default;
 exports.Data = _data2.default;
 
 },{"./Ribbon":1,"./RibbonBase":2,"./RibbonButton":3,"./RibbonCtrl":4,"./RibbonGroup":5,"./RibbonItem":6,"./RibbonPanel":7,"./RibbonPushButton":8,"./RibbonRadioButtonGroup":9,"./RibbonTab":10,"./RibbonTask":11,"./RibbonTaskExecuter":12,"./RibbonTaskManager":13,"./RibbonTitlebar":14,"./RibbonToggleButton":15,"./RibbonTooltip":16,"./data":29,"./utility":35}],31:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _ = require('../');
 
-var ns = _.Utility.namespace('React.Windows');
-
-if (!ns.ribbonCtrlInst) ns.ribbonCtrlInst = new _.RibbonCtrl();
-
-exports.default = ns.ribbonCtrlInst;
+/**
+ * Singleton pattern approach for RibbonCtrl.
+ * @return {RibbonCtrl} - RibbonCtrl instance.
+ */
+exports.default = new _.RibbonCtrl();
 
 },{"../":30}],32:[function(require,module,exports){
+(function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
+
+var _jquery = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
 
 var _modules = require('./modules');
 
@@ -4511,7 +4690,11 @@ var _DemoTask2 = _interopRequireDefault(_DemoTask);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var init = function init() {
+var ns = _modules.Utility.namespace('React.Windows');
+
+if (!ns.ribbonCtrlInst) ns.ribbonCtrlInst = _modules2.default;
+
+(0, _jquery2.default)(function () {
 	_modules2.default.container = document.getElementById('ribbon-root');
 	_modules2.default.run().then(function (self) {
 		// Execute demo task.
@@ -4519,13 +4702,15 @@ var init = function init() {
 	}).catch(function (error) {
 		console.warn(error);
 	});
-};
+});
 
-window.onload = function () {
-	init();
-};
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./modules":33,"./tasks/DemoTask":34}],33:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4566,6 +4751,10 @@ exports.default = _RibbonCtrl2.default;
 
 },{"../":30,"./RibbonCtrl":31}],34:[function(require,module,exports){
 (function (global){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4752,6 +4941,10 @@ _modules2.default.registerTask('React.Windows.RibbonDemoTask', RibbonDemoTask);
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"../modules":33}],35:[function(require,module,exports){
+/**
+ * @author yiskang / http://github.com/yiskang
+ */
+
 'use strict';
 
 /**
