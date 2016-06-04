@@ -1,6 +1,6 @@
 {
   "name": "react-ribbon",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Office Ribbon like ui written in ReactJS.",
   "main": "./src/js/index.js",
   "directories": {

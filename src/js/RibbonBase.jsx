@@ -121,8 +121,8 @@ RibbonBase.propTypes = {
 	id: React.PropTypes.string.isRequired,
 	name: React.PropTypes.string.isRequired,
 	displayName: React.PropTypes.string,
-	enabled: React.PropTypes.boolean,
-	hidden: React.PropTypes.boolean,
+	enabled: React.PropTypes.bool,
+	hidden: React.PropTypes.bool,
 	onStateChange: React.PropTypes.func
 };
 
