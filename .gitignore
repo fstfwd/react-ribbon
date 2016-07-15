@@ -42,6 +42,7 @@ jspm_packages
 # swap
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
+*.swp
 # session
 Session.vim
 # temporary
@@ -76,5 +77,6 @@ bower_components
 ehthumbs.db
 Thumbs.db
 
-# VIM
-*.swp
+### Typings ###
+#### Ignore downloaded typings
+typings
