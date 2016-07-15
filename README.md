@@ -6,9 +6,9 @@ Here is the [Demo](http://yiskang.github.io/react-ribbon/).
 
 ## Dependencies
 
-- react: ^15.0.2
-- react-dom: ^15.0.2
-- classnames: ^2.2.3
+- react: ^15.2.1
+- react-dom: ^115.2.1
+- classnames: ^22.2.5
 
 ## Installation
 
@@ -17,7 +17,7 @@ Here is the [Demo](http://yiskang.github.io/react-ribbon/).
    - Install
 
 		```bash
-		npm install install --save https://github.com/yiskang/react-ribbon.git
+		npm install --save https://github.com/yiskang/react-ribbon.git
 		```
 
    - Import module in your code
