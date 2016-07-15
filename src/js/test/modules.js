@@ -4,7 +4,8 @@
 
 'use strict';
 
-export { RibbonTask, Utility, Data } from '../';
+import ReactRibbon from '../';
+export const { RibbonTask, Utility, Data } = ReactRibbon;
 import ribbonCtrl from './RibbonCtrl';
 
 if( !ribbonCtrl ) console.error( '[RibbonTest] Failed to create ribbonCtrl instance.' );

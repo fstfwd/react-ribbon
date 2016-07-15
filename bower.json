@@ -24,8 +24,12 @@
     "tests",
     "src",
     "package.json",
+    "typings",
+    "test.*",
     "gulpfile.js",
-    "test.js*"
+    "gulpfile.babel.js",
+    "jsconfig.json",
+    "typings.json"
   ],
   "dependencies": {
     "react": "^15.1.0",

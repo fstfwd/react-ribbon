@@ -23,7 +23,7 @@ import RibbonTaskExecuter from './RibbonTaskExecuter';
 import Utility from './utility';
 import Data from './data';
 
-const RibbonUI = {
+const ReactRibbon = {
 	Ribbon,
 	RibbonBase,
 	RibbonTab,
@@ -45,18 +45,6 @@ const RibbonUI = {
 };
 
 /**
- * Expose to global.
- */
-Utility.namespace( 'React.Windows' );
-React.Windows = RibbonUI;
-
-/**
  * Module exposure.
  */
-export default RibbonUI;
-export {
-	RibbonCtrl,
-	RibbonTask,
-	Utility,
-	Data
-};
+export default ReactRibbon;

@@ -1,4 +1,9 @@
+**/.*
 gulpfile.js
+gulpfile.babel.js
 bower.json
-dist/
+jsconfig.json
+typings.json
+.vscode/
+typings/
 test/

@@ -58,12 +58,6 @@ bower_components
 .bower-registry
 .bower-tmp
 
-
-### grunt ###
-# Grunt usually compiles files inside this directory
-#dist/
-#*.map
-
 # Grunt usually preprocesses files such as coffeescript, compass... inside the .tmp directory
 .tmp/
 
@@ -76,3 +70,10 @@ bower_components
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Test files
+dist/test.*
+
+### Typings ###
+### Ignore downloaded typings
+typings

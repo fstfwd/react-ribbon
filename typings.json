@@ -1,0 +1,7 @@
+{
+  "globalDependencies": {
+    "gulp": "registry:dt/gulp#3.8.0+20160316155526",
+    "node": "registry:dt/node#6.0.0+20160709114037",
+    "react": "registry:dt/react#0.14.0+20160630100702"
+  }
+}

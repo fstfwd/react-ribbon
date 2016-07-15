@@ -8,10 +8,9 @@ import $ from 'jquery';
 import ribbonCtrl, { Utility } from './modules';
 import DemoTask from './tasks/DemoTask';
 
-let ns = Utility.namespace( 'React.Windows' );
-
-if( !ns.ribbonCtrlInst )
-	ns.ribbonCtrlInst = ribbonCtrl;
+export default {
+	ribbonCtrl
+};
 
 $(() => {
 	ribbonCtrl.container = document.getElementById( 'ribbon-root' );

@@ -4,7 +4,8 @@
 
 'use strict';
 
-import { RibbonCtrl } from '../';
+import ReactRibbon from '../';
+const { RibbonCtrl } = ReactRibbon;
 
 /**
  * Singleton pattern approach for RibbonCtrl.
