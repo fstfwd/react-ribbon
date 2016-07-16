@@ -6,7 +6,7 @@
 
 import $ from 'jquery';
 import ribbonCtrl, { Utility } from './modules';
-import DemoTask from './tasks/DemoTask';
+import './tasks';
 
 export default {
 	ribbonCtrl

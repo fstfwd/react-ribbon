@@ -214,12 +214,14 @@ export default class RibbonButton extends RibbonItem {
 
 		const formatLegend = ( legend ) => {
 			const texts = legend.split( '\\n' );
-			let result = <span>{ legend }</span>;
+			let guid = newGUID();
+			let result = <span key={ guid } id={ guid }>{ legend }</span>;
 
 			if( texts.length > 1 ) {
 				result = texts.map(( txt ) => {
+						let guid = newGUID();
 						return ( 
-							<span>
+							<span key={ guid } id={ guid }>
 								{ txt }
 								<br />
 							</span>

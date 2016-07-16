@@ -16,7 +16,7 @@ export default class RibbonTitlebarData extends RibbonBaseData {
 	 * @param {string} title - The name of this instance shown on the user interface, might be a localized string.
 	 */
 	constructor( title ) {
-		if( typeof title !== 'string' ) title = 'Ribbon UI';
+		if( typeof title !== 'string' ) title = 'React Ribbon';
 
 		super( 'AppTitlebar', title );
 	}

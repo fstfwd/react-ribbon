@@ -39,52 +39,59 @@ export default class RibbonDemoTask extends RibbonTask {
 		try {
 			// Create tab.
 			const ribbon = this.ribbon;
-			const tabData = new RibbonTabData( 'DemoBasicTab', 'Basic' );
+			const tabData = new RibbonTabData( 'DemoHomeTab', 'Home' );
 			const tab = ribbon.addTab( tabData );
 
 			const testTabData = new RibbonTabData( 'DemoTestTab', 'Test' );
 			const testTab = ribbon.addTab( testTabData );
 
 			// Create panel.
-			const spatialPanelData = new RibbonPanelData( 'DemoSpatialPanel', 'Spatial' );
-			const spatialPanel = tab.addPanel( spatialPanelData );
+			const newMailPanelData = new RibbonPanelData( 'DemoNewMailPanel', 'New' );
+			const newMailPanel = tab.addPanel( newMailPanelData );
+
+			const delMailPanelData = new RibbonPanelData( 'DemoDeleteMailPanel', 'Delete' );
+			const delMailPanel = tab.addPanel( delMailPanelData );
+
+			const resMailPanelData = new RibbonPanelData( 'DemoRespondMailPanel', 'Respond' );
+			const resMailPanel = tab.addPanel( resMailPanelData );
 
 			// Create buttons.
-			const dwnBtnData = new RibbonPushButtonData( 'DemoSpatialDwnBtn', 'Download' );
-			const dwnBtn = spatialPanel.addItem( dwnBtnData );
-			dwnBtn.icon = 'img/db_download.png';
-			dwnBtn.clickHandler = () => { alert( 'DemoSpatialDwnBtn Clicked!' ); };
+			const newMailBtnData = new RibbonPushButtonData( 'DemoNewMailBtn', 'New\\nMail' );
+			const newMailBtn = newMailPanel.addItem( newMailBtnData );
+			newMailBtn.icon = 'img/demo/NewMailMessage.png';
+			newMailBtn.clickHandler = () => { alert( 'DemoNewMailBtn Clicked!' ); };
 
-			const clsBtnData = new RibbonPushButtonData( 'DemoSpatialCleanBtn', 'Clean' );
-			const clsBtn = spatialPanel.addItem( clsBtnData );
-			clsBtn.icon = 'img/db_remove.png';
-			clsBtn.clickHandler = () => { alert( 'DemoSpatialCleanBtn Clicked!' ); };
+			const newMailItemBtnData = new RibbonPushButtonData( 'DemoNewMailItemBtn', 'New\\nItems' );
+			const newMailItemBtn = newMailPanel.addItem( newMailItemBtnData );
+			newMailItemBtn.icon = 'img/demo/MailNewItemMenu.png';
+			newMailItemBtn.clickHandler = () => { alert( 'DemoNewMailItemBtn Clicked!' ); };
 
-			// Create panel.
-			const navPanelData = new RibbonPanelData( 'DemoNavPanel', 'Navigation' );
-			const navPanel = tab.addPanel( navPanelData );
+			const delMailBtnData = new RibbonPushButtonData( 'DemoDeleteMailBtn', 'Delete' );
+			const delMailBtn = delMailPanel.addItem( delMailBtnData );
+			delMailBtn.icon = 'img/demo/Delete.png';
+			delMailBtn.clickHandler = () => { alert( 'DemoDeleteMailBtn Clicked!' ); };
 
-			// Create button gruop.
-			const radioBtnGroupData = new RibbonRadioButtonGroupData( 'DemoNavBtnGroup', 'NavBtnGroup' );
-			const radioBtnGroup = navPanel.addItem( radioBtnGroupData );
+			const replyMailBtnData = new RibbonPushButtonData( 'DemoReplyMailBtn', 'Reply' );
+			const replyMailBtn = resMailPanel.addItem( replyMailBtnData );
+			replyMailBtn.icon = 'img/demo/Reply.png';
+			replyMailBtn.clickHandler = () => { alert( 'DemoReplyMailBtn Clicked!' ); };
 
-			// Add buttons to gruop.
-			const panBtnData = new RibbonToggleButtonData( 'DemoPanBtn', 'Pan' );
-			const panBtn = radioBtnGroup.addItem( panBtnData );
-			panBtn.icon = 'img/pan.png';
-			panBtn.clickHandler = () => { alert( 'DemoPanBtn Clicked!' ); };
+			const replyAllMailBtnData = new RibbonPushButtonData( 'DemoReplyAllMailBtn', 'Reply All' );
+			const replyAllMailBtn = resMailPanel.addItem( replyAllMailBtnData );
+			replyAllMailBtn.icon = 'img/demo/ReplyAll.png';
+			replyAllMailBtn.clickHandler = () => { alert( 'DemoReplyAllMailBtn Clicked!' ); };
 
-			const orbitBtnData = new RibbonToggleButtonData( 'DemoOrbitBtn', 'Orbit' );
-			const orbitBtn = radioBtnGroup.addItem( orbitBtnData );
-			orbitBtn.icon = 'img/orbit.png';
-			orbitBtn.clickHandler = () => { alert( 'DemoOrbitBtn Clicked!' ); };
+			const forwardMailBtnData = new RibbonPushButtonData( 'DemoForwardMailBtn', 'Forward' );
+			const forwardMailBtn = resMailPanel.addItem( forwardMailBtnData );
+			forwardMailBtn.icon = 'img/demo/Forward.png';
+			forwardMailBtn.clickHandler = () => { alert( 'DemoForwardMailBtn Clicked!' ); };
 
-			$('#demo-active-tab-basic').click( () => {
+			$('#demo-active-tab-home').click( () => {
 				tab.actived = true;
 				console.log( 'Set tab actived status to true: ', tab.actived === true );
 			});
 
-			$('#demo-deactive-tab-basic').click( () => {
+			$('#demo-deactive-tab-home').click( () => {
 				tab.actived = false;
 				console.log( 'Set tab actived status to false: ', tab.actived === false );
 			});
@@ -99,24 +106,24 @@ export default class RibbonDemoTask extends RibbonTask {
 				console.log( 'Set tab actived status to false: ', testTab.actived === false );
 			});
 
-			$('#demo-active-button-download').click( () => {
-				dwnBtn.actived = true;
-				console.log( 'Set button actived status to true: ', dwnBtn.actived === true );
+			$('#demo-active-button-new-mail').click( () => {
+				newMailBtn.actived = true;
+				console.log( 'Set button actived status to true: ', newMailBtn.actived === true );
 			});
 
-			$('#demo-deactive-button-download').click( () => {
-				dwnBtn.actived = false;
-				console.log( 'Set button actived status to false: ', dwnBtn.actived === false );
+			$('#demo-deactive-button-new-mail').click( () => {
+				newMailBtn.actived = false;
+				console.log( 'Set button actived status to false: ', newMailBtn.actived === false );
 			});
 
-			$('#demo-enable-button-download').click( () => {
-				dwnBtn.enabled = true;
-				console.log( 'Set button enabled status to true: ', dwnBtn.enabled === true );
+			$('#demo-enable-button-new-mail').click( () => {
+				newMailBtn.enabled = true;
+				console.log( 'Set button enabled status to true: ', newMailBtn.enabled === true );
 			});
 
-			$('#demo-disable-button-download').click( () => {
-				dwnBtn.enabled = false;
-				console.log( 'Set button enabled status to false: ', dwnBtn.enabled === false );
+			$('#demo-disable-button-new-mail').click( () => {
+				newMailBtn.enabled = false;
+				console.log( 'Set button enabled status to false: ', newMailBtn.enabled === false );
 			});
 		} catch( error ) {
 			console.warn( error );
