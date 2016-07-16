@@ -435,7 +435,7 @@
   	function RibbonTitlebarData(title) {
   		classCallCheck(this, RibbonTitlebarData);
 
-  		if (typeof title !== 'string') title = 'Ribbon UI';
+  		if (typeof title !== 'string') title = 'React Ribbon';
 
   		return possibleConstructorReturn(this, Object.getPrototypeOf(RibbonTitlebarData).call(this, 'AppTitlebar', title));
   	}
@@ -1149,17 +1149,19 @@
 
   			var formatLegend = function formatLegend(legend) {
   				var texts = legend.split('\\n');
+  				var guid = newGUID();
   				var result = React.createElement(
   					'span',
-  					null,
+  					{ key: guid, id: guid },
   					legend
   				);
 
   				if (texts.length > 1) {
   					result = texts.map(function (txt) {
+  						var guid = newGUID();
   						return React.createElement(
   							'span',
-  							null,
+  							{ key: guid, id: guid },
   							txt,
   							React.createElement('br', null)
   						);

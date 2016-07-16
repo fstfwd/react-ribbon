@@ -436,7 +436,7 @@
   	function RibbonTitlebarData(title) {
   		classCallCheck(this, RibbonTitlebarData);
 
-  		if (typeof title !== 'string') title = 'Ribbon UI';
+  		if (typeof title !== 'string') title = 'React Ribbon';
 
   		return possibleConstructorReturn(this, Object.getPrototypeOf(RibbonTitlebarData).call(this, 'AppTitlebar', title));
   	}
@@ -1150,17 +1150,19 @@
 
   			var formatLegend = function formatLegend(legend) {
   				var texts = legend.split('\\n');
+  				var guid = newGUID();
   				var result = React.createElement(
   					'span',
-  					null,
+  					{ key: guid, id: guid },
   					legend
   				);
 
   				if (texts.length > 1) {
   					result = texts.map(function (txt) {
+  						var guid = newGUID();
   						return React.createElement(
   							'span',
-  							null,
+  							{ key: guid, id: guid },
   							txt,
   							React.createElement('br', null)
   						);
@@ -3641,60 +3643,71 @@
   				(function () {
   					// Create tab.
   					var ribbon = _this2.ribbon;
-  					var tabData = new RibbonTabData$1('DemoBasicTab', 'Basic');
+  					var tabData = new RibbonTabData$1('DemoHomeTab', 'Home');
   					var tab = ribbon.addTab(tabData);
 
   					var testTabData = new RibbonTabData$1('DemoTestTab', 'Test');
   					var testTab = ribbon.addTab(testTabData);
 
   					// Create panel.
-  					var spatialPanelData = new RibbonPanelData$1('DemoSpatialPanel', 'Spatial');
-  					var spatialPanel = tab.addPanel(spatialPanelData);
+  					var newMailPanelData = new RibbonPanelData$1('DemoNewMailPanel', 'New');
+  					var newMailPanel = tab.addPanel(newMailPanelData);
+
+  					var delMailPanelData = new RibbonPanelData$1('DemoDeleteMailPanel', 'Delete');
+  					var delMailPanel = tab.addPanel(delMailPanelData);
+
+  					var resMailPanelData = new RibbonPanelData$1('DemoRespondMailPanel', 'Respond');
+  					var resMailPanel = tab.addPanel(resMailPanelData);
 
   					// Create buttons.
-  					var dwnBtnData = new RibbonPushButtonData$1('DemoSpatialDwnBtn', 'Download');
-  					var dwnBtn = spatialPanel.addItem(dwnBtnData);
-  					dwnBtn.icon = 'img/db_download.png';
-  					dwnBtn.clickHandler = function () {
-  						alert('DemoSpatialDwnBtn Clicked!');
+  					var newMailBtnData = new RibbonPushButtonData$1('DemoNewMailBtn', 'New\\nMail');
+  					var newMailBtn = newMailPanel.addItem(newMailBtnData);
+  					newMailBtn.icon = 'img/demo/NewMailMessage.png';
+  					newMailBtn.clickHandler = function () {
+  						alert('DemoNewMailBtn Clicked!');
   					};
 
-  					var clsBtnData = new RibbonPushButtonData$1('DemoSpatialCleanBtn', 'Clean');
-  					var clsBtn = spatialPanel.addItem(clsBtnData);
-  					clsBtn.icon = 'img/db_remove.png';
-  					clsBtn.clickHandler = function () {
-  						alert('DemoSpatialCleanBtn Clicked!');
+  					var newMailItemBtnData = new RibbonPushButtonData$1('DemoNewMailItemBtn', 'New\\nItems');
+  					var newMailItemBtn = newMailPanel.addItem(newMailItemBtnData);
+  					newMailItemBtn.icon = 'img/demo/MailNewItemMenu.png';
+  					newMailItemBtn.clickHandler = function () {
+  						alert('DemoNewMailItemBtn Clicked!');
   					};
 
-  					// Create panel.
-  					var navPanelData = new RibbonPanelData$1('DemoNavPanel', 'Navigation');
-  					var navPanel = tab.addPanel(navPanelData);
-
-  					// Create button gruop.
-  					var radioBtnGroupData = new RibbonRadioButtonGroupData$1('DemoNavBtnGroup', 'NavBtnGroup');
-  					var radioBtnGroup = navPanel.addItem(radioBtnGroupData);
-
-  					// Add buttons to gruop.
-  					var panBtnData = new RibbonToggleButtonData$1('DemoPanBtn', 'Pan');
-  					var panBtn = radioBtnGroup.addItem(panBtnData);
-  					panBtn.icon = 'img/pan.png';
-  					panBtn.clickHandler = function () {
-  						alert('DemoPanBtn Clicked!');
+  					var delMailBtnData = new RibbonPushButtonData$1('DemoDeleteMailBtn', 'Delete');
+  					var delMailBtn = delMailPanel.addItem(delMailBtnData);
+  					delMailBtn.icon = 'img/demo/Delete.png';
+  					delMailBtn.clickHandler = function () {
+  						alert('DemoDeleteMailBtn Clicked!');
   					};
 
-  					var orbitBtnData = new RibbonToggleButtonData$1('DemoOrbitBtn', 'Orbit');
-  					var orbitBtn = radioBtnGroup.addItem(orbitBtnData);
-  					orbitBtn.icon = 'img/orbit.png';
-  					orbitBtn.clickHandler = function () {
-  						alert('DemoOrbitBtn Clicked!');
+  					var replyMailBtnData = new RibbonPushButtonData$1('DemoReplyMailBtn', 'Reply');
+  					var replyMailBtn = resMailPanel.addItem(replyMailBtnData);
+  					replyMailBtn.icon = 'img/demo/Reply.png';
+  					replyMailBtn.clickHandler = function () {
+  						alert('DemoReplyMailBtn Clicked!');
   					};
 
-  					$('#demo-active-tab-basic').click(function () {
+  					var replyAllMailBtnData = new RibbonPushButtonData$1('DemoReplyAllMailBtn', 'Reply All');
+  					var replyAllMailBtn = resMailPanel.addItem(replyAllMailBtnData);
+  					replyAllMailBtn.icon = 'img/demo/ReplyAll.png';
+  					replyAllMailBtn.clickHandler = function () {
+  						alert('DemoReplyAllMailBtn Clicked!');
+  					};
+
+  					var forwardMailBtnData = new RibbonPushButtonData$1('DemoForwardMailBtn', 'Forward');
+  					var forwardMailBtn = resMailPanel.addItem(forwardMailBtnData);
+  					forwardMailBtn.icon = 'img/demo/Forward.png';
+  					forwardMailBtn.clickHandler = function () {
+  						alert('DemoForwardMailBtn Clicked!');
+  					};
+
+  					$('#demo-active-tab-home').click(function () {
   						tab.actived = true;
   						console.log('Set tab actived status to true: ', tab.actived === true);
   					});
 
-  					$('#demo-deactive-tab-basic').click(function () {
+  					$('#demo-deactive-tab-home').click(function () {
   						tab.actived = false;
   						console.log('Set tab actived status to false: ', tab.actived === false);
   					});
@@ -3707,6 +3720,147 @@
   					$('#demo-deactive-tab-test').click(function () {
   						testTab.actived = false;
   						console.log('Set tab actived status to false: ', testTab.actived === false);
+  					});
+
+  					$('#demo-active-button-new-mail').click(function () {
+  						newMailBtn.actived = true;
+  						console.log('Set button actived status to true: ', newMailBtn.actived === true);
+  					});
+
+  					$('#demo-deactive-button-new-mail').click(function () {
+  						newMailBtn.actived = false;
+  						console.log('Set button actived status to false: ', newMailBtn.actived === false);
+  					});
+
+  					$('#demo-enable-button-new-mail').click(function () {
+  						newMailBtn.enabled = true;
+  						console.log('Set button enabled status to true: ', newMailBtn.enabled === true);
+  					});
+
+  					$('#demo-disable-button-new-mail').click(function () {
+  						newMailBtn.enabled = false;
+  						console.log('Set button enabled status to false: ', newMailBtn.enabled === false);
+  					});
+  				})();
+  			} catch (error) {
+  				console.warn(error);
+  				return false;
+  			}
+
+  			return true;
+  		}
+
+  		/**
+     * Discard all changes.
+     * @return {bool} If true, it represents changes made by this task was removed from the Ribbon.
+     */
+
+  	}, {
+  		key: 'discard',
+  		value: function discard() {
+  			return true;
+  		}
+  	}]);
+  	return RibbonDemoTask;
+  }(RibbonTask);
+
+  ribbonCtrl.registerTask('React.Windows.RibbonDemoTask', RibbonDemoTask);
+
+  var RibbonTabData$2 = Data.RibbonTabData;
+  var RibbonPanelData$2 = Data.RibbonPanelData;
+  var RibbonPushButtonData$2 = Data.RibbonPushButtonData;
+  var RibbonToggleButtonData$2 = Data.RibbonToggleButtonData;
+  var RibbonTooltipData$2 = Data.RibbonTooltipData;
+  var RibbonRadioButtonGroupData$2 = Data.RibbonRadioButtonGroupData;
+
+  /**
+   * RibbonViewerDemoTask
+   * @extends RibbonTask
+   * @class
+   */
+
+  var RibbonViewerDemoTask = function (_RibbonTask) {
+  	inherits(RibbonViewerDemoTask, _RibbonTask);
+
+  	/**
+    * RibbonViewerDemoTask constructor.
+    * @param {Ribbon} ribbon - Rendered Ribbon component.
+    * @param {object} options - Task options.
+    */
+
+  	function RibbonViewerDemoTask(ribbon, options) {
+  		classCallCheck(this, RibbonViewerDemoTask);
+  		return possibleConstructorReturn(this, Object.getPrototypeOf(RibbonViewerDemoTask).call(this, ribbon, options));
+  	}
+
+  	/**
+    * Execute task content.
+    * @return {bool} If true, it represents this task was executed by the Ribbon.
+    */
+
+
+  	createClass(RibbonViewerDemoTask, [{
+  		key: 'execute',
+  		value: function execute() {
+  			var _this2 = this;
+
+  			try {
+  				(function () {
+  					// Create tab.
+  					var ribbon = _this2.ribbon;
+  					var tabData = new RibbonTabData$2('DemoBIMTab', 'BIM');
+  					var tab = ribbon.addTab(tabData);
+
+  					// Create panel.
+  					var spatialPanelData = new RibbonPanelData$2('DemoSpatialPanel', 'Spatial');
+  					var spatialPanel = tab.addPanel(spatialPanelData);
+
+  					// Create buttons.
+  					var dwnBtnData = new RibbonPushButtonData$2('DemoSpatialDwnBtn', 'Download');
+  					var dwnBtn = spatialPanel.addItem(dwnBtnData);
+  					dwnBtn.icon = 'img/viewer/db_download.png';
+  					dwnBtn.clickHandler = function () {
+  						alert('DemoSpatialDwnBtn Clicked!');
+  					};
+
+  					var clsBtnData = new RibbonPushButtonData$2('DemoSpatialCleanBtn', 'Clean');
+  					var clsBtn = spatialPanel.addItem(clsBtnData);
+  					clsBtn.icon = 'img/viewer/db_remove.png';
+  					clsBtn.clickHandler = function () {
+  						alert('DemoSpatialCleanBtn Clicked!');
+  					};
+
+  					// Create panel.
+  					var navPanelData = new RibbonPanelData$2('DemoNavPanel', 'Navigation');
+  					var navPanel = tab.addPanel(navPanelData);
+
+  					// Create button gruop.
+  					var radioBtnGroupData = new RibbonRadioButtonGroupData$2('DemoNavBtnGroup', 'NavBtnGroup');
+  					var radioBtnGroup = navPanel.addItem(radioBtnGroupData);
+
+  					// Add buttons to gruop.
+  					var panBtnData = new RibbonToggleButtonData$2('DemoPanBtn', 'Pan');
+  					var panBtn = radioBtnGroup.addItem(panBtnData);
+  					panBtn.icon = 'img/viewer/pan.png';
+  					panBtn.clickHandler = function () {
+  						alert('DemoPanBtn Clicked!');
+  					};
+
+  					var orbitBtnData = new RibbonToggleButtonData$2('DemoOrbitBtn', 'Orbit');
+  					var orbitBtn = radioBtnGroup.addItem(orbitBtnData);
+  					orbitBtn.icon = 'img/viewer/orbit.png';
+  					orbitBtn.clickHandler = function () {
+  						alert('DemoOrbitBtn Clicked!');
+  					};
+
+  					$('#demo-active-tab-basic').click(function () {
+  						tab.actived = true;
+  						console.log('Set tab actived status to true: ', tab.actived === true);
+  					});
+
+  					$('#demo-deactive-tab-basic').click(function () {
+  						tab.actived = false;
+  						console.log('Set tab actived status to false: ', tab.actived === false);
   					});
 
   					$('#demo-active-button-download').click(function () {
@@ -3748,10 +3902,10 @@
   			return true;
   		}
   	}]);
-  	return RibbonDemoTask;
+  	return RibbonViewerDemoTask;
   }(RibbonTask);
 
-  ribbonCtrl.registerTask('React.Windows.RibbonDemoTask', RibbonDemoTask);
+  ribbonCtrl.registerTask('React.Windows.RibbonViewerDemoTask', RibbonViewerDemoTask);
 
   var index = {
   	ribbonCtrl: ribbonCtrl
