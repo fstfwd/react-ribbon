@@ -17,6 +17,7 @@ body {
 
 #RibbonUI > .ui-ribbon-title {
 	text-align: center;
+	line-height: 18px;
 	margin-top: 4px;
 	margin-bottom: 4px;
 }

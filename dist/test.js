@@ -385,6 +385,8 @@
   	return RibbonTabData;
   }(RibbonBaseData);
 
+  var Items = Symbol('items');
+
   /**
    * RibbonAppTabData
    * @class
@@ -401,7 +403,11 @@
   	function RibbonAppTabData() {
   		var displayName = arguments.length <= 0 || arguments[0] === undefined ? 'File' : arguments[0];
   		classCallCheck(this, RibbonAppTabData);
-  		return possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppTabData).call(this, 'AppTab', displayName));
+
+  		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppTabData).call(this, 'AppTab', displayName));
+
+  		_this[Items] = [];
+  		return _this;
   	}
 
   	/**
@@ -415,6 +421,28 @@
   		key: 'type',
   		get: function get() {
   			return 'ui-ribbon-tab-application';
+  		}
+
+  		/**
+     * Panel's children items.
+     * @return {RibbonItemData[]} - Ribbon item data.
+     */
+
+  	}, {
+  		key: 'items',
+  		get: function get() {
+  			return this[Items];
+  		}
+
+  		/**
+     * Panel's children items.
+     * @return {RibbonItemData[]} [items = []]- Ribbon item data.
+     */
+  		,
+  		set: function set() {
+  			var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+  			this[Items] = items;
   		}
   	}]);
   	return RibbonAppTabData;
@@ -1717,7 +1745,7 @@
   	return RibbonToggleButtonData;
   }(RibbonPushButtonData);
 
-  var Items$1 = Symbol('items');
+  var Items$2 = Symbol('items');
 
   /**
    * RibbonGroup
@@ -1742,7 +1770,7 @@
   			items: [].concat(props.items)
   		});
 
-  		_this[Items$1] = [];
+  		_this[Items$2] = [];
   		return _this;
   	}
 
@@ -1780,7 +1808,7 @@
   	}, {
   		key: 'componentWillUpdate',
   		value: function componentWillUpdate(nextProps, nextState) {
-  			this[Items$1].length = 0;
+  			this[Items$2].length = 0;
   		}
   	}, {
   		key: 'render',
@@ -1851,7 +1879,7 @@
   	}, {
   		key: 'items',
   		get: function get$$() {
-  			return this[Items$1];
+  			return this[Items$2];
   		}
 
   		/**
@@ -2121,7 +2149,7 @@
   	items: []
   };
 
-  var Items$2 = Symbol('items');
+  var Items$3 = Symbol('items');
 
   /**
    * RibbonGroupData
@@ -2143,7 +2171,7 @@
 
   		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonGroupData).call(this, name, displayName));
 
-  		_this[Items$2] = [];
+  		_this[Items$3] = [];
   		return _this;
   	}
 
@@ -2168,7 +2196,7 @@
   	}, {
   		key: 'items',
   		get: function get() {
-  			return this[Items$2];
+  			return this[Items$3];
   		}
 
   		/**
@@ -2179,7 +2207,7 @@
   		set: function set() {
   			var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
-  			this[Items$2] = items;
+  			this[Items$3] = items;
   		}
   	}]);
   	return RibbonGroupData;
@@ -2221,7 +2249,7 @@
   	return RibbonRadioButtonGroupData;
   }(RibbonGroupData);
 
-  var Items = Symbol('items');
+  var Items$1 = Symbol('items');
 
   /**
    * RibbonPanel
@@ -2246,7 +2274,7 @@
   			items: [].concat(props.items)
   		});
 
-  		_this[Items] = [];
+  		_this[Items$1] = [];
   		return _this;
   	}
 
@@ -2284,7 +2312,7 @@
   	}, {
   		key: 'componentWillUpdate',
   		value: function componentWillUpdate(nextProps, nextState) {
-  			this[Items].length = 0;
+  			this[Items$1].length = 0;
   		}
   	}, {
   		key: 'render',
@@ -2413,7 +2441,7 @@
   	}, {
   		key: 'items',
   		get: function get$$() {
-  			return this[Items];
+  			return this[Items$1];
   		}
 
   		/**
@@ -2491,7 +2519,7 @@
   };
 
   var Seperator = Symbol('seperator');
-  var Items$3 = Symbol('items');
+  var Items$4 = Symbol('items');
 
   /**
    * RibbonPanelData
@@ -2514,7 +2542,7 @@
   		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonPanelData).call(this, name, displayName));
 
   		_this[Seperator] = true;
-  		_this[Items$3] = [];
+  		_this[Items$4] = [];
   		return _this;
   	}
 
@@ -2549,7 +2577,7 @@
   	}, {
   		key: 'items',
   		get: function get() {
-  			return this[Items$3];
+  			return this[Items$4];
   		}
 
   		/**
@@ -2560,7 +2588,7 @@
   		set: function set() {
   			var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
-  			this[Items$3] = items;
+  			this[Items$4] = items;
   		}
   	}]);
   	return RibbonPanelData;
@@ -2846,6 +2874,589 @@
   	panels: []
   };
 
+  /**
+   * RibbonAppMenuItem
+   * @extends RibbonBase
+   * @class
+   */
+
+  var RibbonAppMenuItem = function (_RibbonBase) {
+  	inherits(RibbonAppMenuItem, _RibbonBase);
+
+  	/**
+    * RibbonAppMenuItem constructor
+    * @param {object} props - React component properties
+    */
+
+  	function RibbonAppMenuItem(props) {
+  		classCallCheck(this, RibbonAppMenuItem);
+
+  		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppMenuItem).call(this, props));
+
+  		var actived = props.actived === true;
+  		var content = typeof props.content === 'string' ? props.content : '';
+
+  		_this.state = Object.assign(_this.state, {
+  			actived: actived,
+  			content: content
+  		});
+
+  		_this.handleClick = _this.handleClick.bind(_this);
+  		return _this;
+  	}
+
+  	/**
+    * Panel has seperator or not.
+    * @return {bool} - If true, panel will be seperated with other panels by a panel seperator.
+    */
+
+
+  	createClass(RibbonAppMenuItem, [{
+  		key: 'handleClick',
+
+
+  		/**
+     * Tab clicking event handler
+     */
+  		value: function handleClick(event) {
+  			this.actived = true;
+  		}
+  	}, {
+  		key: 'render',
+  		value: function render() {
+  			var scope = this;
+  			var dynCSS = ClassNames({
+  				'ui-ribbon-active': this.actived,
+  				'ui-ribbon-disabled': this.enabled === false,
+  				'ui-ribbon-invisible': this.hidden
+  			});
+
+  			return React.createElement(
+  				'li',
+  				{ key: this.id, className: dynCSS, onClick: this.handleClick },
+  				React.createElement(
+  					'div',
+  					null,
+  					' ',
+  					this.displayName,
+  					' '
+  				)
+  			);
+  		}
+  	}, {
+  		key: 'seperator',
+  		get: function get$$() {
+  			return this.props.seperator;
+  		}
+
+  		/**
+     * Instance edis/en-able status.
+     * @return {bool} - If false, make instance be disabled.
+     */
+
+  	}, {
+  		key: 'enabled',
+  		get: function get$$() {
+  			return get(Object.getPrototypeOf(RibbonAppMenuItem.prototype), 'enabled', this);
+  		}
+
+  		/**
+     * Instance edis/en-able status.
+     * @param {bool} [enabled = true] - If false, make instance be disabled.
+     */
+  		,
+  		set: function set$$() {
+  			var enabled = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+  			if (this.hidden) return;
+
+  			var isEnabled = enabled === true;
+  			set(Object.getPrototypeOf(RibbonAppMenuItem.prototype), 'enabled', isEnabled, this);
+  		}
+
+  		/**
+     * Instance is hidden or not.
+     * @return {bool} - If false, instance is going to disppear on the UI.
+     */
+
+  	}, {
+  		key: 'hidden',
+  		get: function get$$() {
+  			return get(Object.getPrototypeOf(RibbonAppMenuItem.prototype), 'hidden', this);
+  		}
+
+  		/**
+     * Instance is hidden or not.
+     * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+     */
+  		,
+  		set: function set$$() {
+  			var hidden = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+  			var isHidden = hidden === true;
+  			set(Object.getPrototypeOf(RibbonAppMenuItem.prototype), 'hidden', isHidden, this);
+  		}
+
+  		/**
+     * Tab actived state.
+     * @return {bool} - If true, it repsents tab is selected currently.
+     */
+
+  	}, {
+  		key: 'actived',
+  		get: function get$$() {
+  			return this.state.actived;
+  		}
+
+  		/**
+     * Tab actived state.
+     * @return {bool} [actived = false] - If true, it repsents tab is selected currently.
+     */
+  		,
+  		set: function set$$() {
+  			var actived = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+  			var isActived = actived === true;
+  			var prop = { actived: isActived };
+
+  			var onStateChange = this.props.onStateChange;
+  			onStateChange && onStateChange(this.id, prop, true);
+
+  			this.setState(prop);
+  		}
+
+  		/**
+     * Menu content shown on the app menu.
+     * @return {string} - Menu content.
+     */
+
+  	}, {
+  		key: 'content',
+  		get: function get$$() {
+  			return this.state.content;
+  		}
+
+  		/**
+     * Menu content shown on the app menu.
+     * @param {string} [content] - Menu content.
+     */
+  		,
+  		set: function set$$(content) {
+  			if (typeof content !== 'string') throw 'Input type should be a string.';
+
+  			var prop = { content: content };
+  			var onStateChange = this.props.onStateChange;
+  			onStateChange && onStateChange(this.id, prop);
+
+  			this.setState(prop);
+  		}
+  	}]);
+  	return RibbonAppMenuItem;
+  }(RibbonBase);
+
+  RibbonAppMenuItem.propTypes = {
+  	id: React.PropTypes.string.isRequired,
+  	seperator: React.PropTypes.bool,
+  	actived: React.PropTypes.bool,
+  	content: React.PropTypes.string,
+  	onStateChange: React.PropTypes.func
+  };
+
+  RibbonAppMenuItem.defaultProps = {
+  	id: newGUID(),
+  	seperator: true,
+  	actived: false
+  };
+
+  var Seperator$2 = Symbol('seperator');
+  var Actived$2 = Symbol('actived');
+  var Content$1 = Symbol('contnet');
+
+  /**
+   * RibbonAppMenuItemData
+   * @extends RibbonBaseData
+   * @class
+   */
+
+  var RibbonAppMenuItemData = function (_RibbonBaseData) {
+  	inherits(RibbonAppMenuItemData, _RibbonBaseData);
+
+  	/**
+    * RibbonAppMenuItemData constructor
+    * @param {string} name - The name of this instance used by the internal mechanism.
+    * @param {string} displayName - The name of this instance shown on the user interface, might be a localized string.
+    */
+
+  	function RibbonAppMenuItemData(name, displayName) {
+  		classCallCheck(this, RibbonAppMenuItemData);
+
+  		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppMenuItemData).call(this, name, displayName));
+
+  		_this[Seperator$2] = true;
+  		_this[Actived$2] = false;
+  		_this[Content$1] = undefined;
+  		return _this;
+  	}
+
+  	/**
+    * Panel has seperator or not.
+    * @return {bool} - If true, panel will be seperated with other panels by a panel seperator.
+    */
+
+
+  	createClass(RibbonAppMenuItemData, [{
+  		key: 'seperator',
+  		get: function get() {
+  			return this[Seperator$2];
+  		}
+
+  		/**
+     * Panel has seperator or not.
+     * @param {bool} [seperator = true] - If true, panel will be seperated with other panels by a panel seperator.
+     */
+  		,
+  		set: function set() {
+  			var seperator = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+  			this[Seperator$2] = seperator === true;
+  		}
+
+  		/**
+     * Tab actived state.
+     * @return {bool} - If true, it repsents tab is selected currently.
+     */
+
+  	}, {
+  		key: 'actived',
+  		get: function get() {
+  			return this[Actived$2];
+  		}
+
+  		/**
+     * Tab actived state.
+     * @return {bool} [actived = false] - If true, it repsents tab is selected currently.
+     */
+  		,
+  		set: function set() {
+  			var actived = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+  			this[Actived$2] = actived === true;
+  		}
+
+  		/**
+     * Menu content shown on the app menu.
+     * @return {string} - Menu content.
+     */
+
+  	}, {
+  		key: 'content',
+  		get: function get() {
+  			return this[Content$1];
+  		}
+
+  		/**
+     * Menu content shown on the app menu.
+     * @param {string} [content] - Menu content.
+     */
+  		,
+  		set: function set(content) {
+  			if (typeof content !== 'string') throw 'Input type should be a string.';
+
+  			this[Content$1] = content;
+  		}
+  	}]);
+  	return RibbonAppMenuItemData;
+  }(RibbonBaseData);
+
+  var Items$5 = Symbol('items');
+
+  /**
+   * RibbonAppTab
+   * @extends RibbonBase
+   * @class
+   */
+
+  var RibbonAppTab = function (_RibbonBase) {
+  	inherits(RibbonAppTab, _RibbonBase);
+
+  	/**
+    * RibbonAppTab constructor
+    * @param {object} props - React component properties
+    */
+
+  	function RibbonAppTab(props) {
+  		classCallCheck(this, RibbonAppTab);
+
+  		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppTab).call(this, props));
+
+  		_this.state = Object.assign(_this.state, {
+  			items: [].concat(props.items)
+  		});
+
+  		_this[Items$5] = [];
+
+  		_this.handleClick = _this.handleClick.bind(_this);
+  		_this.handleClose = _this.handleClose.bind(_this);
+  		return _this;
+  	}
+
+  	/**
+    * Tab type.
+    * @return {string} - Tab type for identification.
+    */
+
+
+  	createClass(RibbonAppTab, [{
+  		key: 'addItem',
+
+
+  		/**
+     * Add new RibbonAppMenuItem by given data.
+     * @param {RibbonAppMenuItemData} itemData - Ribbon item data for creating new item on the app menu.
+     * @return {RibbonAppMenuItem} - Rendered RibbonAppMenuItem component.
+     */
+  		value: function addItem(itemData) {
+  			var idx = this.items.findIndex(function (item) {
+  				return item.id === itemData.id || item.name === itemData.name;
+  			});
+  			if (!(itemData instanceof RibbonAppMenuItemData) || idx !== -1) return console.log('%c[RibbonAppTab] Input itemData is invalid or duplicate.', 'color:red;');
+
+  			var items = this.state.items.concat(itemData);
+
+  			var prop = { items: items };
+  			var onStateChange = this.props.onStateChange;
+  			onStateChange && onStateChange(this.id, prop, true);
+
+  			this.setState(prop);
+
+  			return this.items[this.items.length - 1];
+  		}
+  	}, {
+  		key: 'componentWillUpdate',
+  		value: function componentWillUpdate(nextProps, nextState) {
+  			this[Items$5].length = 0;
+  		}
+
+  		/**
+     * Tab clicking event handler
+     */
+
+  	}, {
+  		key: 'handleClick',
+  		value: function handleClick(event) {
+  			var onClick = this.props.onClick;
+  			onClick && onClick(this.id);
+  		}
+  	}, {
+  		key: 'handleClose',
+  		value: function handleClose(event) {
+  			event.stopPropagation();
+
+  			this.actived = false;
+  		}
+  	}, {
+  		key: 'render',
+  		value: function render() {
+  			var scope = this;
+  			var dynCSS = ClassNames({
+  				'ui-ribbon-active': this.actived,
+  				'ui-ribbon-disabled': this.enabled === false,
+  				'ui-ribbon-invisible': this.hidden,
+  				'ui-ribbon-inline': this.hidden === false
+  			});
+
+  			var updateItem = function updateItem(id, data) {
+  				var items = scope.state.items;
+  				var item = items.find(function (item) {
+  					return item.id === id;
+  				});
+  				if (!item) return;
+
+  				Object.assign(item, data);
+
+  				var prop = { items: items };
+  				var onStateChange = scope.props.onStateChange;
+  				onStateChange && onStateChange(scope.id, prop);
+
+  				scope.setState(prop);
+  			};
+
+  			return React.createElement(
+  				'li',
+  				{
+  					key: this.id,
+  					id: this.id,
+  					className: this.type + " " + dynCSS,
+  					role: 'ui-ribbon-tab',
+  					onClick: this.handleClick },
+  				React.createElement(
+  					'span',
+  					{ className: 'ui-ribbon-uppercase' },
+  					this.displayName
+  				),
+  				React.createElement(
+  					'div',
+  					{ className: 'ui-ribbon-tab-application-contents ui-ribbon-absolute' },
+  					React.createElement(
+  						'div',
+  						{ id: 'ribbon-nav-application-menu' },
+  						React.createElement('div', { className: 'ribbon-nav-back-arrow', onClick: this.handleClose }),
+  						React.createElement(
+  							'ul',
+  							{ role: 'ribbon-nav-application-menu-items' },
+  							this.state.items.map(function (item) {
+  								return React.createElement(RibbonAppMenuItem, {
+  									key: item.id,
+  									id: item.id,
+  									name: item.name,
+  									displayName: item.displayName,
+  									enabled: item.enabled,
+  									hidden: item.hidden,
+  									type: item.type,
+  									actived: item.actived,
+  									onStateChange: updateItem,
+  									ref: function ref(c) {
+  										if (c) scope.items.push(c);
+  									} });
+  							})
+  						)
+  					),
+  					React.createElement('div', { role: 'ribbon-nav-application-menu-content' })
+  				)
+  			);
+  		}
+  	}, {
+  		key: 'type',
+  		get: function get$$() {
+  			return this.props.type;
+  		}
+
+  		/**
+     * Panel's children items
+     * @return {[RibbonItemData]} - Ribbon item data.
+     */
+
+  	}, {
+  		key: 'items',
+  		get: function get$$() {
+  			return this[Items$5];
+  		}
+
+  		/**
+     * Instance edis/en-able status.
+     * @return {bool} - If false, make instance be disabled.
+     */
+
+  	}, {
+  		key: 'enabled',
+  		get: function get$$() {
+  			return get(Object.getPrototypeOf(RibbonAppTab.prototype), 'enabled', this);
+  		}
+
+  		/**
+     * Instance edis/en-able status.
+     * @param {bool} [enabled = true] - If false, make instance be disabled.
+     */
+  		,
+  		set: function set() {
+  			var enabled = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+  			if (this.hidden) return;
+
+  			var isEnabled = enabled === true;
+
+  			var prop = { enabled: isEnabled, actived: false };
+  			var onStateChange = this.props.onStateChange;
+  			onStateChange && onStateChange(this.id, prop, true);
+
+  			this.setState(prop);
+
+  			// Cascaded applying changes
+  			this.items.map(function (item) {
+  				item.enabled = isEnabled;
+  			});
+  		}
+
+  		/**
+     * Instance is hidden or not.
+     * @return {bool} - If false, instance is going to disppear on the UI.
+     */
+
+  	}, {
+  		key: 'hidden',
+  		get: function get$$() {
+  			return get(Object.getPrototypeOf(RibbonAppTab.prototype), 'hidden', this);
+  		}
+
+  		/**
+     * Instance is hidden or not.
+     * @return {bool} [hidden = false]- If false, instance is going to disppear on the UI.
+     */
+  		,
+  		set: function set() {
+  			var hidden = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+  			var isHidden = hidden === true;
+  			var isEnabled = !isHidden;
+
+  			var prop = { hidden: isHidden, enabled: isEnabled, actived: false };
+  			var onStateChange = this.props.onStateChange;
+  			onStateChange && onStateChange(this.id, prop, true);
+
+  			this.setState(prop);
+
+  			// Cascaded applying changes
+  			this.items.map(function (item) {
+  				item.hidden = isHidden;
+  			});
+  		}
+
+  		/**
+     * Tab actived state.
+     * @return {bool} - If true, it repsents tab is selected currently.
+     */
+
+  	}, {
+  		key: 'actived',
+  		get: function get$$() {
+  			return this.state.actived;
+  		}
+
+  		/**
+     * Tab actived state.
+     * @return {bool} [actived = false] - If true, it repsents tab is selected currently.
+     */
+  		,
+  		set: function set() {
+  			var actived = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+  			var isActived = actived === true;
+  			var prop = { actived: isActived };
+
+  			var onStateChange = this.props.onStateChange;
+  			onStateChange && onStateChange(this.id, prop, true);
+
+  			this.setState(prop);
+  		}
+  	}]);
+  	return RibbonAppTab;
+  }(RibbonBase);
+
+  RibbonAppTab.propTypes = {
+  	id: React.PropTypes.string.isRequired,
+  	type: React.PropTypes.string.isRequired,
+  	actived: React.PropTypes.bool,
+  	items: React.PropTypes.arrayOf(React.PropTypes.instanceOf(RibbonAppMenuItemData)),
+  	onStateChange: React.PropTypes.func
+  };
+
+  RibbonAppTab.defaultProps = {
+  	id: newGUID(),
+  	type: 'ui-ribbon-tab-application',
+  	actived: false,
+  	items: []
+  };
+
   var Tabs = Symbol('tabs');
 
   /**
@@ -2956,7 +3567,7 @@
   		key: 'render',
   		value: function render() {
   			var scope = this;
-  			var otherTabs = this.state.tabs; //.slice( 1 );
+  			var otherTabs = this.state.tabs;
 
   			var updateTitlebar = function updateTitlebar(id, data) {
   				var titlebar = scope.state.titlebar;
@@ -3002,6 +3613,8 @@
   			};
 
   			var updateTab = function updateTab(id, data) {
+  				var stopPropagation = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+
   				var tabs = scope.state.tabs;
   				var tab = tabs.find(function (tab) {
   					return tab.id === id;
@@ -3011,25 +3624,43 @@
   				Object.assign(tab, data);
   				scope.setState({ tabs: tabs });
 
-  				nextOpt(id, data);
+  				if (!stopPropagation) nextOpt(id, data);
   			};
 
   			var createTab = function createTab(tab) {
-  				return React.createElement(RibbonTab, {
-  					key: tab.id,
-  					id: tab.id,
-  					name: tab.name,
-  					displayName: tab.displayName,
-  					type: tab.type,
-  					enabled: tab.enabled,
-  					hidden: tab.hidden,
-  					actived: tab.actived,
-  					panels: tab.panels,
-  					onClick: scope.handleTabClick,
-  					onStateChange: updateTab,
-  					ref: function ref(c) {
-  						if (c) scope.tabs.push(c);
-  					} });
+  				if (tab.type === 'ui-ribbon-tab-application') {
+  					return React.createElement(RibbonAppTab, {
+  						key: tab.id,
+  						id: tab.id,
+  						name: tab.name,
+  						displayName: tab.displayName,
+  						type: tab.type,
+  						enabled: tab.enabled,
+  						hidden: tab.hidden,
+  						actived: tab.actived,
+  						items: tab.items,
+  						onClick: scope.handleTabClick,
+  						onStateChange: updateTab,
+  						ref: function ref(c) {
+  							if (c) scope.tabs.push(c);
+  						} });
+  				} else {
+  					return React.createElement(RibbonTab, {
+  						key: tab.id,
+  						id: tab.id,
+  						name: tab.name,
+  						displayName: tab.displayName,
+  						type: tab.type,
+  						enabled: tab.enabled,
+  						hidden: tab.hidden,
+  						actived: tab.actived,
+  						panels: tab.panels,
+  						onClick: scope.handleTabClick,
+  						onStateChange: updateTab,
+  						ref: function ref(c) {
+  							if (c) scope.tabs.push(c);
+  						} });
+  				}
   			};
 
   			return React.createElement(
@@ -3557,6 +4188,7 @@
   	RibbonTabData: RibbonTabData,
   	RibbonAppTabData: RibbonAppTabData,
   	RibbonPanelData: RibbonPanelData,
+  	RibbonAppMenuItemData: RibbonAppMenuItemData,
   	RibbonItemData: RibbonItemData,
   	RibbonButtonData: RibbonButtonData,
   	RibbonPushButtonData: RibbonPushButtonData,
@@ -3570,6 +4202,7 @@
   	Ribbon: Ribbon,
   	RibbonBase: RibbonBase,
   	RibbonTab: RibbonTab,
+  	RibbonAppTab: RibbonAppTab,
   	RibbonPanel: RibbonPanel,
   	RibbonTitlebar: RibbonTitlebar,
   	RibbonItem: RibbonItem,
@@ -3607,6 +4240,7 @@
   var RibbonToggleButtonData$1 = Data.RibbonToggleButtonData;
   var RibbonTooltipData$1 = Data.RibbonTooltipData;
   var RibbonRadioButtonGroupData$1 = Data.RibbonRadioButtonGroupData;
+  var RibbonAppMenuItemData$1 = Data.RibbonAppMenuItemData;
 
   /**
    * RibbonDemoTask
@@ -3648,6 +4282,11 @@
 
   					var testTabData = new RibbonTabData$1('DemoTestTab', 'Test');
   					var testTab = ribbon.addTab(testTabData);
+
+  					// Create app menu item.
+  					var appTab = ribbon.tabs[0];
+  					var demoMenuItemData = new RibbonAppMenuItemData$1('DemoMenuItem', 'Demo');
+  					var demoMenuItem = appTab.addItem(demoMenuItemData);
 
   					// Create panel.
   					var newMailPanelData = new RibbonPanelData$1('DemoNewMailPanel', 'New');

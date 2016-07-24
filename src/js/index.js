@@ -7,6 +7,7 @@
 import Ribbon from './Ribbon';
 import RibbonBase from './RibbonBase';
 import RibbonTab from './RibbonTab';
+import RibbonAppTab from './RibbonAppTab';
 import RibbonPanel from './RibbonPanel';
 import RibbonTitlebar from './RibbonTitlebar';
 import RibbonItem from './RibbonItem';
@@ -27,6 +28,7 @@ const ReactRibbon = {
 	Ribbon,
 	RibbonBase,
 	RibbonTab,
+	RibbonAppTab,
 	RibbonPanel,
 	RibbonTitlebar,
 	RibbonItem,

@@ -10,6 +10,7 @@ import RibbonAppTabData from './data/RibbonAppTabData';
 import RibbonTitlebarData from './data/RibbonTitlebarData';
 import RibbonTitlebar from './RibbonTitlebar';
 import RibbonTab from './RibbonTab';
+import RibbonAppTab from './RibbonAppTab';
 import { newGUID } from './utility';
 
 const Tabs = Symbol( 'tabs' );
@@ -99,7 +100,7 @@ export default class Ribbon extends React.Component {
 
 	render() {
 		const scope = this;
-		const otherTabs = this.state.tabs;//.slice( 1 );
+		const otherTabs = this.state.tabs;
 
 		const updateTitlebar = ( id, data ) => {
 			let titlebar = scope.state.titlebar;
@@ -144,7 +145,7 @@ export default class Ribbon extends React.Component {
 			}
 		};
 
-		const updateTab = ( id, data ) => {
+		const updateTab = ( id, data, stopPropagation = false ) => {
 			let tabs = scope.state.tabs;
 			const tab = tabs.find( ( tab ) => tab.id === id );
 			if( !tab ) return;
@@ -152,25 +153,43 @@ export default class Ribbon extends React.Component {
 			Object.assign( tab, data );
 			scope.setState({ tabs });
 
-			nextOpt( id, data );
+			if( !stopPropagation ) nextOpt( id, data );
 		};
 
 		const createTab = ( tab ) => {
-			return (
-				<RibbonTab
-					key={ tab.id }
-					id={ tab.id }
-					name={ tab.name }
-					displayName={ tab.displayName }
-					type={ tab.type }
-					enabled={ tab.enabled }
-					hidden={ tab.hidden }
-					actived={ tab.actived }
-					panels={ tab.panels }
-					onClick={ scope.handleTabClick }
-					onStateChange={ updateTab }
-					ref={ ( c ) => { if( c ) scope.tabs.push( c ) } } />
-			);
+			if( tab.type === 'ui-ribbon-tab-application' ) {
+				return (
+					<RibbonAppTab
+						key={ tab.id }
+						id={ tab.id }
+						name={ tab.name }
+						displayName={ tab.displayName }
+						type={ tab.type }
+						enabled={ tab.enabled }
+						hidden={ tab.hidden }
+						actived={ tab.actived }
+						items={ tab.items }
+						onClick={ scope.handleTabClick }
+						onStateChange={ updateTab }
+						ref={ ( c ) => { if( c ) scope.tabs.push( c ) } } />
+				);
+			} else {
+				return (
+					<RibbonTab
+						key={ tab.id }
+						id={ tab.id }
+						name={ tab.name }
+						displayName={ tab.displayName }
+						type={ tab.type }
+						enabled={ tab.enabled }
+						hidden={ tab.hidden }
+						actived={ tab.actived }
+						panels={ tab.panels }
+						onClick={ scope.handleTabClick }
+						onStateChange={ updateTab }
+						ref={ ( c ) => { if( c ) scope.tabs.push( c ) } } />
+				);
+			}
 		};
 
 		return (

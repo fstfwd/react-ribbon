@@ -29,6 +29,68 @@
 	border-width: 1px;
 }
 
+/*
+ * Styling for the content of the application tab. 
+ */
+#RibbonUI .ui-ribbon-tab-application-contents {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	background-color: white;
+	display: none;
+}
+
+#RibbonUI ul[role=ui-ribbon-tabs] li.ui-ribbon-tab-application.ui-ribbon-active[role=ui-ribbon-tab] .ui-ribbon-tab-application-contents {
+	display: block;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents #ribbon-nav-application-menu {
+	float: left;
+	color: #fff;
+	width: 135px;
+	height: 100%;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents #ribbon-nav-application-menu .ui-ribbon-title {
+	position: absolute;
+	color: black;
+	width: 100%;
+	text-align: center;
+	height: 18px;
+	margin-top: 2px;
+	margin-bottom: 3px;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents #ribbon-nav-application-menu .ribbon-nav-back-arrow {
+	background-repeat: no-repeat;
+	width: 35px;
+	height: 35px;
+	margin-left: 23px;
+	margin-top: 19px;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents #ribbon-nav-application-menu ul[role=ribbon-nav-application-menu-items] {
+	padding: 0;
+	margin: 15px 0 0;
+	list-style-type: none;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents ul[role=ribbon-nav-application-menu-items] li {
+	line-height: 16px;
+	padding: 11px 10px 11px 26px;
+	vertical-align: middle;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents div[role=ribbon-nav-application-menu-content] {
+	position: relative;
+	overflow-y: scroll;
+	height: 100%;
+	margin-top: 23px;
+}
+
 /* Styling for the content of the tabs. 
  * A tab contains various elements which are explained below:
  *		- tab-contents:	Contains the entire contents of the tab.
@@ -47,10 +109,6 @@
 #RibbonUI ul[role=ui-ribbon-tabs] li.ui-ribbon-active[role=ui-ribbon-tab] .ui-ribbon-tab-contents {
 	display: block;
 }
-
-/*#RibbonUI .ui-ribbon-tab-contents.ui-ribbon-active {
-	display: block;
-}*/
 
 #RibbonUI .ui-ribbon-panel-container {
 	vertical-align: top;

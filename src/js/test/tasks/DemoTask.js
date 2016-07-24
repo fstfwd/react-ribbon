@@ -13,7 +13,8 @@ const {
 	RibbonPushButtonData,
 	RibbonToggleButtonData,
 	RibbonTooltipData,
-	RibbonRadioButtonGroupData
+	RibbonRadioButtonGroupData,
+	RibbonAppMenuItemData
 } = Data;
 
 /**
@@ -44,6 +45,11 @@ export default class RibbonDemoTask extends RibbonTask {
 
 			const testTabData = new RibbonTabData( 'DemoTestTab', 'Test' );
 			const testTab = ribbon.addTab( testTabData );
+
+			// Create app menu item.
+			const appTab = ribbon.tabs[0];
+			const demoMenuItemData = new RibbonAppMenuItemData( 'DemoMenuItem', 'Demo' );
+			const demoMenuItem = appTab.addItem( demoMenuItemData );
 
 			// Create panel.
 			const newMailPanelData = new RibbonPanelData( 'DemoNewMailPanel', 'New' );

@@ -17,8 +17,38 @@
 	color: #2b579a;
 }
 
-#RibbonUI ul[role=ui-ribbon-tabs] li.ui-ribbon-active[role=ui-ribbon-tab] {
+#RibbonUI li.ui-ribbon-active[role=ui-ribbon-tab]:not(.ui-ribbon-tab-application) {
 	color: #2b579a;
+}
+
+#RibbonUI li[role=ui-ribbon-tab].ui-ribbon-tab-application.ui-ribbon-active {
+	background-color: #3e6db5;
+	border: 1px solid #3e6db5 !important;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents #ribbon-nav-application-menu {
+	background-color: #2b579a;
+}
+
+#RibbonUI ul[role=ribbon-nav-application-menu-items] li:not(.ui-ribbon-seperator).ui-ribbon-active {
+	background-color: #3e6db5;
+}
+
+#RibbonUI ul[role=ribbon-nav-application-menu-items] li:not(.ui-ribbon-seperator):hover {
+	background-color: #19478a;
+}
+
+#RibbonUI ul[role=ribbon-nav-application-menu-items] li .ui-ribbon-seperator {
+	background-color: #3e6db5;
+}
+
+
+#RibbonUI .ui-ribbon-tab-application-contents #ribbon-nav-application-menu .ribbon-nav-back-arrow {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAIAAACRuyQOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAAOoSURBVEhLrZf5S1VREMfv/xNFBBFFFP0ihBRBhGWIZIsItpi0EdFCGyFt+EOpmOaSS2o9NZfE0kzMLTPNPdNcM01TccPqc53n9XrefYu+Dt8fzjIz33tmzsw5V1vjF+Uamw7FnY98k17U1P595K+pzc//qW/7EZdTH3wzT1GxhCsm/0svS2q77IYX2/TMXFPnT/tgsXX1j2W9bdkenKhYMMOaacvh+LzyDrEyOzcP35Wo0t3h6WaZtQei91/MepBSVdcyIJIjY1Ns0SxjhgVTwGXb4PAEmnx+rO0T3lMEHLHzZEpBxVfhK6/v8Ql9pggAlYmQiEJx9bcdIUnKqmuwRdyIbs/g712n05TVZUwGTfSLj+Z5z7Ex8Mm7um4sjE/O+J5KNS8tMfFFQkNIjMlVgPjllLVhh4Oz7ViCMW9n2hAQKxt3EVLPsf5gjByTospOY9LOlFbUxALB5IuMNW+w9ejToV+T2CQiMqMzcXyZIhOVc+wliAJmqxr7ZKgz2UpbmWJbMvW/gHs6e0exLIHX1vnHyIZ8jlskgRk4JCm/gQ8CHu5eDjNBoa+F3M5nUNPUb5ZwBDStXcNI0u4lVyqrzsBBI/1RIf01Uset8upoBFI52Y9W9aWPXuDVbEXCgDc04HFmLYqUR21wRD+LzgqPlzTg7MNidHPL2jXxIw5VJICZhore2DHkFo5fI+egpLZb49TRs0xYtrzAsoKWUtioGAm6lsP8h4ZebWximh4XkiIhQHPBgt6oZnLEXQBfKRZORBSiS1nS5ALdey5DkTBADi0Q6ZlAqVZW3eJG7Ht0kwsatexSve4a1ckS3pBJAcK+JtUpo7hZkVCwOjLCPzquR4cCpPmGpdJjTKlX5BQkvPq8wLUCMh4KyNc2D9DXK2xFQy9j1w4UhN8vwgdg34VMZckSuArLcoPrTOLAvqFxt9taEfaceS4phNsY2m9C2dbqqoAzSMXj6MvQziSZTCHgNSEzXuJWXLn4yXjE2ZmA+JQreaWPL0ccuZ4rfgu7+9qYXGICZDLLvL+9IeNamJyaxY7hN8Eyps1B8Vz7CPGG5YCalzwEFUFKNgmrLC1jApDxekWURrY6q4eO4L7nFhdF/gaUVaAyCeQipuEH+PhvcfY6I+AEw/g4Ho3knCIjsGYC1FxDn8brlyGuj0yrJv/4M6BPbkjkaTicGct7TuCUSQAft5QEz1kjbzjTbv3shskAhkLvFLCbR5k1ttK2iMQK+txynpYVv6h/ZqNVJyUvIOAAAAAASUVORK5CYII=');
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents #ribbon-nav-application-menu .ribbon-nav-back-arrow:hover {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAIAAACRuyQOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAAO6SURBVEhLrZd3UxNBGMbv+6hIG7uOoiOOY0NHgRACQYoQIAakSBAjyFBCCUgNJCAtgJSA4gQFASkGREWk+W18bt7McSx3uZA48/tjb8v73O7ePvsedyza6p1gte1+wURm7Xx5z8+2yb8CLc5dk20ttXLmhn6YGSKJN6UI3WBh64o4OngztsNIAtTgVcI0diaCGGklzMPQ+JWiNDv3oBdtfH8xtU/cJyi246puUPt6urR7nXrWDm2mVc2I+4iRULqWOWR2/MbIpvFdLE6I2tubEniJvOZl0itqd59K7GY6AFYpKt9JAzCPM0lvmVbvRGQ4qvo3MLa6f+NCSi/TekBJkEmp+Cyu952wePvztm+I0DS2w4jtK0VkDJBMTPEHodIPjsd06C0LiIOZhSd0CfUepSBVZ2UfP/G0qlmhzW8gRjPLb1kWKj1K+EbRYGx3o5PQFgjhmq6awU3ExI5QDa90PqUXVa0Te8x3HCDYBYR90bFKj7zS0wZ+WbPrF6jqf4Hlqej7hciPjJN45PBMEzr7uEfc7zBYkAzzl8y6eeDj7B8UTiA4ThjK3E3DCB5KbGviHoeBjGBCmlIX0yrHSVUnjj+GwHS45IpPioP9kyHIOTEfDjuG0vUsWT8ORAYklfMz0ZZNc/QtntZKG0+AMiCqgPcdQ8MiB9tACQvK9ABiGTg6PFuRw29D3wEOMtfq3ENJ8sAmlrlIxnd0tXNMkEj9MOqLrW7OMrKFEpyR6UFgpBAlp3GRPnEvYK2YCHeejWFsXvMSV9b9A6XLTwaYHgI4Q6SEkxAcZ2NaFVG9nMLYdPMsZ7DwdyuOGNNDTCBisB4MfFg0ycEqUFK0Ir/FzA7+24a1cmSvlpFt5AVMJ4b06iOL4RZGf5N9HWXeYY1WN569LyBxL38cqQu4ku5gmiShK5HSGF6JFhBHWHFaR+JSWj+MG5HPJfPe7bkJaVr+uYAc5Hi4Y+nRo0QnGUaAFI5qAkRt+oiAyObg4lTjUQJZdfwFX/9uS84DfQfvTet2O3dUqNxXArlNS2jGRXnUTE8MrgVk1IgjrBtxQClUbacNqxv6A78SN/lIbMkUtgARkDEwTQeUQEicTch74WOwc6aDHNhgk/07DcRGMK2AVSK05dPk8biboYd1l8vOkLXfzRun7A7ARfHI9CGklYA4qQeNo9sFLStQxc8FTi7SaZSLrau08wAZK34XmCBiZJUI6CWUuigDkAPnRlUypehPCkoCofH2WzmjcBPMSVczp3nlQjkye/iEj7YSbf0Ha15pmffbg9AAAAAASUVORK5CYII=');
 }
 
 #RibbonUI .ui-ribbon-button.ui-ribbon-active {
