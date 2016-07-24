@@ -24,9 +24,18 @@ export default class RibbonAppMenuItemData extends RibbonBaseData {
 	constructor( name, displayName ) {
 		super( name, displayName );
 
-		this[Seperator] = true;
+		this[Seperator] = false;
 		this[Actived] = false;
 		this[Content] = undefined;
+	}
+
+	/**
+	 * Menu type.
+	 * @return {string} -	Button type for identification.
+	 * @override
+	 */
+	get type() {
+		return 'ui-ribbon-app-menu-normal';
 	}
 
 	/**
@@ -62,19 +71,19 @@ export default class RibbonAppMenuItemData extends RibbonBaseData {
 	}
 
 	/**
-	 * Menu content shown on the app menu.
-	 * @return {string} - Menu content.
+	 * Menu content handler for rendering app menu content.
+	 * @return {Function} - Menu content handler.
 	 */
 	get content() {
 		return this[Content];
 	}
 
 	/**
-	 * Menu content shown on the app menu.
-	 * @param {string} [content] - Menu content.
+	 * Menu content handler for rendering app menu content.
+	 * @param {Function} [content] - Menu content handler.
 	 */
 	set content( content ) {
-		if( typeof content !== 'string' ) throw 'Input type should be a string.';
+		if( !(content instanceof Function) ) throw 'Input content handler is invalid.';
 
 		this[Content] = content;
 	}

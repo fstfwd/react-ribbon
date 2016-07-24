@@ -14,7 +14,8 @@ const {
 	RibbonToggleButtonData,
 	RibbonTooltipData,
 	RibbonRadioButtonGroupData,
-	RibbonAppMenuItemData
+	RibbonAppMenuItemData,
+	RibbonAppMenuButtonData
 } = Data;
 
 /**
@@ -49,7 +50,34 @@ export default class RibbonDemoTask extends RibbonTask {
 			// Create app menu item.
 			const appTab = ribbon.tabs[0];
 			const demoMenuItemData = new RibbonAppMenuItemData( 'DemoMenuItem', 'Demo' );
+			demoMenuItemData.content = () => {
+				return (
+					<div>
+						<h1>Hello Demo</h1>
+						<span>This is demo app menu content</span>
+					</div>
+				);
+			};
 			const demoMenuItem = appTab.addItem( demoMenuItemData );
+
+			const testMenuItemData = new RibbonAppMenuItemData( 'DemoTestMenuItem', 'Test' );
+			const testMenuItem = appTab.addItem( testMenuItemData );
+			testMenuItem.content = () => {
+				return (
+					<div>
+						<h1>Hello Test</h1>
+						<span>This is test app menu content</span>
+					</div>
+				);
+			};
+
+			const fooMenuBtnData = new RibbonAppMenuButtonData( 'DemoFooMenuButton', 'Foo' );
+			fooMenuBtnData.seperator = true;
+
+			const fooMenuBtn = appTab.addItem( fooMenuBtnData );
+			fooMenuBtn.clickHandler = () => {
+				alert( 'DemoFooMenuButton clicked!' );
+			};
 
 			// Create panel.
 			const newMailPanelData = new RibbonPanelData( 'DemoNewMailPanel', 'New' );

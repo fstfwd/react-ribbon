@@ -84,11 +84,27 @@
 	vertical-align: middle;
 }
 
+#RibbonUI .ui-ribbon-tab-application-contents ul[role=ribbon-nav-application-menu-items] li.ui-ribbon-seperator {
+	margin-bottom: -1px;
+	display: block;
+}
+
+#RibbonUI .ui-ribbon-tab-application-contents ul[role=ribbon-nav-application-menu-items] li.ui-ribbon-seperator div.ui-ribbon-seperator {
+	height: 1px;
+}
+
 #RibbonUI .ui-ribbon-tab-application-contents div[role=ribbon-nav-application-menu-content] {
 	position: relative;
 	overflow-y: scroll;
 	height: 100%;
 	margin-top: 23px;
+}
+
+#RibbonUI div[role=ribbon-nav-application-menu-content] .ribbon-content-area {
+	position: absolute;
+	color: black;
+	margin-left: 40px;
+	margin-top: 34px;
 }
 
 /* Styling for the content of the tabs. 

@@ -10,6 +10,7 @@ import RibbonTabData from './RibbonTabData';
 import RibbonAppTabData from './RibbonAppTabData';
 import RibbonPanelData from './RibbonPanelData';
 import RibbonAppMenuItemData from './RibbonAppMenuItemData';
+import RibbonAppMenuButtonData from './RibbonAppMenuButtonData';
 import RibbonItemData from './RibbonItemData';
 import RibbonButtonData from './RibbonButtonData';
 import RibbonPushButtonData from './RibbonPushButtonData';
@@ -25,6 +26,7 @@ const Data = {
 	RibbonAppTabData,
 	RibbonPanelData,
 	RibbonAppMenuItemData,
+	RibbonAppMenuButtonData,
 	RibbonItemData,
 	RibbonButtonData,
 	RibbonPushButtonData,

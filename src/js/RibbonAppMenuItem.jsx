@@ -7,6 +7,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import RibbonBase from './RibbonBase';
+import RibbonAppMenuSeperator from './RibbonAppMenuSeperator';
 import { newGUID } from './utility';
 
 const Seperator = Symbol( 'seperator' );
@@ -25,7 +26,7 @@ export default class RibbonAppMenuItem extends RibbonBase {
 		super( props );
 
 		let actived = ( props.actived === true );
-		let content = ( typeof props.content === 'string' ) ? props.content : '';
+		let content = props.content;
 
 		this.state = Object.assign( this.state,
 			{
@@ -34,6 +35,14 @@ export default class RibbonAppMenuItem extends RibbonBase {
 			});
 
 		this.handleClick = this.handleClick.bind( this );
+	}
+
+	/**
+	 * Item type.
+	 * @return {string} - Item type for identification.
+	 */
+	get type() {
+		return this.props.type;
 	}
 
 	/**
@@ -103,19 +112,19 @@ export default class RibbonAppMenuItem extends RibbonBase {
 	}
 
 	/**
-	 * Menu content shown on the app menu.
-	 * @return {string} - Menu content.
+	 * Menu content handler for rendering app menu content.
+	 * @return {Function} - Menu content handler.
 	 */
 	get content() {
 		return this.state.content;
 	}
 
 	/**
-	 * Menu content shown on the app menu.
-	 * @param {string} [content] - Menu content.
+	 * Menu content handler for rendering app menu content.
+	 * @param {Function} [content] - Menu content handler.
 	 */
 	set content( content ) {
-		if( typeof content !== 'string' ) throw 'Input type should be a string.';
+		if( !(content instanceof Function) ) throw 'Input content handler is invalid.';
 
 		const prop = { content };
 		const onStateChange = this.props.onStateChange;
@@ -128,7 +137,8 @@ export default class RibbonAppMenuItem extends RibbonBase {
 	 * Tab clicking event handler
 	 */
 	handleClick( event ) {
-		this.actived = true;
+		const onMenuClick = this.props.onMenuClick;
+		onMenuClick && onMenuClick( this.id );
 	}
 
 	render() {
@@ -139,24 +149,39 @@ export default class RibbonAppMenuItem extends RibbonBase {
 			'ui-ribbon-invisible': this.hidden
 		});
 
+		const createSeperator = ( seperator = true ) => {
+			if( seperator ) {
+				const id = newGUID();
+				return(
+					<RibbonAppMenuSeperator key={ id } id={ id } />
+				);
+			}
+		};
+
 		return (
-			<li key={ this.id } className={ dynCSS } onClick={ this.handleClick }>
-					<div> { this.displayName } </div>
-			</li>
+			<div>
+				{ createSeperator( this.seperator ) }
+				<li key={ this.id } className={ dynCSS } onClick={ this.handleClick }>
+						<div> { this.displayName } </div>
+				</li>
+			</div>
 		);
 	}
 }
 
 RibbonAppMenuItem.propTypes = {
 	id: React.PropTypes.string.isRequired,
+	type: React.PropTypes.string.isRequired,
 	seperator: React.PropTypes.bool,
 	actived: React.PropTypes.bool,
-	content: React.PropTypes.string,
+	content: React.PropTypes.func,
+	onMenuClick: React.PropTypes.func,
 	onStateChange: React.PropTypes.func
 };
 
 RibbonAppMenuItem.defaultProps = {
 	id: newGUID(),
-	seperator: true,
+	type: 'ui-ribbon-app-menu-normal',
+	seperator: false,
 	actived: false
 };

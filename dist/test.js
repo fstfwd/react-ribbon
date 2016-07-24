@@ -2,10 +2,10 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery'), require('react'), require('classnames'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define('react-ribbon-test', ['jquery', 'react', 'classnames', 'react-dom'], factory) :
   (global.ReactRibbonTest = factory(global.jQuery,global.React,global.classNames,global.ReactDOM));
-}(this, function ($,React,ClassNames,ReactDOM) { 'use strict';
+}(this, function ($,React$1,ClassNames,ReactDOM) { 'use strict';
 
   $ = 'default' in $ ? $['default'] : $;
-  React = 'default' in React ? React['default'] : React;
+  React$1 = 'default' in React$1 ? React$1['default'] : React$1;
   ClassNames = 'default' in ClassNames ? ClassNames['default'] : ClassNames;
   ReactDOM = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
 
@@ -633,15 +633,15 @@
   		}
   	}]);
   	return RibbonBase;
-  }(React.Component);
+  }(React$1.Component);
 
   RibbonBase.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	name: React.PropTypes.string.isRequired,
-  	displayName: React.PropTypes.string,
-  	enabled: React.PropTypes.bool,
-  	hidden: React.PropTypes.bool,
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	name: React$1.PropTypes.string.isRequired,
+  	displayName: React$1.PropTypes.string,
+  	enabled: React$1.PropTypes.bool,
+  	hidden: React$1.PropTypes.bool,
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonBase.defaultProps = {
@@ -691,10 +691,10 @@
   				'ui-ribbon-invisible': this.hidden
   			});
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'div',
   				{ className: "ui-ribbon-title " + dynCSS },
-  				React.createElement(
+  				React$1.createElement(
   					'span',
   					null,
   					this.title
@@ -722,7 +722,7 @@
   }(RibbonBase);
 
   RibbonTitlebar.propTypes = {
-  	onStateChange: React.PropTypes.func
+  	onStateChange: React$1.PropTypes.func
   };
 
   /**
@@ -794,10 +794,10 @@
   }(RibbonBase);
 
   RibbonItem.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	type: React.PropTypes.string.isRequired,
-  	actived: React.PropTypes.bool,
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	type: React$1.PropTypes.string.isRequired,
+  	actived: React$1.PropTypes.bool,
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonItem.defaultProps = {
@@ -866,7 +866,7 @@
   			});
 
   			var createTitle = function createTitle() {
-  				if (_this2.title) return React.createElement(
+  				if (_this2.title) return React$1.createElement(
   					'strong',
   					null,
   					_this2.title
@@ -874,14 +874,14 @@
   			};
 
   			var createContent = function createContent() {
-  				if (_this2.content) return React.createElement(
+  				if (_this2.content) return React$1.createElement(
   					'p',
   					null,
   					_this2.content
   				);
   			};
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'div',
   				{ id: this.id, className: "ui-ribbon-tooltip " + dynCSS },
   				createTitle(),
@@ -967,8 +967,8 @@
   }(RibbonBase);
 
   RibbonTooltip.propTypes = {
-  	content: React.PropTypes.string,
-  	onStateChange: React.PropTypes.func
+  	content: React$1.PropTypes.string,
+  	onStateChange: React$1.PropTypes.func
   };
 
   var Content = Symbol('content');
@@ -1118,7 +1118,7 @@
   				scope.setState(prop);
   			};
 
-  			return React.createElement(RibbonTooltip, {
+  			return React$1.createElement(RibbonTooltip, {
   				key: data.id,
   				id: data.id,
   				name: data.name,
@@ -1179,7 +1179,7 @@
   			var formatLegend = function formatLegend(legend) {
   				var texts = legend.split('\\n');
   				var guid = newGUID();
-  				var result = React.createElement(
+  				var result = React$1.createElement(
   					'span',
   					{ key: guid, id: guid },
   					legend
@@ -1188,18 +1188,18 @@
   				if (texts.length > 1) {
   					result = texts.map(function (txt) {
   						var guid = newGUID();
-  						return React.createElement(
+  						return React$1.createElement(
   							'span',
   							{ key: guid, id: guid },
   							txt,
-  							React.createElement('br', null)
+  							React$1.createElement('br', null)
   						);
   					});
   				}
   				return result;
   			};
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'a',
   				{
   					key: this.id,
@@ -1208,13 +1208,13 @@
   					onClick: this.handleClick,
   					onMouseOver: this.handleMouseOver,
   					onMouseOut: this.handleMouseOut },
-  				React.createElement(
+  				React$1.createElement(
   					'div',
   					{
   						role: this.role,
   						className: "ui-ribbon-button " + this.type + " ui-ribbon-relative ui-ribbon-inline ui-ribbon-center " + innerDynCSS },
-  					React.createElement('img', { src: this.icon }),
-  					React.createElement(
+  					React$1.createElement('img', { src: this.icon }),
+  					React$1.createElement(
   						'div',
   						{ className: 'ui-ribbon-button-legend' },
   						formatLegend(this.displayName)
@@ -1333,14 +1333,14 @@
   }(RibbonItem);
 
   RibbonButton.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	role: React.PropTypes.string.isRequired,
-  	type: React.PropTypes.string.isRequired,
-  	icon: React.PropTypes.string,
-  	tooltip: React.PropTypes.instanceOf(RibbonTooltipData),
-  	toggleable: React.PropTypes.bool,
-  	clickHandler: React.PropTypes.func,
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	role: React$1.PropTypes.string.isRequired,
+  	type: React$1.PropTypes.string.isRequired,
+  	icon: React$1.PropTypes.string,
+  	tooltip: React$1.PropTypes.instanceOf(RibbonTooltipData),
+  	toggleable: React$1.PropTypes.bool,
+  	clickHandler: React$1.PropTypes.func,
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonButton.defaultProps = {
@@ -1377,7 +1377,7 @@
   				'ui-ribbon-invisible': this.hidden
   			});
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'div',
   				{ className: "ui-ribbon-button-group ui-ribbon-inline " + dynCSS },
   				get(Object.getPrototypeOf(RibbonPushButton.prototype), 'render', this).call(this)
@@ -1388,8 +1388,8 @@
   }(RibbonButton);
 
   RibbonPushButton.propTypes = {
-  	type: React.PropTypes.string.isRequired,
-  	onStateChange: React.PropTypes.func
+  	type: React$1.PropTypes.string.isRequired,
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonPushButton.defaultProps = {
@@ -1451,10 +1451,10 @@
   }(RibbonPushButton);
 
   RibbonToggleButton.propTypes = {
-  	type: React.PropTypes.string.isRequired,
-  	role: React.PropTypes.string.isRequired,
-  	onGroupCurrentChange: React.PropTypes.func,
-  	onStateChange: React.PropTypes.func
+  	type: React$1.PropTypes.string.isRequired,
+  	role: React$1.PropTypes.string.isRequired,
+  	onGroupCurrentChange: React$1.PropTypes.func,
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonToggleButton.defaultProps = {
@@ -1837,7 +1837,7 @@
   				switch (item.type) {
   					case 'ui-ribbon-button-big':
   						var RibbonPushButtonLike = item.role === 'ui-ribbon-button-toggle' ? RibbonToggleButton : RibbonPushButton;
-  						result = React.createElement(RibbonPushButtonLike, {
+  						result = React$1.createElement(RibbonPushButtonLike, {
   							key: item.id,
   							id: item.id,
   							name: item.name,
@@ -1867,7 +1867,7 @@
   				'ui-ribbon-invisible': this.hidden
   			});
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'div',
   				{
   					key: this.id,
@@ -1944,9 +1944,9 @@
   }(RibbonItem);
 
   RibbonGroup.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	items: React.PropTypes.arrayOf(React.PropTypes.instanceOf(RibbonButtonData)),
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	items: React$1.PropTypes.arrayOf(React$1.PropTypes.instanceOf(RibbonButtonData)),
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonGroup.defaultProps = {
@@ -2045,7 +2045,7 @@
   			};
 
   			var createItem = function createItem(item) {
-  				return React.createElement(RibbonToggleButton, {
+  				return React$1.createElement(RibbonToggleButton, {
   					key: item.id,
   					id: item.id,
   					name: item.name,
@@ -2072,7 +2072,7 @@
   				'ui-ribbon-invisible': this.hidden
   			});
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'div',
   				{
   					key: this.id,
@@ -2139,9 +2139,9 @@
   }(RibbonGroup);
 
   RibbonGroup.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	items: React.PropTypes.arrayOf(React.PropTypes.instanceOf(RibbonToggleButtonData)),
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	items: React$1.PropTypes.arrayOf(React$1.PropTypes.instanceOf(RibbonToggleButtonData)),
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonGroup.defaultProps = {
@@ -2357,7 +2357,7 @@
   					case 'ui-ribbon-radio-group':
   					case 'ui-ribbon-group':
   						var RibbonGroupLike = item.type === 'ui-ribbon-group' ? RibbonGroup : RibbonRadioButtonGroup;
-  						result = React.createElement(RibbonGroupLike, {
+  						result = React$1.createElement(RibbonGroupLike, {
   							key: item.id,
   							id: item.id,
   							name: item.name,
@@ -2374,7 +2374,7 @@
   						break;
   					case 'ui-ribbon-button-big':
   						var RibbonPushButtonLike = item.role === 'ui-ribbon-button-toggle' ? RibbonToggleButton : RibbonPushButton;
-  						result = React.createElement(RibbonPushButtonLike, {
+  						result = React$1.createElement(RibbonPushButtonLike, {
   							key: item.id,
   							id: item.id,
   							name: item.name,
@@ -2402,23 +2402,23 @@
   			var createSeperator = function createSeperator() {
   				var seperator = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
 
-  				if (seperator) return React.createElement('div', { className: 'ui-ribbon-panel-seperator ui-ribbon-relative ui-ribbon-inline' });
+  				if (seperator) return React$1.createElement('div', { className: 'ui-ribbon-panel-seperator ui-ribbon-relative ui-ribbon-inline' });
   			};
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'div',
   				{
   					key: this.id,
   					className: "ui-ribbon-panel-container ui-ribbon-relative " + outerDynCSS },
   				createSeperator(this.seperator),
-  				React.createElement(
+  				React$1.createElement(
   					'div',
   					{ className: "ui-ribbon-panel ui-ribbon-relative ui-ribbon-inline " + innerDynCSS },
-  					React.createElement(
+  					React$1.createElement(
   						'div',
   						{ className: 'ui-ribbon-panel-contents' },
   						items.map(createItem),
-  						React.createElement(
+  						React$1.createElement(
   							'div',
   							{ className: "ui-ribbon-panel-legend ui-ribbon-absolute " + legendDynCSS },
   							this.displayName
@@ -2506,10 +2506,10 @@
   }(RibbonBase);
 
   RibbonPanel.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	seperator: React.PropTypes.bool,
-  	items: React.PropTypes.arrayOf(React.PropTypes.instanceOf(RibbonItemData)),
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	seperator: React$1.PropTypes.bool,
+  	items: React$1.PropTypes.arrayOf(React$1.PropTypes.instanceOf(RibbonItemData)),
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonPanel.defaultProps = {
@@ -2707,7 +2707,7 @@
   			};
 
   			var createPanel = function createPanel(panel) {
-  				return React.createElement(RibbonPanel, {
+  				return React$1.createElement(RibbonPanel, {
   					key: panel.id,
   					id: panel.id,
   					name: panel.name,
@@ -2722,7 +2722,7 @@
   					} });
   			};
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'li',
   				{
   					key: this.id,
@@ -2730,12 +2730,12 @@
   					className: this.type + " " + dynCSS,
   					role: 'ui-ribbon-tab',
   					onClick: this.handleClick },
-  				React.createElement(
+  				React$1.createElement(
   					'span',
   					{ className: 'ui-ribbon-uppercase' },
   					this.displayName
   				),
-  				React.createElement(
+  				React$1.createElement(
   					'div',
   					{ className: 'ui-ribbon-tab-contents ui-ribbon-absolute' },
   					panels.map(createPanel)
@@ -2860,11 +2860,11 @@
   }(RibbonBase);
 
   RibbonTab.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	type: React.PropTypes.string.isRequired,
-  	actived: React.PropTypes.bool,
-  	panels: React.PropTypes.arrayOf(React.PropTypes.instanceOf(RibbonPanelData)),
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	type: React$1.PropTypes.string.isRequired,
+  	actived: React$1.PropTypes.bool,
+  	panels: React$1.PropTypes.arrayOf(React$1.PropTypes.instanceOf(RibbonPanelData)),
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonTab.defaultProps = {
@@ -2872,6 +2872,57 @@
   	type: 'ui-ribbon-tab-normal',
   	actived: false,
   	panels: []
+  };
+
+  /**
+   * RibbonAppMenuSeperator
+   * @extends RibbonBase
+   * @class
+   */
+
+  var RibbonAppMenuSeperator = function (_React$Component) {
+  	inherits(RibbonAppMenuSeperator, _React$Component);
+
+  	/**
+    * RibbonAppMenuSeperator constructor
+    * @param {object} props - React component properties
+    */
+
+  	function RibbonAppMenuSeperator(props) {
+  		classCallCheck(this, RibbonAppMenuSeperator);
+  		return possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppMenuSeperator).call(this, props));
+  	}
+
+  	/**
+    * Item type.
+    * @return {string} - Item type for identification.
+    */
+
+
+  	createClass(RibbonAppMenuSeperator, [{
+  		key: 'render',
+  		value: function render() {
+  			return React$1.createElement(
+  				'li',
+  				{ key: this.id, id: this.id, className: 'ui-ribbon-seperator' },
+  				React$1.createElement('div', { className: 'ui-ribbon-seperator' })
+  			);
+  		}
+  	}, {
+  		key: 'type',
+  		get: function get() {
+  			return 'ui-ribbon-seperator';
+  		}
+  	}]);
+  	return RibbonAppMenuSeperator;
+  }(React$1.Component);
+
+  RibbonAppMenuSeperator.propTypes = {
+  	id: React$1.PropTypes.string.isRequired
+  };
+
+  RibbonAppMenuSeperator.defaultProps = {
+  	id: newGUID()
   };
 
   /**
@@ -2894,7 +2945,7 @@
   		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppMenuItem).call(this, props));
 
   		var actived = props.actived === true;
-  		var content = typeof props.content === 'string' ? props.content : '';
+  		var content = props.content;
 
   		_this.state = Object.assign(_this.state, {
   			actived: actived,
@@ -2906,8 +2957,8 @@
   	}
 
   	/**
-    * Panel has seperator or not.
-    * @return {bool} - If true, panel will be seperated with other panels by a panel seperator.
+    * Item type.
+    * @return {string} - Item type for identification.
     */
 
 
@@ -2919,7 +2970,8 @@
      * Tab clicking event handler
      */
   		value: function handleClick(event) {
-  			this.actived = true;
+  			var onMenuClick = this.props.onMenuClick;
+  			onMenuClick && onMenuClick(this.id);
   		}
   	}, {
   		key: 'render',
@@ -2931,18 +2983,43 @@
   				'ui-ribbon-invisible': this.hidden
   			});
 
-  			return React.createElement(
-  				'li',
-  				{ key: this.id, className: dynCSS, onClick: this.handleClick },
-  				React.createElement(
-  					'div',
-  					null,
-  					' ',
-  					this.displayName,
-  					' '
+  			var createSeperator = function createSeperator() {
+  				var seperator = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+  				if (seperator) {
+  					var id = newGUID();
+  					return React$1.createElement(RibbonAppMenuSeperator, { key: id, id: id });
+  				}
+  			};
+
+  			return React$1.createElement(
+  				'div',
+  				null,
+  				createSeperator(this.seperator),
+  				React$1.createElement(
+  					'li',
+  					{ key: this.id, className: dynCSS, onClick: this.handleClick },
+  					React$1.createElement(
+  						'div',
+  						null,
+  						' ',
+  						this.displayName,
+  						' '
+  					)
   				)
   			);
   		}
+  	}, {
+  		key: 'type',
+  		get: function get$$() {
+  			return this.props.type;
+  		}
+
+  		/**
+     * Panel has seperator or not.
+     * @return {bool} - If true, panel will be seperated with other panels by a panel seperator.
+     */
+
   	}, {
   		key: 'seperator',
   		get: function get$$() {
@@ -3026,8 +3103,8 @@
   		}
 
   		/**
-     * Menu content shown on the app menu.
-     * @return {string} - Menu content.
+     * Menu content handler for rendering app menu content.
+     * @return {Function} - Menu content handler.
      */
 
   	}, {
@@ -3037,12 +3114,12 @@
   		}
 
   		/**
-     * Menu content shown on the app menu.
-     * @param {string} [content] - Menu content.
+     * Menu content handler for rendering app menu content.
+     * @param {Function} [content] - Menu content handler.
      */
   		,
   		set: function set$$(content) {
-  			if (typeof content !== 'string') throw 'Input type should be a string.';
+  			if (!(content instanceof Function)) throw 'Input content handler is invalid.';
 
   			var prop = { content: content };
   			var onStateChange = this.props.onStateChange;
@@ -3055,15 +3132,96 @@
   }(RibbonBase);
 
   RibbonAppMenuItem.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	seperator: React.PropTypes.bool,
-  	actived: React.PropTypes.bool,
-  	content: React.PropTypes.string,
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	type: React$1.PropTypes.string.isRequired,
+  	seperator: React$1.PropTypes.bool,
+  	actived: React$1.PropTypes.bool,
+  	content: React$1.PropTypes.func,
+  	onMenuClick: React$1.PropTypes.func,
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonAppMenuItem.defaultProps = {
   	id: newGUID(),
+  	type: 'ui-ribbon-app-menu-normal',
+  	seperator: false,
+  	actived: false
+  };
+
+  /**
+   * RibbonAppMenuButton
+   * @extends RibbonAppMenuItem
+   * @class
+   */
+
+  var RibbonAppMenuButton = function (_RibbonAppMenuItem) {
+  	inherits(RibbonAppMenuButton, _RibbonAppMenuItem);
+
+  	/**
+    * RibbonAppMenuButton constructor
+    * @param {object} props - React component properties
+    */
+
+  	function RibbonAppMenuButton(props) {
+  		classCallCheck(this, RibbonAppMenuButton);
+
+  		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppMenuButton).call(this, props));
+
+  		_this.handleClick = _this.handleClick.bind(_this);
+  		return _this;
+  	}
+
+  	/**
+    * Button click eveent handler.
+    * @return {Function} - Click eveent handler.
+    */
+
+
+  	createClass(RibbonAppMenuButton, [{
+  		key: 'handleClick',
+
+
+  		/**
+     * Menu clicking event handler
+     */
+  		value: function handleClick(event) {
+  			if (!this.enabled) return;
+
+  			var onClick = this.state.content;
+  			onClick && onClick(event);
+  		}
+  	}, {
+  		key: 'clickHandler',
+  		get: function get() {
+  			return this.state.content;
+  		}
+
+  		/**
+     * Button click eveent handler.
+     * @param {Function} handler - Click eveent handler.
+     */
+  		,
+  		set: function set(handler) {
+  			if (!(handler instanceof Function)) throw 'Input clicking handler is invalid.';
+
+  			this.content = handler;
+  		}
+  	}]);
+  	return RibbonAppMenuButton;
+  }(RibbonAppMenuItem);
+
+  RibbonAppMenuButton.propTypes = {
+  	id: React$1.PropTypes.string.isRequired,
+  	type: React$1.PropTypes.string.isRequired,
+  	seperator: React$1.PropTypes.bool,
+  	actived: React$1.PropTypes.bool,
+  	content: React$1.PropTypes.func,
+  	onStateChange: React$1.PropTypes.func
+  };
+
+  RibbonAppMenuButton.defaultProps = {
+  	id: newGUID(),
+  	type: 'ui-ribbon-app-menu-button',
   	seperator: true,
   	actived: false
   };
@@ -3092,19 +3250,31 @@
 
   		var _this = possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppMenuItemData).call(this, name, displayName));
 
-  		_this[Seperator$2] = true;
+  		_this[Seperator$2] = false;
   		_this[Actived$2] = false;
   		_this[Content$1] = undefined;
   		return _this;
   	}
 
   	/**
-    * Panel has seperator or not.
-    * @return {bool} - If true, panel will be seperated with other panels by a panel seperator.
+    * Menu type.
+    * @return {string} -	Button type for identification.
+    * @override
     */
 
 
   	createClass(RibbonAppMenuItemData, [{
+  		key: 'type',
+  		get: function get() {
+  			return 'ui-ribbon-app-menu-normal';
+  		}
+
+  		/**
+     * Panel has seperator or not.
+     * @return {bool} - If true, panel will be seperated with other panels by a panel seperator.
+     */
+
+  	}, {
   		key: 'seperator',
   		get: function get() {
   			return this[Seperator$2];
@@ -3144,8 +3314,8 @@
   		}
 
   		/**
-     * Menu content shown on the app menu.
-     * @return {string} - Menu content.
+     * Menu content handler for rendering app menu content.
+     * @return {Function} - Menu content handler.
      */
 
   	}, {
@@ -3155,12 +3325,12 @@
   		}
 
   		/**
-     * Menu content shown on the app menu.
-     * @param {string} [content] - Menu content.
+     * Menu content handler for rendering app menu content.
+     * @param {Function} [content] - Menu content handler.
      */
   		,
   		set: function set(content) {
-  			if (typeof content !== 'string') throw 'Input type should be a string.';
+  			if (!(content instanceof Function)) throw 'Input content handler is invalid.';
 
   			this[Content$1] = content;
   		}
@@ -3168,7 +3338,45 @@
   	return RibbonAppMenuItemData;
   }(RibbonBaseData);
 
+  /**
+   * RibbonAppMenuButtonData
+   * @extends RibbonAppMenuItemData
+   * @class
+   */
+
+  var RibbonAppMenuButtonData = function (_RibbonAppMenuItemDat) {
+  	inherits(RibbonAppMenuButtonData, _RibbonAppMenuItemDat);
+
+  	/**
+    * RibbonAppMenuButtonData constructor
+    * @param {string} name - The name of this instance used by the internal mechanism.
+    * @param {string} displayName - The name of this instance shown on the user interface, might be a localized string.
+    */
+
+  	function RibbonAppMenuButtonData(name, displayName) {
+  		classCallCheck(this, RibbonAppMenuButtonData);
+  		return possibleConstructorReturn(this, Object.getPrototypeOf(RibbonAppMenuButtonData).call(this, name, displayName));
+  	}
+
+  	/**
+    * Menu type.
+    * @return {string} -	Button type for identification.
+    * @override
+    */
+
+
+  	createClass(RibbonAppMenuButtonData, [{
+  		key: 'type',
+  		get: function get() {
+  			return 'ui-ribbon-app-menu-button';
+  		}
+  	}]);
+  	return RibbonAppMenuButtonData;
+  }(RibbonAppMenuItemData);
+
   var Items$5 = Symbol('items');
+  var Current$1 = Symbol('current');
+  var Default$1 = Symbol('default');
 
   /**
    * RibbonAppTab
@@ -3194,9 +3402,12 @@
   		});
 
   		_this[Items$5] = [];
+  		_this[Current$1] = undefined;
+  		_this[Default$1] = undefined;
 
   		_this.handleClick = _this.handleClick.bind(_this);
   		_this.handleClose = _this.handleClose.bind(_this);
+  		_this.handleItemClick = _this.handleItemClick.bind(_this);
   		return _this;
   	}
 
@@ -3207,6 +3418,22 @@
 
 
   	createClass(RibbonAppTab, [{
+  		key: 'resetCurrent',
+
+
+  		/**
+     * Reset current item to the default.
+     */
+  		value: function resetCurrent() {
+  			this.current = this.default;
+  		}
+
+  		/**
+     * Instance edis/en-able status.
+     * @return {bool} - If false, make instance be disabled.
+     */
+
+  	}, {
   		key: 'addItem',
 
 
@@ -3229,7 +3456,28 @@
 
   			this.setState(prop);
 
-  			return this.items[this.items.length - 1];
+  			var item = this.items[this.items.length - 1];
+  			if (!(item instanceof RibbonAppMenuButton) && !this.default) this.default = item.id;
+
+  			return item;
+  		}
+
+  		/**
+     * Active target item by given id.
+     * @param {string} itemId - Item Id.
+     */
+
+  	}, {
+  		key: 'activeItemById',
+  		value: function activeItemById(itemId) {
+  			if (typeof itemId !== 'string') return console.log('%c[RibbonAppTab] ItemId should be a string.', 'color:red;');
+
+  			var item = this.items.find(function (item) {
+  				return item.id === itemId;
+  			});
+  			if (!item) throw '[RibbonAppTab] Input item id not exists.';
+
+  			item.actived = true;
   		}
   	}, {
   		key: 'componentWillUpdate',
@@ -3254,6 +3502,16 @@
 
   			this.actived = false;
   		}
+
+  		/**
+     * Tab clicking event handler
+     */
+
+  	}, {
+  		key: 'handleItemClick',
+  		value: function handleItemClick(itemId) {
+  			this.activeItemById(itemId);
+  		}
   	}, {
   		key: 'render',
   		value: function render() {
@@ -3264,6 +3522,73 @@
   				'ui-ribbon-invisible': this.hidden,
   				'ui-ribbon-inline': this.hidden === false
   			});
+
+  			var updateCurrentItem = function updateCurrentItem(id) {
+  				if (typeof id !== 'string') return;
+
+  				scope[Current$1] = id;
+  			};
+
+  			var createItem = function createItem(item) {
+  				if (item.type === 'ui-ribbon-app-menu-button') {
+  					return React$1.createElement(RibbonAppMenuButton, {
+  						key: item.id,
+  						id: item.id,
+  						name: item.name,
+  						displayName: item.displayName,
+  						enabled: item.enabled,
+  						hidden: item.hidden,
+  						type: item.type,
+  						actived: item.actived,
+  						content: item.content,
+  						seperator: item.seperator,
+  						onStateChange: updateItem,
+  						ref: function ref(c) {
+  							if (c) scope.items.push(c);
+  						} });
+  				} else {
+  					return React$1.createElement(RibbonAppMenuItem, {
+  						key: item.id,
+  						id: item.id,
+  						name: item.name,
+  						displayName: item.displayName,
+  						enabled: item.enabled,
+  						hidden: item.hidden,
+  						type: item.type,
+  						actived: item.actived,
+  						content: item.content,
+  						seperator: item.seperator,
+  						onMenuClick: scope.handleItemClick,
+  						onStateChange: updateItem,
+  						ref: function ref(c) {
+  							if (c) scope.items.push(c);
+  						} });
+  				}
+  			};
+
+  			var nextOpt = function nextOpt(id, data) {
+  				// For de/activating menu by changing menu's actived property.
+  				if (data.hasOwnProperty('actived')) {
+  					if (data.actived === true) {
+  						scope.items.map(function (item) {
+  							if (item.id !== id) item.actived = false;
+  						});
+
+  						updateCurrentItem(id);
+  					} else {
+  						// For activing other menu while current menu is diabled.
+  						if (data.hasOwnProperty('enabled') && data.enabled === false) {
+  							var item = scope.items.find(function (item) {
+  								return item.id !== id && item.enabled === true && item.type !== 'ui-ribbon-app-menu-button';
+  							});
+  							if (!item) return;
+
+  							item.actived = true;
+  							updateCurrentItem(id);
+  						}
+  					}
+  				}
+  			};
 
   			var updateItem = function updateItem(id, data) {
   				var items = scope.state.items;
@@ -3279,9 +3604,28 @@
   				onStateChange && onStateChange(scope.id, prop);
 
   				scope.setState(prop);
+
+  				if (item.type === 'ui-ribbon-app-menu-button') return;
+
+  				nextOpt(id, data);
   			};
 
-  			return React.createElement(
+  			var renderItemContent = function renderItemContent(id) {
+  				if (!id) return;
+
+  				var items = scope.state.items;
+  				var item = items.find(function (item) {
+  					return item.id === id;
+  				});
+  				if (!item) return;
+
+  				var content = item.content;
+  				if (!content) return;
+
+  				return content();
+  			};
+
+  			return React$1.createElement(
   				'li',
   				{
   					key: this.id,
@@ -3289,39 +3633,33 @@
   					className: this.type + " " + dynCSS,
   					role: 'ui-ribbon-tab',
   					onClick: this.handleClick },
-  				React.createElement(
+  				React$1.createElement(
   					'span',
   					{ className: 'ui-ribbon-uppercase' },
   					this.displayName
   				),
-  				React.createElement(
+  				React$1.createElement(
   					'div',
   					{ className: 'ui-ribbon-tab-application-contents ui-ribbon-absolute' },
-  					React.createElement(
+  					React$1.createElement(
   						'div',
   						{ id: 'ribbon-nav-application-menu' },
-  						React.createElement('div', { className: 'ribbon-nav-back-arrow', onClick: this.handleClose }),
-  						React.createElement(
+  						React$1.createElement('div', { className: 'ribbon-nav-back-arrow', onClick: this.handleClose }),
+  						React$1.createElement(
   							'ul',
   							{ role: 'ribbon-nav-application-menu-items' },
-  							this.state.items.map(function (item) {
-  								return React.createElement(RibbonAppMenuItem, {
-  									key: item.id,
-  									id: item.id,
-  									name: item.name,
-  									displayName: item.displayName,
-  									enabled: item.enabled,
-  									hidden: item.hidden,
-  									type: item.type,
-  									actived: item.actived,
-  									onStateChange: updateItem,
-  									ref: function ref(c) {
-  										if (c) scope.items.push(c);
-  									} });
-  							})
+  							this.state.items.map(createItem)
   						)
   					),
-  					React.createElement('div', { role: 'ribbon-nav-application-menu-content' })
+  					React$1.createElement(
+  						'div',
+  						{ role: 'ribbon-nav-application-menu-content' },
+  						React$1.createElement(
+  							'div',
+  							{ className: 'ribbon-content-area' },
+  							renderItemContent(this.current)
+  						)
+  					)
   				)
   			);
   		}
@@ -3343,10 +3681,63 @@
   		}
 
   		/**
-     * Instance edis/en-able status.
-     * @return {bool} - If false, make instance be disabled.
+     * Current actived RibbonAppMenuItem.
+     * @return {string} - RibbonAppMenuItem id.
      */
 
+  	}, {
+  		key: 'current',
+  		get: function get$$() {
+  			return this[Current$1];
+  		}
+
+  		/**
+     * Current actived RibbonAppMenuItem.
+     * @param {string} id - RibbonAppMenuItem id.
+     */
+  		,
+  		set: function set(id) {
+  			var current = this.items.find(function (item) {
+  				return item.id === id && item.type !== 'ui-ribbon-app-menu-button' && item.enabled;
+  			});
+  			if (!current) throw '[RibbonAppTab] Input id not exists or disabled.';
+
+  			current.actived = true;
+  			this[Current$1] = id;
+
+  			if (!this.default) this.default = id;
+
+  			this.items.map(function (item) {
+  				if (item.id !== id) item.actived = false;
+  			});
+  		}
+
+  		/**
+     * Default actived RibbonAppMenuItem.
+     * @return {string} - RibbonAppMenuItem id.
+     */
+
+  	}, {
+  		key: 'default',
+  		get: function get$$() {
+  			return this[Default$1];
+  		}
+
+  		/**
+     * Default actived RibbonAppMenuItem.
+     * @param {string} - RibbonAppMenuItem id.
+     */
+  		,
+  		set: function set(id) {
+  			var item = this.items.find(function (item) {
+  				return item.id === id && item.type !== 'ui-ribbon-app-menu-button' && item.enabled;
+  			});
+  			if (!item) throw '[RibbonAppTab] Input id not exists or disabled.';
+
+  			this[Default$1] = id;
+
+  			if (!this.current) this.current = id;
+  		}
   	}, {
   		key: 'enabled',
   		get: function get$$() {
@@ -3443,11 +3834,11 @@
   }(RibbonBase);
 
   RibbonAppTab.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	type: React.PropTypes.string.isRequired,
-  	actived: React.PropTypes.bool,
-  	items: React.PropTypes.arrayOf(React.PropTypes.instanceOf(RibbonAppMenuItemData)),
-  	onStateChange: React.PropTypes.func
+  	id: React$1.PropTypes.string.isRequired,
+  	type: React$1.PropTypes.string.isRequired,
+  	actived: React$1.PropTypes.bool,
+  	items: React$1.PropTypes.arrayOf(React$1.PropTypes.instanceOf(RibbonAppMenuItemData)),
+  	onStateChange: React$1.PropTypes.func
   };
 
   RibbonAppTab.defaultProps = {
@@ -3580,7 +3971,7 @@
 
   			var createTitleBar = function createTitleBar() {
   				var data = scope.state.titlebar;
-  				return React.createElement(RibbonTitlebar, {
+  				return React$1.createElement(RibbonTitlebar, {
   					key: data.id,
   					id: data.id,
   					name: data.name,
@@ -3629,7 +4020,7 @@
 
   			var createTab = function createTab(tab) {
   				if (tab.type === 'ui-ribbon-tab-application') {
-  					return React.createElement(RibbonAppTab, {
+  					return React$1.createElement(RibbonAppTab, {
   						key: tab.id,
   						id: tab.id,
   						name: tab.name,
@@ -3645,7 +4036,7 @@
   							if (c) scope.tabs.push(c);
   						} });
   				} else {
-  					return React.createElement(RibbonTab, {
+  					return React$1.createElement(RibbonTab, {
   						key: tab.id,
   						id: tab.id,
   						name: tab.name,
@@ -3663,20 +4054,20 @@
   				}
   			};
 
-  			return React.createElement(
+  			return React$1.createElement(
   				'div',
   				{ id: 'RibbonUI' },
   				createTitleBar(),
-  				React.createElement(
+  				React$1.createElement(
   					'div',
   					{ className: 'ui-ribbon-window' },
-  					React.createElement(
+  					React$1.createElement(
   						'div',
   						{ id: 'ui-ribbon-main', className: 'ui-ribbon-main ui-ribbon-border-bottom' },
-  						React.createElement(
+  						React$1.createElement(
   							'div',
   							{ className: 'ui-ribbon-tab-container ui-ribbon-border-bottom' },
-  							React.createElement(
+  							React$1.createElement(
   								'ul',
   								{ role: 'ui-ribbon-tabs', className: 'ui-ribbon-nowrap ui-ribbon-nopadding ui-ribbon-nomargin' },
   								otherTabs.map(createTab)
@@ -3693,11 +4084,11 @@
   		}
   	}]);
   	return Ribbon;
-  }(React.Component);
+  }(React$1.Component);
 
   Ribbon.propTypes = {
-  	id: React.PropTypes.string.isRequired,
-  	tabs: React.PropTypes.arrayOf(React.PropTypes.instanceOf(RibbonTabData))
+  	id: React$1.PropTypes.string.isRequired,
+  	tabs: React$1.PropTypes.arrayOf(React$1.PropTypes.instanceOf(RibbonTabData))
   };
 
   Ribbon.defaultProps = {
@@ -4120,7 +4511,7 @@
   					var container = scope.container;
   					var taskManager = scope.taskManager;
 
-  					scope[MainRibbon] = ReactDOM.render(React.createElement(Ribbon, null), container);
+  					scope[MainRibbon] = ReactDOM.render(React$1.createElement(Ribbon, null), container);
   					scope[TaskExecuter] = new RibbonTaskExecuter(scope.mainRibbon, taskManager);
 
   					resolve(scope);
@@ -4189,6 +4580,7 @@
   	RibbonAppTabData: RibbonAppTabData,
   	RibbonPanelData: RibbonPanelData,
   	RibbonAppMenuItemData: RibbonAppMenuItemData,
+  	RibbonAppMenuButtonData: RibbonAppMenuButtonData,
   	RibbonItemData: RibbonItemData,
   	RibbonButtonData: RibbonButtonData,
   	RibbonPushButtonData: RibbonPushButtonData,
@@ -4203,6 +4595,8 @@
   	RibbonBase: RibbonBase,
   	RibbonTab: RibbonTab,
   	RibbonAppTab: RibbonAppTab,
+  	RibbonAppMenuItem: RibbonAppMenuItem,
+  	RibbonAppMenuButton: RibbonAppMenuButton,
   	RibbonPanel: RibbonPanel,
   	RibbonTitlebar: RibbonTitlebar,
   	RibbonItem: RibbonItem,
@@ -4241,6 +4635,7 @@
   var RibbonTooltipData$1 = Data.RibbonTooltipData;
   var RibbonRadioButtonGroupData$1 = Data.RibbonRadioButtonGroupData;
   var RibbonAppMenuItemData$1 = Data.RibbonAppMenuItemData;
+  var RibbonAppMenuButtonData$1 = Data.RibbonAppMenuButtonData;
 
   /**
    * RibbonDemoTask
@@ -4286,7 +4681,50 @@
   					// Create app menu item.
   					var appTab = ribbon.tabs[0];
   					var demoMenuItemData = new RibbonAppMenuItemData$1('DemoMenuItem', 'Demo');
+  					demoMenuItemData.content = function () {
+  						return React.createElement(
+  							'div',
+  							null,
+  							React.createElement(
+  								'h1',
+  								null,
+  								'Hello Demo'
+  							),
+  							React.createElement(
+  								'span',
+  								null,
+  								'This is demo app menu content'
+  							)
+  						);
+  					};
   					var demoMenuItem = appTab.addItem(demoMenuItemData);
+
+  					var testMenuItemData = new RibbonAppMenuItemData$1('DemoTestMenuItem', 'Test');
+  					var testMenuItem = appTab.addItem(testMenuItemData);
+  					testMenuItem.content = function () {
+  						return React.createElement(
+  							'div',
+  							null,
+  							React.createElement(
+  								'h1',
+  								null,
+  								'Hello Test'
+  							),
+  							React.createElement(
+  								'span',
+  								null,
+  								'This is test app menu content'
+  							)
+  						);
+  					};
+
+  					var fooMenuBtnData = new RibbonAppMenuButtonData$1('DemoFooMenuButton', 'Foo');
+  					fooMenuBtnData.seperator = true;
+
+  					var fooMenuBtn = appTab.addItem(fooMenuBtnData);
+  					fooMenuBtn.clickHandler = function () {
+  						alert('DemoFooMenuButton clicked!');
+  					};
 
   					// Create panel.
   					var newMailPanelData = new RibbonPanelData$1('DemoNewMailPanel', 'New');

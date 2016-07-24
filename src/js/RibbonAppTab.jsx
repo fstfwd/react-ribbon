@@ -8,10 +8,14 @@ import React from 'react';
 import ClassNames from 'classnames';
 import RibbonBase from './RibbonBase';
 import RibbonAppMenuItem from './RibbonAppMenuItem';
+import RibbonAppMenuButton from './RibbonAppMenuButton';
 import RibbonAppMenuItemData from './data/RibbonAppMenuItemData';
+import RibbonAppMenuButtonData from './data/RibbonAppMenuButtonData';
 import { newGUID } from './utility';
 
 const Items = Symbol( 'items' );
+const Current = Symbol( 'current' );
+const Default = Symbol( 'default' );
 
 /**
  * RibbonAppTab
@@ -32,9 +36,12 @@ export default class RibbonAppTab extends RibbonBase {
 			});
 
 		this[Items] = [];
+		this[Current] = undefined;
+		this[Default] = undefined;
 
 		this.handleClick = this.handleClick.bind( this );
 		this.handleClose = this.handleClose.bind( this );
+		this.handleItemClick = this.handleItemClick.bind( this );
 	}
 
 	/**
@@ -51,6 +58,62 @@ export default class RibbonAppTab extends RibbonBase {
 	 */
 	get items() {
 		return this[Items];
+	}
+
+	/**
+	 * Current actived RibbonAppMenuItem.
+	 * @return {string} - RibbonAppMenuItem id.
+	 */
+	get current() {
+		return this[Current];
+	}
+
+	/**
+	 * Current actived RibbonAppMenuItem.
+	 * @param {string} id - RibbonAppMenuItem id.
+	 */
+	set current( id ) {
+		const current = this.items.find( ( item ) => item.id === id && item.type !== 'ui-ribbon-app-menu-button' && item.enabled );
+		if( !current ) throw '[RibbonAppTab] Input id not exists or disabled.'
+
+		current.actived = true;
+		this[Current] = id;
+
+		if( !this.default )
+			this.default = id;
+
+		this.items.map( ( item ) => {
+			if( item.id !== id ) item.actived = false;
+		});
+	}
+
+	/**
+	 * Default actived RibbonAppMenuItem.
+	 * @return {string} - RibbonAppMenuItem id.
+	 */
+	get default() {
+		return this[Default];
+	}
+
+	/**
+	 * Default actived RibbonAppMenuItem.
+	 * @param {string} - RibbonAppMenuItem id.
+	 */
+	set default( id ) {
+		const item = this.items.find( ( item ) => item.id === id && item.type !== 'ui-ribbon-app-menu-button' && item.enabled );
+		if( !item ) throw '[RibbonAppTab] Input id not exists or disabled.'
+
+		this[Default] = id;
+
+		if( !this.current )
+			this.current = id;
+	}
+
+	/**
+	 * Reset current item to the default.
+	 */
+	resetCurrent() {
+		this.current = this.default;
 	}
 
 	/**
@@ -150,7 +213,24 @@ export default class RibbonAppTab extends RibbonBase {
 
 		this.setState( prop );
 
-		return this.items[ this.items.length -1 ];
+		const item = this.items[ this.items.length -1 ];
+		if( !(item instanceof RibbonAppMenuButton) && !this.default )
+			this.default = item.id;
+
+		return item;
+	}
+
+	/**
+	 * Active target item by given id.
+	 * @param {string} itemId - Item Id.
+	 */
+	activeItemById( itemId ) {
+		if( typeof itemId !== 'string' ) return console.log( '%c[RibbonAppTab] ItemId should be a string.', 'color:red;' );
+
+		const item = this.items.find( ( item ) => item.id === itemId );
+		if( !item ) throw '[RibbonAppTab] Input item id not exists.';
+
+		item.actived = true;
 	}
 
 	componentWillUpdate( nextProps, nextState ) {
@@ -171,6 +251,13 @@ export default class RibbonAppTab extends RibbonBase {
 		this.actived = false;
 	}
 
+	/**
+	 * Tab clicking event handler
+	 */
+	handleItemClick( itemId ) {
+		this.activeItemById( itemId );
+	}
+
 	render() {
 		const scope = this;
 		const dynCSS = ClassNames({
@@ -179,6 +266,67 @@ export default class RibbonAppTab extends RibbonBase {
 			'ui-ribbon-invisible': this.hidden,
 			'ui-ribbon-inline': ( this.hidden === false )
 		});
+
+		const updateCurrentItem = ( id ) => {
+			if( typeof id !== 'string' ) return;
+
+			scope[Current] = id;
+		};
+
+		const createItem = ( item ) => {
+			if( item.type === 'ui-ribbon-app-menu-button' ) {
+				return <RibbonAppMenuButton
+								key={ item.id }
+								id={ item.id }
+								name={ item.name }
+								displayName={ item.displayName }
+								enabled={ item.enabled }
+								hidden={ item.hidden }
+								type={ item.type }
+								actived={ item.actived }
+								content={ item.content }
+								seperator={ item.seperator }
+								onStateChange={ updateItem }
+								ref={ ( c ) => { if( c ) scope.items.push( c ) } } />
+			} else {
+				return <RibbonAppMenuItem
+								key={ item.id }
+								id={ item.id }
+								name={ item.name }
+								displayName={ item.displayName }
+								enabled={ item.enabled }
+								hidden={ item.hidden }
+								type={ item.type }
+								actived={ item.actived }
+								content={ item.content }
+								seperator={ item.seperator }
+								onMenuClick={ scope.handleItemClick }
+								onStateChange={ updateItem }
+								ref={ ( c ) => { if( c ) scope.items.push( c ) } } />
+			}
+		};
+
+		const nextOpt = ( id, data ) => {
+			// For de/activating menu by changing menu's actived property.
+			if( data.hasOwnProperty( 'actived' ) ) {
+				if( data.actived === true ) {
+					scope.items.map( ( item ) => {
+						if( item.id !== id ) item.actived = false;
+					});
+
+					updateCurrentItem( id );
+				} else {
+					// For activing other menu while current menu is diabled.
+					if( data.hasOwnProperty( 'enabled' ) && ( data.enabled === false ) ) {
+						const item = scope.items.find( ( item ) => ( item.id !== id && item.enabled === true && item.type !== 'ui-ribbon-app-menu-button' ) );
+						if( !item ) return;
+
+						item.actived = true;
+						updateCurrentItem( id );
+					}
+				}
+			}
+		};
 
 		const updateItem = ( id, data ) => {
 			let items = scope.state.items;
@@ -192,6 +340,23 @@ export default class RibbonAppTab extends RibbonBase {
 			onStateChange && onStateChange( scope.id, prop );
 
 			scope.setState( prop );
+
+			if( item.type === 'ui-ribbon-app-menu-button' ) return;
+
+			nextOpt( id, data );
+		};
+
+		const renderItemContent = ( id ) => {
+			if( !id ) return;
+
+			let items = scope.state.items;
+			const item = items.find( ( item ) => item.id === id );
+			if( !item ) return;
+
+			const content = item.content;
+			if( !content ) return;
+
+			return content();
 		};
 
 		return (
@@ -207,24 +372,13 @@ export default class RibbonAppTab extends RibbonBase {
 					<div id="ribbon-nav-application-menu">
 						<div className="ribbon-nav-back-arrow" onClick={ this.handleClose }></div>
 						<ul role="ribbon-nav-application-menu-items">
-							{
-								this.state.items.map( ( item ) => {
-									return <RibbonAppMenuItem
-														key={ item.id }
-														id={ item.id }
-														name={ item.name }
-														displayName={ item.displayName }
-														enabled={ item.enabled }
-														hidden={ item.hidden }
-														type={ item.type }
-														actived={ item.actived }
-														onStateChange={ updateItem }
-														ref={ ( c ) => { if( c ) scope.items.push( c ) } } />
-								})
-							}
+							{ this.state.items.map( createItem ) }
 						</ul>
 					</div>
 					<div role="ribbon-nav-application-menu-content">
+						<div className="ribbon-content-area">
+							{ renderItemContent( this.current ) }
+						</div>
 					</div>
 				</div>
 			</li>
