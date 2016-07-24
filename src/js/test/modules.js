@@ -4,7 +4,7 @@
 
 'use strict';
 
-import ReactRibbon from '../';
+import ReactRibbon from 'react-ribbon';
 export const { RibbonTask, Utility, Data } = ReactRibbon;
 import ribbonCtrl from './RibbonCtrl';
 

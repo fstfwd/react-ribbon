@@ -4,7 +4,7 @@
 
 'use strict';
 
-import ReactRibbon from '../';
+import ReactRibbon from 'react-ribbon';
 const { RibbonCtrl } = ReactRibbon;
 
 /**

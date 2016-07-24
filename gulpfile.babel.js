@@ -109,7 +109,7 @@ gulp.task( 'scripts', [ 'scripts:main', 'scripts:uglify' ] );
 gulp.task( 'scripts:test', ()  => {
   return rollup({
     entry: 'src/js/test/index.js',
-    external: [ 'react', 'react-dom', 'classnames', 'jquery' ],
+    external: [ 'react', 'react-dom', 'classnames', 'jquery', 'react-ribbon' ],
     plugins: [
       babel( babelOptions ),
       nodeResolve({
@@ -128,7 +128,8 @@ gulp.task( 'scripts:test', ()  => {
         'react': 'React',
         'react-dom': 'ReactDOM',
         'classnames': 'classNames',
-        'jquery': 'jQuery'
+        'jquery': 'jQuery',
+        'react-ribbon': 'ReactRibbon'
       }
     });
 
@@ -142,7 +143,8 @@ gulp.task( 'scripts:test', ()  => {
         'react': 'React',
         'react-dom': 'ReactDOM',
         'classnames': 'classNames',
-        'jquery': 'jQuery'
+        'jquery': 'jQuery',
+        'react-ribbon': 'ReactRibbon'
       }
     });
   });
