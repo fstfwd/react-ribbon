@@ -23,27 +23,37 @@ Here is the [Demo](http://yiskang.github.io/react-ribbon/).
    - Import module in your code
 
 		```javascript
-		import RibbonUI from 'react-ribbon';
+		import ReactRibbon from 'react-ribbon';
 
-		OR
+		//OR
 
-		var RibbonUI = requrie( 'react-ribbon' );
+		var ReactRibbon = requrie( 'react-ribbon' );
 		```
 
 2. Install package via bower
 
-  - Install
+    - Install
 
-		```bash
-		bower install --save https://github.com/yiskang/react-ribbon.git
-		```
+    ```bash
+    bower install --save https://github.com/yiskang/react-ribbon.git
+    ```
 
-  - Add module in your code
+    - Add module in your code
 
-		```html
-		<script type="text/javascript" src="{module_dir}/dist/bundle.js" />
-		<link rel="stylesheet" type="text/css" href="{module_dir}/dist/bundle.css" />
-		```
+    ```html
+    <script type="text/javascript" src="{module_dir}/dist/bundle.js" />
+    <link rel="stylesheet" type="text/css" href="{module_dir}/dist/bundle.css" />
+    ```
+
+    ```javascript
+    // Access library from global
+
+    // Ribbon component data
+    ReactRibbon.Data
+
+    // Ribbon component
+    ReactRibbon.*
+    ```
 
 ## Development
 
@@ -76,6 +86,9 @@ Here is the [Demo](http://yiskang.github.io/react-ribbon/).
   ```bash
   gulp
   ```
+
+## Written by
+Written by [Yi-Sheng Kang](https://www.facebook.com/yisheng.kang)
 
 ## License
 
