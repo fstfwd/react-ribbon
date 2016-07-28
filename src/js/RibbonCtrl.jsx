@@ -20,124 +20,124 @@ const TaskExecuter = Symbol( 'taskExecuter' );
  * @class
  */
 export default class RibbonCtrl {
-	/**
-	 * RibbonCtrl constructor
-	 */
-	constructor() {
-		this[TaskManager] = new RibbonTaskManager();
-		this[Container] = undefined;
-		this[MainRibbon] = undefined;
-		this[TaskExecuter] = undefined;
-	}
+  /**
+   * RibbonCtrl constructor
+   */
+  constructor() {
+    this[TaskManager] = new RibbonTaskManager();
+    this[Container] = undefined;
+    this[MainRibbon] = undefined;
+    this[TaskExecuter] = undefined;
+  }
 
-	/**
-	 * Ribbon instance.
-	 * @return {Ribbon} - Rendered Ribbon component.
-	 */
-	get mainRibbon() {
-		return this[MainRibbon];
-	}
+  /**
+   * Ribbon instance.
+   * @return {Ribbon} - Rendered Ribbon component.
+   */
+  get mainRibbon() {
+    return this[MainRibbon];
+  }
 
-	/**
-	 * Ribbon container
-	 * @return {HTMLElement} - React render target DOM element.
-	 */
-	get container() {
-		return this[Container];
-	}
+  /**
+   * Ribbon container
+   * @return {HTMLElement} - React render target DOM element.
+   */
+  get container() {
+    return this[Container];
+  }
 
-	/**
-	 * Ribbon container
-	 * @param {HTMLElement} container - React render target DOM element.
-	 */
-	set container( container ) {
-		if( !(container instanceof HTMLElement) ) throw '[RibbonCtrl] Input container must be a HTML DOM element.';
+  /**
+   * Ribbon container
+   * @param {HTMLElement} container - React render target DOM element.
+   */
+  set container( container ) {
+    if( !(container instanceof HTMLElement) ) throw '[RibbonCtrl] Input container must be a HTML DOM element.';
 
-		this[Container] = container;
-	}
+    this[Container] = container;
+  }
 
-	/**
-	 * RibbonTaskManager instance.
-	 * @return {RibbonTaskManager}
-	 */
-	get taskManager() {
-		return this[TaskManager];
-	}
+  /**
+   * RibbonTaskManager instance.
+   * @return {RibbonTaskManager}
+   */
+  get taskManager() {
+    return this[TaskManager];
+  }
 
-	/**
-	 * RibbonTaskExecuter instance.
-	 * @return {RibbonTaskExecuter}
-	 */
-	get taskExecuter() {
-		return this[TaskExecuter];
-	}
+  /**
+   * RibbonTaskExecuter instance.
+   * @return {RibbonTaskExecuter}
+   */
+  get taskExecuter() {
+    return this[TaskExecuter];
+  }
 
-	/**
-	 * Register RibbonTask.
-	 * @param {string} taskId - Task Identification.
-	 * @param {RibbonTask} task - Content instance of RibbonTask.
-	 * @return {bool} - If task is not type of RibbonTask or registered, it will return false.
-	 */
-	registerTask( taskId, task ) {
-		if( !this.taskManager ) return false;
+  /**
+   * Register RibbonTask.
+   * @param {string} taskId - Task Identification.
+   * @param {RibbonTask} task - Content instance of RibbonTask.
+   * @return {bool} - If task is not type of RibbonTask or registered, it will return false.
+   */
+  registerTask( taskId, task ) {
+    if( !this.taskManager ) return false;
 
-		return this.taskManager.register( taskId, task );
-	}
+    return this.taskManager.register( taskId, task );
+  }
 
-	/**
-	 * Unregister RibbonTask.
-	 * @param {string} taskId - Task Identification.
-	 * @return {bool} - If task is not registered, it will return false.
-	 */
-	unregisterTask( taskId ) {
-		if( !this.taskManager ) return false;
+  /**
+   * Unregister RibbonTask.
+   * @param {string} taskId - Task Identification.
+   * @return {bool} - If task is not registered, it will return false.
+   */
+  unregisterTask( taskId ) {
+    if( !this.taskManager ) return false;
 
-		return this.taskManager.unregister( taskId );
-	}
+    return this.taskManager.unregister( taskId );
+  }
 
-	/**
-	 * Execute registered RibbonTask.
-	 * @param {string} taskId - Task Identification.
-	 * @return {bool} - If task is not registered or failed to execute, it will return false.
-	 */
-	executeTask( taskId, options ) {
-		if( !this.taskExecuter ) return false;
+  /**
+   * Execute registered RibbonTask.
+   * @param {string} taskId - Task Identification.
+   * @return {bool} - If task is not registered or failed to execute, it will return false.
+   */
+  executeTask( taskId, options ) {
+    if( !this.taskExecuter ) return false;
 
-		return this.taskExecuter.execute( taskId, options );
-	}
+    return this.taskExecuter.execute( taskId, options );
+  }
 
-	/**
-	 * Discard executed RibbonTask.
-	 * @param {string} taskId - Task Identification.
-	 * @return {bool} - If task is not registered or failed to discard changes, it will return false.
-	 */
-	discardTask( taskId ) {
-		if( !this.taskExecuter ) return false;
+  /**
+   * Discard executed RibbonTask.
+   * @param {string} taskId - Task Identification.
+   * @return {bool} - If task is not registered or failed to discard changes, it will return false.
+   */
+  discardTask( taskId ) {
+    if( !this.taskExecuter ) return false;
 
-		return this.taskExecuter.discard( taskId );
-	}
+    return this.taskExecuter.discard( taskId );
+  }
 
-	/**
-	 * Start UI rendering.
-	 * @return {Promise} - Result.
-	 * @resolve {RibbonCtrl} - Self RibbonCtrl instance.
-	 * @reject {object} - Errors.
-	 */
-	run() {
-		const scope = this;
+  /**
+   * Start UI rendering.
+   * @return {Promise} - Result.
+   * @resolve {RibbonCtrl} - Self RibbonCtrl instance.
+   * @reject {object} - Errors.
+   */
+  run() {
+    const scope = this;
 
-		return new Promise( ( resolve, reject ) => {
-			try {
-				const container = scope.container;
-				const taskManager = scope.taskManager;
+    return new Promise( ( resolve, reject ) => {
+      try {
+        const container = scope.container;
+        const taskManager = scope.taskManager;
 
-				scope[MainRibbon] = ReactDOM.render( <Ribbon />, container );
-				scope[TaskExecuter] = new RibbonTaskExecuter( scope.mainRibbon, taskManager );
+        scope[MainRibbon] = ReactDOM.render( <Ribbon />, container );
+        scope[TaskExecuter] = new RibbonTaskExecuter( scope.mainRibbon, taskManager );
 
-				resolve( scope );
-			} catch( error ) {
-				reject( error );
-			}
-		});
-	}
+        resolve( scope );
+      } catch( error ) {
+        reject( error );
+      }
+    });
+  }
 }

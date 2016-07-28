@@ -1,9 +1,9 @@
 import gulp from 'gulp';
 import connect from 'gulp-connect';
+import eslint from 'gulp-eslint';
 import sourcemaps from 'gulp-sourcemaps';
 import cleanCSS from 'gulp-clean-css';
 import concat from 'gulp-concat';
-import gutil from 'gulp-util';
 import { rollup } from 'rollup';
 import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
@@ -23,7 +23,14 @@ gulp.task( 'connect', ()  => {
   });
 });
 
-gulp.task( 'scripts:main', ()  => {
+gulp.task( 'lint', () => {
+  return gulp.src( 'src/**/*.js' )
+              .pipe( eslint() )
+              .pipe( eslint.format() )
+              .pipe( eslint.failAfterError() );
+});
+
+gulp.task( 'scripts:main', [ 'lint' ], ()  => {
   return rollup({
     entry: 'src/js/index.js',
     external: [ 'react', 'react-dom', 'classnames' ],
@@ -167,7 +174,7 @@ gulp.task('html', function () {
 
 // For rollup livereload
 gulp.task( 'livereload', () => {
-    return gulp.src( './dist/*.js' )
+  return gulp.src( './dist/*.js' )
                 .pipe( connect.reload() );
 });
 

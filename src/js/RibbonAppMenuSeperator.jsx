@@ -13,35 +13,35 @@ import { newGUID } from './utility';
  * @class
  */
 export default class RibbonAppMenuSeperator extends React.Component {
-	/**
-	 * RibbonAppMenuSeperator constructor
-	 * @param {object} props - React component properties
-	 */
-	constructor( props ) {
-		super( props );
-	}
+  /**
+   * RibbonAppMenuSeperator constructor
+   * @param {object} props - React component properties
+   */
+  constructor( props ) {
+    super( props );
+  }
 
-	/**
-	 * Item type.
-	 * @return {string} - Item type for identification.
-	 */
-	get type() {
-		return 'ui-ribbon-seperator';
-	}
+  /**
+   * Item type.
+   * @return {string} - Item type for identification.
+   */
+  get type() {
+    return 'ui-ribbon-seperator';
+  }
 
-	render() {
-		return (
-			<li key={ this.id } id={ this.id} className="ui-ribbon-seperator">
-					<div className="ui-ribbon-seperator"></div>
-			</li>
-		);
-	}
+  render() {
+    return (
+      <li key={ this.id } id={ this.id} className="ui-ribbon-seperator">
+          <div className="ui-ribbon-seperator"></div>
+      </li>
+    );
+  }
 }
 
 RibbonAppMenuSeperator.propTypes = {
-	id: React.PropTypes.string.isRequired
+  id: React.PropTypes.string.isRequired
 };
 
 RibbonAppMenuSeperator.defaultProps = {
-	id: newGUID()
+  id: newGUID()
 };

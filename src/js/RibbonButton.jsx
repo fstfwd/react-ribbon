@@ -17,259 +17,259 @@ import { newGUID } from './utility';
  * @class
  */
 export default class RibbonButton extends RibbonItem {
-	/**
-	 * RibbonButton constructor
-	 * @param {object} props - React component properties
-	 */
-	constructor( props ) {
-		super( props );
+  /**
+   * RibbonButton constructor
+   * @param {object} props - React component properties
+   */
+  constructor( props ) {
+    super( props );
 
-		let icon = props.icon;
-		let tooltip = props.tooltip;
-		let toggleable = ( props.toggleable === true );
-		let clickHandler = props.clickHandler;
+    let icon = props.icon;
+    let tooltip = props.tooltip;
+    let toggleable = ( props.toggleable === true );
+    let clickHandler = props.clickHandler;
 
-		this.state = Object.assign( this.state,
-			{
-				icon,
-				tooltip,
-				toggleable,
-				clickHandler
-			});
+    this.state = Object.assign( this.state,
+      {
+        icon,
+        tooltip,
+        toggleable,
+        clickHandler
+      });
 
-		this.handleClick = this.handleClick.bind( this );
-		this.handleMouseOver = this.handleMouseOver.bind( this );
-		this.handleMouseOut = this.handleMouseOut.bind( this );
-	}
+    this.handleClick = this.handleClick.bind( this );
+    this.handleMouseOver = this.handleMouseOver.bind( this );
+    this.handleMouseOut = this.handleMouseOut.bind( this );
+  }
 
-	/**
-	 * Button role.
-	 * @return {string}
-	 */
-	get role() {
-		return this.props.role;
-	}
+  /**
+   * Button role.
+   * @return {string}
+   */
+  get role() {
+    return this.props.role;
+  }
 
-	/**
-	 * Button icon.
-	 * @return {string} - Button icon path.
-	 */
-	get icon() {
-		return this.state.icon;
-	}
-	
-	/**
-	 * Button icon.
-	 * @return {string} icon - Button icon path.
-	 */
-	set icon( icon ) {
-		if( typeof icon !== 'string' ) throw 'Input type should be a string.';
+  /**
+   * Button icon.
+   * @return {string} - Button icon path.
+   */
+  get icon() {
+    return this.state.icon;
+  }
 
-		const prop = { icon };
-		const onStateChange = this.props.onStateChange;
-		onStateChange && onStateChange( this.id, prop );
+  /**
+   * Button icon.
+   * @return {string} icon - Button icon path.
+   */
+  set icon( icon ) {
+    if( typeof icon !== 'string' ) throw 'Input type should be a string.';
 
-		this.setState( prop );
-	}
+    const prop = { icon };
+    const onStateChange = this.props.onStateChange;
+    onStateChange && onStateChange( this.id, prop );
 
-	/**
-	 * Button toggleable state.
-	 * @return {bool} - If true, it repsents button is toggled currently.
-	 */
-	get toggleable() {
-		return this.state.toggleable;
-	}
+    this.setState( prop );
+  }
 
-	/**
-	 * Button toggleable state.
-	 * @return {bool} [toggleable = false] - If true, it repsents button is toggled currently.
-	 */
-	set toggleable( toggleable = false ) {
-		const isToggleable = ( toggleable === true );
+  /**
+   * Button toggleable state.
+   * @return {bool} - If true, it repsents button is toggled currently.
+   */
+  get toggleable() {
+    return this.state.toggleable;
+  }
 
-		const prop = { toggleable: isToggleable };
-		const onStateChange = this.props.onStateChange;
-		onStateChange && onStateChange( this.id, prop );
+  /**
+   * Button toggleable state.
+   * @return {bool} [toggleable = false] - If true, it repsents button is toggled currently.
+   */
+  set toggleable( toggleable = false ) {
+    const isToggleable = ( toggleable === true );
 
-		this.setState( prop );
-	}
+    const prop = { toggleable: isToggleable };
+    const onStateChange = this.props.onStateChange;
+    onStateChange && onStateChange( this.id, prop );
 
-	/**
-	 * Button click eveent handler.
-	 * @return {Function} - Click eveent handler.
-	 */
-	get clickHandler() {
-		return this.state.clickHandler;
-	}
+    this.setState( prop );
+  }
 
-	/**
-	 * Button click eveent handler.
-	 * @param {Function} handler - Click eveent handler.
-	 */
-	set clickHandler( handler ) {
-		if( !(handler instanceof Function) )
-			throw 'Input clicking handler is invalid.';
+  /**
+   * Button click eveent handler.
+   * @return {Function} - Click eveent handler.
+   */
+  get clickHandler() {
+    return this.state.clickHandler;
+  }
 
-		const prop = { clickHandler: handler };
-		const onStateChange = this.props.onStateChange;
-		onStateChange && onStateChange( this.id, prop );
+  /**
+   * Button click eveent handler.
+   * @param {Function} handler - Click eveent handler.
+   */
+  set clickHandler( handler ) {
+    if( !(handler instanceof Function) )
+      throw 'Input clicking handler is invalid.';
 
-		this.setState( prop );
-	}
+    const prop = { clickHandler: handler };
+    const onStateChange = this.props.onStateChange;
+    onStateChange && onStateChange( this.id, prop );
 
-	/**
-	 * Button tooltip comopent.
-	 * @return {RibbonTooltip} - Rendered RibbonTooltip component.
-	 */
-	get tooltip() {
-		return this.refs.tooltip;
-	}
+    this.setState( prop );
+  }
 
-	set tooltip( tooltip ) {
-		if( !(tooltip instanceof RibbonTooltipData) )
-			throw '[RibbonButton] Input tooltip data is invalid.';
+  /**
+   * Button tooltip comopent.
+   * @return {RibbonTooltip} - Rendered RibbonTooltip component.
+   */
+  get tooltip() {
+    return this.refs.tooltip;
+  }
 
-		const prop = { tooltip };
-		const onStateChange = this.props.onStateChange;
-		onStateChange && onStateChange( this.id, prop );
+  set tooltip( tooltip ) {
+    if( !(tooltip instanceof RibbonTooltipData) )
+      throw '[RibbonButton] Input tooltip data is invalid.';
 
-		this.setState( prop );
-	}
+    const prop = { tooltip };
+    const onStateChange = this.props.onStateChange;
+    onStateChange && onStateChange( this.id, prop );
 
-	/**
-	 * Create tooltip
-	 * @return {RibbonTooltip} - RibbonTooltip instance (not rendered).
-	 */
-	createTooltip() {
-		const scope = this;
-		const data = this.state.tooltip;
-		if( !data ) return;
+    this.setState( prop );
+  }
 
-		if( !(data instanceof RibbonTooltipData) && data )
-			return console.log( '%c[RibbonButton] Input tooltip data is invalid.', 'color:red;' );
+  /**
+   * Create tooltip
+   * @return {RibbonTooltip} - RibbonTooltip instance (not rendered).
+   */
+  createTooltip() {
+    const scope = this;
+    const data = this.state.tooltip;
+    if( !data ) return;
 
-		const updateTooltip = ( id, data ) => {
-			let tooltip = scope.state.tooltip;
+    if( !(data instanceof RibbonTooltipData) && data )
+      return console.log( '%c[RibbonButton] Input tooltip data is invalid.', 'color:red;' );
 
-			if( tooltip.id !== id ) return;
+    const updateTooltip = ( id, data ) => {
+      let tooltip = scope.state.tooltip;
 
-			Object.assign( tooltip, data );
+      if( tooltip.id !== id ) return;
 
-			const prop = { tooltip };
-			const onStateChange = scope.props.onStateChange;
-			onStateChange && onStateChange( scope.id, prop );
+      Object.assign( tooltip, data );
 
-			scope.setState( prop );
-		};
+      const prop = { tooltip };
+      const onStateChange = scope.props.onStateChange;
+      onStateChange && onStateChange( scope.id, prop );
 
-		return (
-			<RibbonTooltip
-				key={ data.id }
-				id={ data.id }
-				name={ data.name }
-				displayName={ data.title }
-				content={ data.content }
-				enabled={ data.enabled }
-				hidden={ data.hidden }
-				onStateChange={ updateTooltip }
-				ref="tooltip" />
-		);
-	}
+      scope.setState( prop );
+    };
 
-	/**
-	 * Button clicking event handler.
-	 */
-	handleClick( event ) {
-		if( !this.enabled ) return;
+    return (
+      <RibbonTooltip
+        key={ data.id }
+        id={ data.id }
+        name={ data.name }
+        displayName={ data.title }
+        content={ data.content }
+        enabled={ data.enabled }
+        hidden={ data.hidden }
+        onStateChange={ updateTooltip }
+        ref="tooltip" />
+    );
+  }
 
-		const clickHandler = this.props.clickHandler;
-		clickHandler && clickHandler( event );
-	}
+  /**
+   * Button clicking event handler.
+   */
+  handleClick( event ) {
+    if( !this.enabled ) return;
 
-	/**
-	 * Button hovering over event handler.
-	 */
-	handleMouseOver() {
-		const tooltip = this.tooltip;
-		tooltip && tooltip.show();
-	}
+    const clickHandler = this.props.clickHandler;
+    clickHandler && clickHandler( event );
+  }
 
-	/**
-	 * Button hovering out event handler.
-	 */
-	handleMouseOut() {
-		const tooltip = this.tooltip;
-		tooltip && tooltip.hide();
-	}
+  /**
+   * Button hovering over event handler.
+   */
+  handleMouseOver() {
+    const tooltip = this.tooltip;
+    tooltip && tooltip.show();
+  }
 
-	render() {
-		const outerDynCSS = ClassNames({
-			'ui-ribbon-disabled': ( this.enabled === false ),
-			'ui-ribbon-invisible': this.hidden
-		});
+  /**
+   * Button hovering out event handler.
+   */
+  handleMouseOut() {
+    const tooltip = this.tooltip;
+    tooltip && tooltip.hide();
+  }
 
-		const innerDynCSS = ClassNames({
-			'ui-ribbon-active': this.actived
-		});
+  render() {
+    const outerDynCSS = ClassNames({
+      'ui-ribbon-disabled': ( this.enabled === false ),
+      'ui-ribbon-invisible': this.hidden
+    });
 
-		const formatLegend = ( legend ) => {
-			const texts = legend.split( '\\n' );
-			let guid = newGUID();
-			let result = <span key={ guid } id={ guid }>{ legend }</span>;
+    const innerDynCSS = ClassNames({
+      'ui-ribbon-active': this.actived
+    });
 
-			if( texts.length > 1 ) {
-				result = texts.map(( txt ) => {
-						let guid = newGUID();
-						return ( 
-							<span key={ guid } id={ guid }>
-								{ txt }
-								<br />
-							</span>
-						);
-					});
-			}
-			return result;
-		};
+    const formatLegend = ( legend ) => {
+      const texts = legend.split( '\\n' );
+      let guid = newGUID();
+      let result = <span key={ guid } id={ guid }>{ legend }</span>;
 
-		return (
-			<a
-				key={ this.id }
-				id={ this.id }
-				className={ outerDynCSS }
-				onClick={ this.handleClick }
-				onMouseOver={ this.handleMouseOver }
-				onMouseOut={ this.handleMouseOut } >
+      if( texts.length > 1 ) {
+        result = texts.map(( txt ) => {
+          let guid = newGUID();
+          return (
+              <span key={ guid } id={ guid }>
+                { txt }
+                <br />
+              </span>
+          );
+        });
+      }
+      return result;
+    };
 
-				<div
-					role={ this.role }
-					className={ "ui-ribbon-button " + this.type + " ui-ribbon-relative ui-ribbon-inline ui-ribbon-center " + innerDynCSS } >
+    return (
+      <a
+        key={ this.id }
+        id={ this.id }
+        className={ outerDynCSS }
+        onClick={ this.handleClick }
+        onMouseOver={ this.handleMouseOver }
+        onMouseOut={ this.handleMouseOut } >
 
-					<img src={ this.icon } />
-					<div className="ui-ribbon-button-legend">
-						{ formatLegend( this.displayName ) }
-					</div>
-					{ this.createTooltip() }
-				</div>
-			</a>
-		);
-	}
+        <div
+          role={ this.role }
+          className={ 'ui-ribbon-button ' + this.type + ' ui-ribbon-relative ui-ribbon-inline ui-ribbon-center ' + innerDynCSS } >
+
+          <img src={ this.icon } />
+          <div className="ui-ribbon-button-legend">
+            { formatLegend( this.displayName ) }
+          </div>
+          { this.createTooltip() }
+        </div>
+      </a>
+    );
+  }
 }
 
 RibbonButton.propTypes = {
-	id: React.PropTypes.string.isRequired,
-	role: React.PropTypes.string.isRequired,
-	type: React.PropTypes.string.isRequired,
-	icon: React.PropTypes.string,
-	tooltip: React.PropTypes.instanceOf( RibbonTooltipData ),
-	toggleable: React.PropTypes.bool,
-	clickHandler: React.PropTypes.func,
-	onStateChange: React.PropTypes.func
+  id: React.PropTypes.string.isRequired,
+  role: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string.isRequired,
+  icon: React.PropTypes.string,
+  tooltip: React.PropTypes.instanceOf( RibbonTooltipData ),
+  toggleable: React.PropTypes.bool,
+  clickHandler: React.PropTypes.func,
+  onStateChange: React.PropTypes.func
 };
 
 RibbonButton.defaultProps = {
-	id: newGUID(),
-	role: 'ui-ribbon-button',
-	type: 'ui-ribbon-button',
-	icon: '',
-	toggleable: false
+  id: newGUID(),
+  role: 'ui-ribbon-button',
+  type: 'ui-ribbon-button',
+  icon: '',
+  toggleable: false
 };

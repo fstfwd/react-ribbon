@@ -17,106 +17,106 @@ const TaskManager = Symbol( 'taskManager' );
  * @classdesc	Class for executing tasks to create or modify Ribbon contents.
  */
 export default class RibbonTaskExecuter {
-	/**
-	 * RibbonTaskExecuter constructor.
-	 * @param {Ribbon} ribbon - Rendered Ribbon component.
-	 * @param {RibbonTaskManager} taskManager -	RibbonTaskManager instance.
-	 */
-	constructor( ribbon, taskManager ) {
-		if( !(ribbon instanceof Ribbon ) ) throw 'No Ribbon instance available.';
-		if( !(taskManager instanceof RibbonTaskManager ) ) throw 'No RibbonTaskManager instance available.';
+  /**
+   * RibbonTaskExecuter constructor.
+   * @param {Ribbon} ribbon - Rendered Ribbon component.
+   * @param {RibbonTaskManager} taskManager -	RibbonTaskManager instance.
+   */
+  constructor( ribbon, taskManager ) {
+    if( !(ribbon instanceof Ribbon ) ) throw 'No Ribbon instance available.';
+    if( !(taskManager instanceof RibbonTaskManager ) ) throw 'No RibbonTaskManager instance available.';
 
-		this[RibbonInst] = ribbon;
-		this[TaskManager] = taskManager;
-		this[Tasks] = {};
-	}
+    this[RibbonInst] = ribbon;
+    this[TaskManager] = taskManager;
+    this[Tasks] = {};
+  }
 
-	/**
-	 * Rendered Ribbon component.
-	 * @return {Ribbon}
-	 */
-	get ribbon() {
-		return this[RibbonInst];
-	}
+  /**
+   * Rendered Ribbon component.
+   * @return {Ribbon}
+   */
+  get ribbon() {
+    return this[RibbonInst];
+  }
 
-	/**
-	 * Task	manager instance.
-	 * @return {RibbonTaskManager}
-	 */
-	get manager() {
-		return this[TaskManager];
-	}
+  /**
+   * Task	manager instance.
+   * @return {RibbonTaskManager}
+   */
+  get manager() {
+    return this[TaskManager];
+  }
 
-	/**
-	 * All executed tasks.
-	 * @return {RibbonTask[]}
-	 */
-	get tasks() {
-		return this[Tasks];
-	}
+  /**
+   * All executed tasks.
+   * @return {RibbonTask[]}
+   */
+  get tasks() {
+    return this[Tasks];
+  }
 
-	/**
-	 * Execute registered task.
-	 * @param {string} taskId - Task Identification.
-	 * @return {bool} - If task is not registered or failed to execute, it will return false.
-	 */
-	execute( taskId, options ) {
-		let result = false;
+  /**
+   * Execute registered task.
+   * @param {string} taskId - Task Identification.
+   * @return {bool} - If task is not registered or failed to execute, it will return false.
+   */
+  execute( taskId, options ) {
+    let result = false;
 
-		if( !this.getTask( taskId ) ) {
-			const taskClass = this.manager.getTask( taskId );
+    if( !this.getTask( taskId ) ) {
+      const taskClass = this.manager.getTask( taskId );
 
-			if( taskClass ) {
-				const task = new taskClass( this.ribbon, options );
-				result = task.execute();
+      if( taskClass ) {
+        const task = new taskClass( this.ribbon, options );
+        result = task.execute();
 
-				if( result === true ) {
-					this[Tasks][taskId] = task;
+        if( result === true ) {
+          this[Tasks][taskId] = task;
 
-					console.log( '[RibbonTaskExecuter] Task executed: `%s`.', taskId );
-				}
-			} else {
-				console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
-			}
-		} else {
-			console.log( '[RibbonTaskExecuter] Task already executed: `%s`.', taskId );
-		}
+          console.log( '[RibbonTaskExecuter] Task executed: `%s`.', taskId );
+        }
+      } else {
+        console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
+      }
+    } else {
+      console.log( '[RibbonTaskExecuter] Task already executed: `%s`.', taskId );
+    }
 
-		return result;
-	}
+    return result;
+  }
 
-	/**
-	 * Discard executed task.
-	 * @param {string} taskId - Task Identification.
-	 * @return {bool} - If task is not registered or failed to discard changes, it will return false.
-	 */
-	discard( taskId ) {
-		let result = false;
-		const task = this.getTask( taskId );
+  /**
+   * Discard executed task.
+   * @param {string} taskId - Task Identification.
+   * @return {bool} - If task is not registered or failed to discard changes, it will return false.
+   */
+  discard( taskId ) {
+    let result = false;
+    const task = this.getTask( taskId );
 
-		if( !task ) {
-			console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
-		} else {
-			result = task.discard();
-			if( !result ) throw 'Failed to discard chnages in task: `' + taskId + '`.';
+    if( !task ) {
+      console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
+    } else {
+      result = task.discard();
+      if( !result ) throw 'Failed to discard chnages in task: `' + taskId + '`.';
 
-			delete this[Tasks][taskId];
-			console.log( '[RibbonTaskExecuter] Task content discarded: `%s`.', taskId );
-		}
+      delete this[Tasks][taskId];
+      console.log( '[RibbonTaskExecuter] Task content discarded: `%s`.', taskId );
+    }
 
-		return result;
-	}
+    return result;
+  }
 
-	/**
-	 * Get executed task by given id.
-	 * @param {string} taskId - Task Identification.
-	 * @return {null | RibbonTask} - Return task definition if task is existed.
-	 */
-	getTask( taskId ) {
-		if( this.tasks.hasOwnProperty( taskId ) ) {
-			return this.tasks[ taskId ];
-		}
+  /**
+   * Get executed task by given id.
+   * @param {string} taskId - Task Identification.
+   * @return {null | RibbonTask} - Return task definition if task is existed.
+   */
+  getTask( taskId ) {
+    if( this.tasks.hasOwnProperty( taskId ) ) {
+      return this.tasks[ taskId ];
+    }
 
-		return null;
-	}
+    return null;
+  }
 }

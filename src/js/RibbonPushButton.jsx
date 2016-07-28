@@ -13,33 +13,33 @@ import RibbonButton from './RibbonButton';
  * @class
  */
 export default class RibbonPushButton extends RibbonButton {
-	/**
-	 * RibbonPushButton constructor
-	 * @param {object} props - React component properties
-	 */
-	constructor( props ) {
-		super( props );
-	}
+  /**
+   * RibbonPushButton constructor
+   * @param {object} props - React component properties
+   */
+  constructor( props ) {
+    super( props );
+  }
 
-	render() {
-		const dynCSS = ClassNames({
-			'ui-ribbon-disabled': ( this.enabled === false ),
-			'ui-ribbon-invisible': this.hidden
-		});
+  render() {
+    const dynCSS = ClassNames({
+      'ui-ribbon-disabled': ( this.enabled === false ),
+      'ui-ribbon-invisible': this.hidden
+    });
 
-		return (
-			<div className={ "ui-ribbon-button-group ui-ribbon-inline " + dynCSS }>
-				{ super.render() }
-			</div>
-		);
-	}
+    return (
+      <div className={ 'ui-ribbon-button-group ui-ribbon-inline ' + dynCSS }>
+        { super.render() }
+      </div>
+    );
+  }
 }
 
 RibbonPushButton.propTypes = {
-	type: React.PropTypes.string.isRequired,
-	onStateChange: React.PropTypes.func
+  type: React.PropTypes.string.isRequired,
+  onStateChange: React.PropTypes.func
 };
 
 RibbonPushButton.defaultProps = {
-	type: 'ui-ribbon-button-big'
+  type: 'ui-ribbon-button-big'
 };

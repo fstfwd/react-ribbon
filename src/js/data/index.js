@@ -20,20 +20,20 @@ import RibbonGroupData from './RibbonGroupData';
 import RibbonRadioButtonGroupData from './RibbonRadioButtonGroupData';
 
 const Data = {
-	RibbonBaseData,
-	RibbonTitlebarData,
-	RibbonTabData,
-	RibbonAppTabData,
-	RibbonPanelData,
-	RibbonAppMenuItemData,
-	RibbonAppMenuButtonData,
-	RibbonItemData,
-	RibbonButtonData,
-	RibbonPushButtonData,
-	RibbonToggleButtonData,
-	RibbonTooltipData,
-	RibbonGroupData,
-	RibbonRadioButtonGroupData
+  RibbonBaseData,
+  RibbonTitlebarData,
+  RibbonTabData,
+  RibbonAppTabData,
+  RibbonPanelData,
+  RibbonAppMenuItemData,
+  RibbonAppMenuButtonData,
+  RibbonItemData,
+  RibbonButtonData,
+  RibbonPushButtonData,
+  RibbonToggleButtonData,
+  RibbonTooltipData,
+  RibbonGroupData,
+  RibbonRadioButtonGroupData
 };
 
 export default Data;

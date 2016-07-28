@@ -27,27 +27,27 @@ import Utility from './utility';
 import Data from './data';
 
 const ReactRibbon = {
-	Ribbon,
-	RibbonBase,
-	RibbonTab,
-	RibbonAppTab,
-	RibbonAppMenuItem,
-	RibbonAppMenuButton,
-	RibbonPanel,
-	RibbonTitlebar,
-	RibbonItem,
-	RibbonButton,
-	RibbonTooltip,
-	RibbonPushButton,
-	RibbonToggleButton,
-	RibbonGroup,
-	RibbonRadioButtonGroup,
-	RibbonCtrl,
-	RibbonTask,
-	RibbonTaskManager,
-	RibbonTaskExecuter,
-	Utility,
-	Data
+  Ribbon,
+  RibbonBase,
+  RibbonTab,
+  RibbonAppTab,
+  RibbonAppMenuItem,
+  RibbonAppMenuButton,
+  RibbonPanel,
+  RibbonTitlebar,
+  RibbonItem,
+  RibbonButton,
+  RibbonTooltip,
+  RibbonPushButton,
+  RibbonToggleButton,
+  RibbonGroup,
+  RibbonRadioButtonGroup,
+  RibbonCtrl,
+  RibbonTask,
+  RibbonTaskManager,
+  RibbonTaskExecuter,
+  Utility,
+  Data
 };
 
 /**
