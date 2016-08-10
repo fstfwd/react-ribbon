@@ -1,10 +1,11 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('classnames'), require('react-dom')) :
-  typeof define === 'function' && define.amd ? define('react-ribbon', ['react', 'classnames', 'react-dom'], factory) :
-  (global.ReactRibbon = factory(global.React,global.classNames,global.ReactDOM));
-}(this, function (React,ClassNames,ReactDOM) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('visionmedia-debug'), require('classnames'), require('react-dom')) :
+  typeof define === 'function' && define.amd ? define('react-ribbon', ['react', 'visionmedia-debug', 'classnames', 'react-dom'], factory) :
+  (global.ReactRibbon = factory(global.React,global.debug,global.classNames,global.ReactDOM));
+}(this, function (React,debug,ClassNames,ReactDOM) { 'use strict';
 
   React = 'default' in React ? React['default'] : React;
+  debug = 'default' in debug ? debug['default'] : debug;
   ClassNames = 'default' in ClassNames ? ClassNames['default'] : ClassNames;
   ReactDOM = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
 
@@ -12,7 +13,6 @@
    * Create new RFC4122 v4 GUID based on timeStamp.
    * @return {string}	- New guid
    */
-
   var newGUID = function newGUID() {
     var d = new Date().getTime();
 
@@ -73,11 +73,18 @@
     return ns;
   };
 
+  /**
+   * Debugging output
+   */
+  var stderr = debug('react-ribbon');
+  stderr.log = console.log.bind(console);
+
   var utility = {
     newGUID: newGUID,
     isGUID: isGUID,
     findItem: findItem,
-    namespace: namespace
+    namespace: namespace,
+    stderr: stderr
   };
 
   var classCallCheck = function (instance, Constructor) {
@@ -1101,7 +1108,7 @@
         var data = this.state.tooltip;
         if (!data) return;
 
-        if (!(data instanceof RibbonTooltipData) && data) return console.log('%c[RibbonButton] Input tooltip data is invalid.', 'color:red;');
+        if (!(data instanceof RibbonTooltipData) && data) return stderr('%c[RibbonButton] Input tooltip data is invalid.', 'color:red;');
 
         var updateTooltip = function updateTooltip(id, data) {
           var tooltip = scope.state.tooltip;
@@ -1792,7 +1799,7 @@
         var idx = this.items.findIndex(function (item) {
           return item.id == itemData.id || item.name === itemData.name;
         });
-        if (!(itemData instanceof RibbonButtonData) || idx !== -1) return console.log('%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;');
+        if (!(itemData instanceof RibbonButtonData) || idx !== -1) return stderr('%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;');
 
         var items = this.state.items.concat(itemData);
 
@@ -2003,7 +2010,7 @@
     }, {
       key: 'addItem',
       value: function addItem(itemData) {
-        if (!(itemData instanceof RibbonToggleButtonData)) return console.log('%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;');
+        if (!(itemData instanceof RibbonToggleButtonData)) return stderr('%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;');
 
         var item = get(Object.getPrototypeOf(RibbonRadioButtonGroup.prototype), 'addItem', this).call(this, itemData);
 
@@ -2292,7 +2299,7 @@
         var idx = this.items.findIndex(function (item) {
           return item.id == itemData.id || item.name === itemData.name;
         });
-        if (!(itemData instanceof RibbonItemData) || idx !== -1) return console.log('%c[RibbonPanel] Input itemData is invalid or duplicate.', 'color:red;');
+        if (!(itemData instanceof RibbonItemData) || idx !== -1) return stderr('%c[RibbonPanel] Input itemData is invalid or duplicate.', 'color:red;');
 
         var items = this.state.items.concat(itemData);
 
@@ -2636,7 +2643,7 @@
         var idx = this.panels.findIndex(function (panel) {
           return panel.id == panelData.id || panel.name === panelData.name;
         });
-        if (!(panelData instanceof RibbonPanelData) || idx !== -1) return console.log('%c[RibbonTab] Input panelData is invalid or duplicate.', 'color:red;');
+        if (!(panelData instanceof RibbonPanelData) || idx !== -1) return stderr('%c[RibbonTab] Input panelData is invalid or duplicate.', 'color:red;');
 
         panelData.seperator = this.panels.length !== 0;
         var panels = this.state.panels.concat(panelData);
@@ -3435,7 +3442,7 @@
         var idx = this.items.findIndex(function (item) {
           return item.id === itemData.id || item.name === itemData.name;
         });
-        if (!(itemData instanceof RibbonAppMenuItemData) || idx !== -1) return console.log('%c[RibbonAppTab] Input itemData is invalid or duplicate.', 'color:red;');
+        if (!(itemData instanceof RibbonAppMenuItemData) || idx !== -1) return stderr('%c[RibbonAppTab] Input itemData is invalid or duplicate.', 'color:red;');
 
         var items = this.state.items.concat(itemData);
 
@@ -3459,7 +3466,7 @@
     }, {
       key: 'activeItemById',
       value: function activeItemById(itemId) {
-        if (typeof itemId !== 'string') return console.log('%c[RibbonAppTab] ItemId should be a string.', 'color:red;');
+        if (typeof itemId !== 'string') return stderr('%c[RibbonAppTab] ItemId should be a string.', 'color:red;');
 
         var item = this.items.find(function (item) {
           return item.id === itemId;
@@ -3902,7 +3909,7 @@
         var idx = this.tabs.findIndex(function (tab) {
           return tab.id == tabData.id || tab.name === tabData.name;
         });
-        if (!(tabData instanceof RibbonTabData) || idx !== -1) return console.log('%c[Ribbon] Input tabData is invalid or duplicate.', 'color:red;');
+        if (!(tabData instanceof RibbonTabData) || idx !== -1) return stderr('%c[Ribbon] Input tabData is invalid or duplicate.', 'color:red;');
 
         tabData.actived = this.tabs.length === 1;
         var tabs = this.state.tabs.concat(tabData);
@@ -3919,7 +3926,7 @@
     }, {
       key: 'activeTabById',
       value: function activeTabById(tabId) {
-        if (typeof tabId !== 'string') return console.log('%c[Ribbon] TabId should be a string.', 'color:red;');
+        if (typeof tabId !== 'string') return stderr('%c[Ribbon] TabId should be a string.', 'color:red;');
 
         var tab = this.tabs.find(function (tab) {
           return tab.id === tabId;
@@ -4313,13 +4320,13 @@
             if (result === true) {
               this[Tasks$1][taskId] = task;
 
-              console.log('[RibbonTaskExecuter] Task executed: `%s`.', taskId);
+              stderr('[RibbonTaskExecuter] Task executed: `%s`.', taskId);
             }
           } else {
-            console.log('[RibbonTaskExecuter] Task not found: `%s`.', taskId);
+            stderr('[RibbonTaskExecuter] Task not found: `%s`.', taskId);
           }
         } else {
-          console.log('[RibbonTaskExecuter] Task already executed: `%s`.', taskId);
+          stderr('[RibbonTaskExecuter] Task already executed: `%s`.', taskId);
         }
 
         return result;
@@ -4338,13 +4345,13 @@
         var task = this.getTask(taskId);
 
         if (!task) {
-          console.log('[RibbonTaskExecuter] Task not found: `%s`.', taskId);
+          stderr('[RibbonTaskExecuter] Task not found: `%s`.', taskId);
         } else {
           result = task.discard();
           if (!result) throw 'Failed to discard chnages in task: `' + taskId + '`.';
 
           delete this[Tasks$1][taskId];
-          console.log('[RibbonTaskExecuter] Task content discarded: `%s`.', taskId);
+          stderr('[RibbonTaskExecuter] Task content discarded: `%s`.', taskId);
         }
 
         return result;
