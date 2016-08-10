@@ -19,7 +19,7 @@ import RibbonPushButtonData from './data/RibbonPushButtonData';
 import RibbonToggleButtonData from './data/RibbonToggleButtonData';
 import RibbonGroupData from './data/RibbonGroupData';
 import RibbonRadioButtonGroupData from './data/RibbonRadioButtonGroupData';
-import { newGUID } from './utility';
+import { newGUID, stderr } from './Utility';
 
 const Items = Symbol( 'items' );
 
@@ -114,7 +114,7 @@ export default class RibbonPanel extends RibbonBase {
   addItem( itemData ) {
     const idx = this.items.findIndex( ( item ) => ( item.id == itemData.id || item.name === itemData.name ) );
     if( !(itemData instanceof RibbonItemData) || idx !== -1 )
-      return console.log( '%c[RibbonPanel] Input itemData is invalid or duplicate.', 'color:red;' );
+      return stderr( '%c[RibbonPanel] Input itemData is invalid or duplicate.', 'color:red;' );
 
     const items = this.state.items.concat( itemData );
 

@@ -18,6 +18,10 @@ const {
   RibbonAppMenuButtonData
 } = Data;
 
+const {
+  stderr
+} = Utility;
+
 /**
  * RibbonDemoTask
  * @extends RibbonTask
@@ -122,45 +126,45 @@ export default class RibbonDemoTask extends RibbonTask {
 
       $('#demo-active-tab-home').click( () => {
         tab.actived = true;
-        console.log( 'Set tab actived status to true: ', tab.actived === true );
+        stderr( '[RibbonDemoTask] Set tab actived status to true: %c%s', 'color:blue;', tab.actived === true );
       });
 
       $('#demo-deactive-tab-home').click( () => {
         tab.actived = false;
-        console.log( 'Set tab actived status to false: ', tab.actived === false );
+        stderr( '[RibbonDemoTask] Set tab actived status to false: %c%s', 'color:blue;', tab.actived === false );
       });
 
       $('#demo-active-tab-test').click( () => {
         testTab.actived = true;
-        console.log( 'Set tab actived status to true: ', testTab.actived === true );
+        stderr( '[RibbonDemoTask] Set tab actived status to true: %c%s', 'color:blue;', testTab.actived === true );
       });
 
       $('#demo-deactive-tab-test').click( () => {
         testTab.actived = false;
-        console.log( 'Set tab actived status to false: ', testTab.actived === false );
+        stderr( '[RibbonDemoTask] Set tab actived status to false: %c%s', 'color:blue;', testTab.actived === false );
       });
 
       $('#demo-active-button-new-mail').click( () => {
         newMailBtn.actived = true;
-        console.log( 'Set button actived status to true: ', newMailBtn.actived === true );
+        stderr( '[RibbonDemoTask] Set button actived status to true: %c%s', 'color:blue;', newMailBtn.actived === true );
       });
 
       $('#demo-deactive-button-new-mail').click( () => {
         newMailBtn.actived = false;
-        console.log( 'Set button actived status to false: ', newMailBtn.actived === false );
+        stderr( '[RibbonDemoTask] Set button actived status to false: %c%s', 'color:blue;', newMailBtn.actived === false );
       });
 
       $('#demo-enable-button-new-mail').click( () => {
         newMailBtn.enabled = true;
-        console.log( 'Set button enabled status to true: ', newMailBtn.enabled === true );
+        stderr( '[RibbonDemoTask] Set button enabled status to true: %c%s', 'color:blue;', newMailBtn.enabled === true );
       });
 
       $('#demo-disable-button-new-mail').click( () => {
         newMailBtn.enabled = false;
-        console.log( 'Set button enabled status to false: ', newMailBtn.enabled === false );
+        stderr( '[RibbonDemoTask] Set button enabled status to false: %c%s', 'color:blue;', newMailBtn.enabled === false );
       });
     } catch( error ) {
-      console.warn( error );
+      stderr( '%c[RibbonDemoTask] %s', 'color:red;', error );
       return false;
     }
 

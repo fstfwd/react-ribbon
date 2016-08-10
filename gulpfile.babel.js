@@ -24,7 +24,14 @@ gulp.task( 'connect', ()  => {
 });
 
 gulp.task( 'lint', () => {
-  return gulp.src( 'src/**/*.js' )
+  return gulp.src( 'src/js/**/*.js' )
+              .pipe( eslint() )
+              .pipe( eslint.format() )
+              .pipe( eslint.failAfterError() );
+});
+
+gulp.task( 'lint:test', () => {
+  return gulp.src( 'test/src/js/**/*.js' )
               .pipe( eslint() )
               .pipe( eslint.format() )
               .pipe( eslint.failAfterError() );
@@ -33,7 +40,7 @@ gulp.task( 'lint', () => {
 gulp.task( 'scripts:main', [ 'lint' ], ()  => {
   return rollup({
     entry: 'src/js/index.js',
-    external: [ 'react', 'react-dom', 'classnames' ],
+    external: [ 'react', 'react-dom', 'classnames', 'visionmedia-debug' ],
     plugins: [
       babel( babelOptions ),
       nodeResolve({
@@ -51,7 +58,8 @@ gulp.task( 'scripts:main', [ 'lint' ], ()  => {
       globals: {
         'react': 'React',
         'react-dom': 'ReactDOM',
-        'classnames': 'classNames'
+        'classnames': 'classNames',
+        'visionmedia-debug': 'debug'
       }
     });
 
@@ -64,16 +72,17 @@ gulp.task( 'scripts:main', [ 'lint' ], ()  => {
       globals: {
         'react': 'React',
         'react-dom': 'ReactDOM',
-        'classnames': 'classNames'
+        'classnames': 'classNames',
+        'visionmedia-debug': 'debug'
       }
     });
   });
 });
 
-gulp.task( 'scripts:uglify', ()  => {
+gulp.task( 'scripts:uglify', [ 'lint' ], ()  => {
   return rollup({
     entry: 'src/js/index.js',
-    external: [ 'react', 'react-dom', 'classnames' ],
+    external: [ 'react', 'react-dom', 'classnames', 'visionmedia-debug' ],
     plugins: [
       babel( babelOptions ),
       nodeResolve({
@@ -92,7 +101,8 @@ gulp.task( 'scripts:uglify', ()  => {
       globals: {
         'react': 'React',
         'react-dom': 'ReactDOM',
-        'classnames': 'classNames'
+        'classnames': 'classNames',
+        'visionmedia-debug': 'debug'
       }
     });
 
@@ -105,7 +115,8 @@ gulp.task( 'scripts:uglify', ()  => {
       globals: {
         'react': 'React',
         'react-dom': 'ReactDOM',
-        'classnames': 'classNames'
+        'classnames': 'classNames',
+        'visionmedia-debug': 'debug'
       }
     });
   });
@@ -113,10 +124,10 @@ gulp.task( 'scripts:uglify', ()  => {
 
 gulp.task( 'scripts', [ 'scripts:main', 'scripts:uglify' ] );
 
-gulp.task( 'scripts:test', ()  => {
+gulp.task( 'scripts:test', [ 'lint:test' ], ()  => {
   return rollup({
-    entry: 'src/js/test/index.js',
-    external: [ 'react', 'react-dom', 'classnames', 'jquery', 'react-ribbon' ],
+    entry: 'test/src/js/index.js',
+    external: [ 'react', 'react-dom', 'classnames', 'jquery', 'react-ribbon', 'visionmedia-debug' ],
     plugins: [
       babel( babelOptions ),
       nodeResolve({
@@ -136,7 +147,8 @@ gulp.task( 'scripts:test', ()  => {
         'react-dom': 'ReactDOM',
         'classnames': 'classNames',
         'jquery': 'jQuery',
-        'react-ribbon': 'ReactRibbon'
+        'react-ribbon': 'ReactRibbon',
+        'visionmedia-debug': 'debug'
       }
     });
 
@@ -151,7 +163,8 @@ gulp.task( 'scripts:test', ()  => {
         'react-dom': 'ReactDOM',
         'classnames': 'classNames',
         'jquery': 'jQuery',
-        'react-ribbon': 'ReactRibbon'
+        'react-ribbon': 'ReactRibbon',
+        'visionmedia-debug': 'debug'
       }
     });
   });
@@ -182,7 +195,7 @@ gulp.task( 'watch', ()  => {
   gulp.watch( [ './test/*.html' ], [ 'html' ] );
   gulp.watch( [ './src/css/*.css' ], [ 'styleSheets' ] );
   gulp.watch( [ './src/js/*.{js,jsx}', './src/js/data/*.{js,jsx}' ], [ 'scripts', 'scripts:test', 'livereload' ] );
-  gulp.watch( [ './src/js/test/*.{js,jsx}', './src/js/test/**/*.{js,jsx}' ], [ 'scripts:test', 'livereload' ] );
+  gulp.watch( [ './test/src/js/*.{js,jsx}', './test/src/js/**/*.{js,jsx}' ], [ 'scripts:test', 'livereload' ] );
 });
 
 gulp.task( 'default', [ 'connect', 'scripts', 'scripts:test', 'styleSheets', 'html', 'watch' ] );

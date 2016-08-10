@@ -9,7 +9,7 @@ import ClassNames from 'classnames';
 import RibbonGroup from './RibbonGroup';
 import RibbonToggleButton from './RibbonToggleButton';
 import RibbonToggleButtonData from './data/RibbonToggleButtonData';
-import { newGUID } from './utility';
+import { newGUID, stderr } from './Utility';
 
 const Current = Symbol( 'current' );
 const Default = Symbol( 'default' );
@@ -95,7 +95,7 @@ export default class RibbonRadioButtonGroup extends RibbonGroup {
    */
   addItem( itemData ) {
     if( !(itemData instanceof RibbonToggleButtonData) )
-      return console.log( '%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;' );
+      return stderr( '%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;' );
 
     const item = super.addItem( itemData );
 

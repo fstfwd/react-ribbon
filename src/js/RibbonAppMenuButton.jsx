@@ -6,7 +6,7 @@
 
 import React from 'react';
 import RibbonAppMenuItem from './RibbonAppMenuItem';
-import { newGUID } from './utility';
+import { newGUID } from './Utility';
 
 /**
  * RibbonAppMenuButton

@@ -4,7 +4,7 @@
 
 'use strict';
 
-import { newGUID } from '../utility';
+import { newGUID } from '../Utility';
 
 const Id = Symbol( 'id' );
 const Name = Symbol( 'name' );

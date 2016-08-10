@@ -14,7 +14,7 @@ import RibbonItemData from './data/RibbonItemData';
 import RibbonButtonData from './data/RibbonButtonData';
 import RibbonPushButtonData from './data/RibbonPushButtonData';
 import RibbonToggleButtonData from './data/RibbonToggleButtonData';
-import { newGUID } from './utility';
+import { newGUID, stderr } from './Utility';
 
 const Items = Symbol( 'items' );
 
@@ -101,7 +101,7 @@ export default class RibbonGroup extends RibbonItem {
   addItem( itemData ) {
     const idx = this.items.findIndex( ( item ) => ( item.id == itemData.id || item.name === itemData.name ) );
     if( !(itemData instanceof RibbonButtonData) || idx !== -1 )
-      return console.log( '%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;' );
+      return stderr( '%c[RibbonGroup] Input itemData is invalid or duplicate.', 'color:red;' );
 
     const items = this.state.items.concat( itemData );
 

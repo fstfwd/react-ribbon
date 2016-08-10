@@ -1,9 +1,1 @@
-**/.*
-gulpfile.js
-gulpfile.babel.js
-bower.json
-jsconfig.json
-typings.json
-.vscode/
-typings/
 test/

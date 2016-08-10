@@ -1,10 +1,11 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery'), require('react-ribbon')) :
-  typeof define === 'function' && define.amd ? define('react-ribbon-test', ['jquery', 'react-ribbon'], factory) :
-  (global.ReactRibbonTest = factory(global.jQuery,global.ReactRibbon));
-}(this, function ($,ReactRibbon) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery'), require('visionmedia-debug'), require('react-ribbon')) :
+  typeof define === 'function' && define.amd ? define('react-ribbon-test', ['jquery', 'visionmedia-debug', 'react-ribbon'], factory) :
+  (global.ReactRibbonTest = factory(global.jQuery,global.debug,global.ReactRibbon));
+}(this, function ($,debug,ReactRibbon) { 'use strict';
 
   $ = 'default' in $ ? $['default'] : $;
+  debug = 'default' in debug ? debug['default'] : debug;
   ReactRibbon = 'default' in ReactRibbon ? ReactRibbon['default'] : ReactRibbon;
 
   var RibbonCtrl = ReactRibbon.RibbonCtrl;
@@ -17,8 +18,12 @@
   var ribbonCtrl = new RibbonCtrl();
 
   var RibbonTask = ReactRibbon.RibbonTask;
+  var Utility = ReactRibbon.Utility;
   var Data = ReactRibbon.Data;
-  if (!ribbonCtrl) console.error('[RibbonTest] Failed to create ribbonCtrl instance.');
+  var stderr = Utility.stderr;
+
+
+  if (!ribbonCtrl) stderr('%c[RibbonTest] Failed to create ribbonCtrl instance.', 'color:red;');
 
   var classCallCheck = function (instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -76,6 +81,7 @@
   var RibbonRadioButtonGroupData = Data.RibbonRadioButtonGroupData;
   var RibbonAppMenuItemData = Data.RibbonAppMenuItemData;
   var RibbonAppMenuButtonData = Data.RibbonAppMenuButtonData;
+  var stderr$1 = Utility.stderr;
 
   /**
    * RibbonDemoTask
@@ -221,46 +227,46 @@
 
             $('#demo-active-tab-home').click(function () {
               tab.actived = true;
-              console.log('Set tab actived status to true: ', tab.actived === true);
+              stderr$1('[RibbonDemoTask] Set tab actived status to true: %c%s', 'color:blue;', tab.actived === true);
             });
 
             $('#demo-deactive-tab-home').click(function () {
               tab.actived = false;
-              console.log('Set tab actived status to false: ', tab.actived === false);
+              stderr$1('[RibbonDemoTask] Set tab actived status to false: %c%s', 'color:blue;', tab.actived === false);
             });
 
             $('#demo-active-tab-test').click(function () {
               testTab.actived = true;
-              console.log('Set tab actived status to true: ', testTab.actived === true);
+              stderr$1('[RibbonDemoTask] Set tab actived status to true: %c%s', 'color:blue;', testTab.actived === true);
             });
 
             $('#demo-deactive-tab-test').click(function () {
               testTab.actived = false;
-              console.log('Set tab actived status to false: ', testTab.actived === false);
+              stderr$1('[RibbonDemoTask] Set tab actived status to false: %c%s', 'color:blue;', testTab.actived === false);
             });
 
             $('#demo-active-button-new-mail').click(function () {
               newMailBtn.actived = true;
-              console.log('Set button actived status to true: ', newMailBtn.actived === true);
+              stderr$1('[RibbonDemoTask] Set button actived status to true: %c%s', 'color:blue;', newMailBtn.actived === true);
             });
 
             $('#demo-deactive-button-new-mail').click(function () {
               newMailBtn.actived = false;
-              console.log('Set button actived status to false: ', newMailBtn.actived === false);
+              stderr$1('[RibbonDemoTask] Set button actived status to false: %c%s', 'color:blue;', newMailBtn.actived === false);
             });
 
             $('#demo-enable-button-new-mail').click(function () {
               newMailBtn.enabled = true;
-              console.log('Set button enabled status to true: ', newMailBtn.enabled === true);
+              stderr$1('[RibbonDemoTask] Set button enabled status to true: %c%s', 'color:blue;', newMailBtn.enabled === true);
             });
 
             $('#demo-disable-button-new-mail').click(function () {
               newMailBtn.enabled = false;
-              console.log('Set button enabled status to false: ', newMailBtn.enabled === false);
+              stderr$1('[RibbonDemoTask] Set button enabled status to false: %c%s', 'color:blue;', newMailBtn.enabled === false);
             });
           })();
         } catch (error) {
-          console.warn(error);
+          stderr$1('%c[RibbonDemoTask] %s', 'color:red;', error);
           return false;
         }
 
@@ -289,6 +295,7 @@
   var RibbonToggleButtonData$1 = Data.RibbonToggleButtonData;
   var RibbonTooltipData$1 = Data.RibbonTooltipData;
   var RibbonRadioButtonGroupData$1 = Data.RibbonRadioButtonGroupData;
+  var stderr$2 = Utility.stderr;
 
   /**
    * RibbonViewerDemoTask
@@ -372,36 +379,36 @@
 
             $('#demo-active-tab-basic').click(function () {
               tab.actived = true;
-              console.log('Set tab actived status to true: ', tab.actived === true);
+              stderr$2('[RibbonViewerDemoTask] Set tab actived status to true: %c%s', 'color:blue;', tab.actived === true);
             });
 
             $('#demo-deactive-tab-basic').click(function () {
               tab.actived = false;
-              console.log('Set tab actived status to false: ', tab.actived === false);
+              stderr$2('[RibbonViewerDemoTask] Set tab actived status to false: %c%s', 'color:blue;', tab.actived === false);
             });
 
             $('#demo-active-button-download').click(function () {
               dwnBtn.actived = true;
-              console.log('Set button actived status to true: ', dwnBtn.actived === true);
+              stderr$2('[RibbonViewerDemoTask] Set button actived status to true: %c%s', 'color:blue;', dwnBtn.actived === true);
             });
 
             $('#demo-deactive-button-download').click(function () {
               dwnBtn.actived = false;
-              console.log('Set button actived status to false: ', dwnBtn.actived === false);
+              stderr$2('[RibbonViewerDemoTask] Set button actived status to false: %c%s', 'color:blue;', dwnBtn.actived === false);
             });
 
             $('#demo-enable-button-download').click(function () {
               dwnBtn.enabled = true;
-              console.log('Set button enabled status to true: ', dwnBtn.enabled === true);
+              stderr$2('[RibbonViewerDemoTask] Set button enabled status to true: %c%s', 'color:blue;', dwnBtn.enabled === true);
             });
 
             $('#demo-disable-button-download').click(function () {
               dwnBtn.enabled = false;
-              console.log('Set button enabled status to false: ', dwnBtn.enabled === false);
+              stderr$2('[RibbonViewerDemoTask] Set button enabled status to false: %c%s', 'color:blue;', dwnBtn.enabled === false);
             });
           })();
         } catch (error) {
-          console.warn(error);
+          stderr$2('%c[RibbonViewerDemoTask] %s', 'color:red;', error);
           return false;
         }
 
@@ -429,6 +436,10 @@
   };
 
   $(function () {
+    // Enable debug message
+    debug.enable('*');
+
+    // Ribbon init
     ribbonCtrl.container = document.getElementById('ribbon-root');
     ribbonCtrl.run().then(function (self) {
       // Execute demo task.

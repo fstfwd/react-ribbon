@@ -11,7 +11,7 @@ import RibbonAppMenuItem from './RibbonAppMenuItem';
 import RibbonAppMenuButton from './RibbonAppMenuButton';
 import RibbonAppMenuItemData from './data/RibbonAppMenuItemData';
 import RibbonAppMenuButtonData from './data/RibbonAppMenuButtonData';
-import { newGUID } from './utility';
+import { newGUID, stderr } from './Utility';
 
 const Items = Symbol( 'items' );
 const Current = Symbol( 'current' );
@@ -74,7 +74,7 @@ export default class RibbonAppTab extends RibbonBase {
    */
   set current( id ) {
     const current = this.items.find( ( item ) => item.id === id && item.type !== 'ui-ribbon-app-menu-button' && item.enabled );
-    if( !current ) throw '[RibbonAppTab] Input id not exists or disabled.'
+    if( !current ) throw '[RibbonAppTab] Input id not exists or disabled.';
 
     current.actived = true;
     this[Current] = id;
@@ -101,7 +101,7 @@ export default class RibbonAppTab extends RibbonBase {
    */
   set default( id ) {
     const item = this.items.find( ( item ) => item.id === id && item.type !== 'ui-ribbon-app-menu-button' && item.enabled );
-    if( !item ) throw '[RibbonAppTab] Input id not exists or disabled.'
+    if( !item ) throw '[RibbonAppTab] Input id not exists or disabled.';
 
     this[Default] = id;
 
@@ -203,7 +203,7 @@ export default class RibbonAppTab extends RibbonBase {
   addItem( itemData ) {
     const idx = this.items.findIndex( ( item ) => ( item.id === itemData.id || item.name === itemData.name ) );
     if( !(itemData instanceof RibbonAppMenuItemData) || idx !== -1 )
-      return console.log( '%c[RibbonAppTab] Input itemData is invalid or duplicate.', 'color:red;' );
+      return stderr( '%c[RibbonAppTab] Input itemData is invalid or duplicate.', 'color:red;' );
 
     const items = this.state.items.concat( itemData );
 
@@ -225,7 +225,7 @@ export default class RibbonAppTab extends RibbonBase {
    * @param {string} itemId - Item Id.
    */
   activeItemById( itemId ) {
-    if( typeof itemId !== 'string' ) return console.log( '%c[RibbonAppTab] ItemId should be a string.', 'color:red;' );
+    if( typeof itemId !== 'string' ) return stderr( '%c[RibbonAppTab] ItemId should be a string.', 'color:red;' );
 
     const item = this.items.find( ( item ) => item.id === itemId );
     if( !item ) throw '[RibbonAppTab] Input item id not exists.';

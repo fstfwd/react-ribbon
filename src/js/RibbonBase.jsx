@@ -5,7 +5,7 @@
 'use strict';
 
 import React from 'react';
-import { newGUID } from './utility';
+import { newGUID } from './Utility';
 
 /**
  * RibbonBase

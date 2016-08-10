@@ -11,7 +11,7 @@ import RibbonTitlebarData from './data/RibbonTitlebarData';
 import RibbonTitlebar from './RibbonTitlebar';
 import RibbonTab from './RibbonTab';
 import RibbonAppTab from './RibbonAppTab';
-import { newGUID } from './utility';
+import { newGUID, stderr } from './Utility';
 
 const Tabs = Symbol( 'tabs' );
 
@@ -65,7 +65,7 @@ export default class Ribbon extends React.Component {
   addTab( tabData ) {
     const idx = this.tabs.findIndex( ( tab ) => ( tab.id == tabData.id || tab.name === tabData.name ) );
     if( !(tabData instanceof RibbonTabData) || idx !== -1 )
-      return console.log( '%c[Ribbon] Input tabData is invalid or duplicate.', 'color:red;' );
+      return stderr( '%c[Ribbon] Input tabData is invalid or duplicate.', 'color:red;' );
 
     tabData.actived = ( this.tabs.length === 1 );
     const tabs = this.state.tabs.concat( tabData );
@@ -79,7 +79,7 @@ export default class Ribbon extends React.Component {
    * @param {string} tabId - Tab Id.
    */
   activeTabById( tabId ) {
-    if( typeof tabId !== 'string' ) return console.log( '%c[Ribbon] TabId should be a string.', 'color:red;' );
+    if( typeof tabId !== 'string' ) return stderr( '%c[Ribbon] TabId should be a string.', 'color:red;' );
 
     const tab = this.tabs.find( ( tab ) => tab.id === tabId );
     if( !tab ) throw '[Ribbon] Input tab id not exists.';
@@ -171,7 +171,7 @@ export default class Ribbon extends React.Component {
             items={ tab.items }
             onClick={ scope.handleTabClick }
             onStateChange={ updateTab }
-            ref={ ( c ) => { if( c ) scope.tabs.push( c ) } } />
+            ref={ ( c ) => { if( c ) scope.tabs.push( c ); } } />
         );
       } else {
         return (
@@ -187,7 +187,7 @@ export default class Ribbon extends React.Component {
             panels={ tab.panels }
             onClick={ scope.handleTabClick }
             onStateChange={ updateTab }
-            ref={ ( c ) => { if( c ) scope.tabs.push( c ) } } />
+            ref={ ( c ) => { if( c ) scope.tabs.push( c ); } } />
         );
       }
     };

@@ -5,7 +5,8 @@
 'use strict';
 
 import $ from 'jquery';
-import ribbonCtrl, { Utility } from './modules';
+import debug from 'visionmedia-debug';
+import ribbonCtrl from './modules';
 import './tasks';
 
 export default {
@@ -13,6 +14,10 @@ export default {
 };
 
 $(() => {
+  // Enable debug message
+  debug.enable( '*' );
+
+  // Ribbon init
   ribbonCtrl.container = document.getElementById( 'ribbon-root' );
   ribbonCtrl.run()
             .then( ( self ) => {

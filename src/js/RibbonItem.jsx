@@ -6,7 +6,7 @@
 
 import React from 'react';
 import RibbonBase from './RibbonBase';
-import { newGUID } from './utility';
+import { newGUID } from './Utility';
 
 /**
  * RibbonItem

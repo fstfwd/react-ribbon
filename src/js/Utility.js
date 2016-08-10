@@ -4,6 +4,8 @@
 
 'use strict';
 
+import debug from 'visionmedia-debug';
+
 /**
  * Create new RFC4122 v4 GUID based on timeStamp.
  * @return {string}	- New guid
@@ -52,7 +54,7 @@ export const findItem = ( items = [], predicate ) => {
  * Create namespace.
  * @param {string} s - namespace (e.g. 'RiibonUI.Ribbon').
  * @return {Object} - Namespace,
- */	
+ */
 export const namespace = ( s ) => {
   var ns = typeof window !== 'undefined' && window !== null ? window : self;
 
@@ -65,11 +67,18 @@ export const namespace = ( s ) => {
   return ns;
 };
 
+/**
+ * Debugging output
+ */
+export const stderr = debug( 'react-ribbon' );
+stderr.log = console.log.bind( console );
+
 const utility = {
   newGUID,
   isGUID,
   findItem,
-  namespace
+  namespace,
+  stderr
 };
 
 export default utility;

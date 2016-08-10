@@ -6,6 +6,7 @@
 
 import Ribbon from './Ribbon';
 import RibbonTaskManager from './RibbonTaskManager';
+import { stderr } from './Utility';
 
 const RibbonInst = Symbol( 'ribbon' );
 const Tasks = Symbol( 'tasks' );
@@ -73,13 +74,13 @@ export default class RibbonTaskExecuter {
         if( result === true ) {
           this[Tasks][taskId] = task;
 
-          console.log( '[RibbonTaskExecuter] Task executed: `%s`.', taskId );
+          stderr( '[RibbonTaskExecuter] Task executed: `%s`.', taskId );
         }
       } else {
-        console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
+        stderr( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
       }
     } else {
-      console.log( '[RibbonTaskExecuter] Task already executed: `%s`.', taskId );
+      stderr( '[RibbonTaskExecuter] Task already executed: `%s`.', taskId );
     }
 
     return result;
@@ -95,13 +96,13 @@ export default class RibbonTaskExecuter {
     const task = this.getTask( taskId );
 
     if( !task ) {
-      console.log( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
+      stderr( '[RibbonTaskExecuter] Task not found: `%s`.', taskId );
     } else {
       result = task.discard();
       if( !result ) throw 'Failed to discard chnages in task: `' + taskId + '`.';
 
       delete this[Tasks][taskId];
-      console.log( '[RibbonTaskExecuter] Task content discarded: `%s`.', taskId );
+      stderr( '[RibbonTaskExecuter] Task content discarded: `%s`.', taskId );
     }
 
     return result;

@@ -16,6 +16,10 @@ const {
   RibbonRadioButtonGroupData
 } = Data;
 
+const {
+  stderr
+} = Utility;
+
 /**
  * RibbonViewerDemoTask
  * @extends RibbonTask
@@ -78,35 +82,35 @@ export default class RibbonViewerDemoTask extends RibbonTask {
 
       $('#demo-active-tab-basic').click( () => {
         tab.actived = true;
-        console.log( 'Set tab actived status to true: ', tab.actived === true );
+        stderr( '[RibbonViewerDemoTask] Set tab actived status to true: %c%s', 'color:blue;', tab.actived === true );
       });
 
       $('#demo-deactive-tab-basic').click( () => {
         tab.actived = false;
-        console.log( 'Set tab actived status to false: ', tab.actived === false );
+        stderr( '[RibbonViewerDemoTask] Set tab actived status to false: %c%s', 'color:blue;', tab.actived === false );
       });
 
       $('#demo-active-button-download').click( () => {
         dwnBtn.actived = true;
-        console.log( 'Set button actived status to true: ', dwnBtn.actived === true );
+        stderr( '[RibbonViewerDemoTask] Set button actived status to true: %c%s', 'color:blue;', dwnBtn.actived === true );
       });
 
       $('#demo-deactive-button-download').click( () => {
         dwnBtn.actived = false;
-        console.log( 'Set button actived status to false: ', dwnBtn.actived === false );
+        stderr( '[RibbonViewerDemoTask] Set button actived status to false: %c%s', 'color:blue;', dwnBtn.actived === false );
       });
 
       $('#demo-enable-button-download').click( () => {
         dwnBtn.enabled = true;
-        console.log( 'Set button enabled status to true: ', dwnBtn.enabled === true );
+        stderr( '[RibbonViewerDemoTask] Set button enabled status to true: %c%s', 'color:blue;', dwnBtn.enabled === true );
       });
 
       $('#demo-disable-button-download').click( () => {
         dwnBtn.enabled = false;
-        console.log( 'Set button enabled status to false: ', dwnBtn.enabled === false );
+        stderr( '[RibbonViewerDemoTask] Set button enabled status to false: %c%s', 'color:blue;', dwnBtn.enabled === false );
       });
     } catch( error ) {
-      console.warn( error );
+      stderr( '%c[RibbonViewerDemoTask] %s', 'color:red;', error );
       return false;
     }
 

@@ -9,7 +9,7 @@ import ClassNames from 'classnames';
 import RibbonBase from './RibbonBase';
 import RibbonPanel from './RibbonPanel';
 import RibbonPanelData from './data/RibbonPanelData';
-import { newGUID } from './utility';
+import { newGUID, stderr } from './Utility';
 
 const Panels = Symbol( 'panels' );
 
@@ -142,7 +142,7 @@ export default class RibbonTab extends RibbonBase {
   addPanel( panelData ) {
     const idx = this.panels.findIndex( ( panel ) => ( panel.id == panelData.id || panel.name === panelData.name ) );
     if( !(panelData instanceof RibbonPanelData) || idx !== -1 )
-      return console.log( '%c[RibbonTab] Input panelData is invalid or duplicate.', 'color:red;' );
+      return stderr( '%c[RibbonTab] Input panelData is invalid or duplicate.', 'color:red;' );
 
     panelData.seperator = ( this.panels.length !== 0 );
     const panels = this.state.panels.concat( panelData );

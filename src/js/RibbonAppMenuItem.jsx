@@ -8,7 +8,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import RibbonBase from './RibbonBase';
 import RibbonAppMenuSeperator from './RibbonAppMenuSeperator';
-import { newGUID } from './utility';
+import { newGUID } from './Utility';
 
 /**
  * RibbonAppMenuItem

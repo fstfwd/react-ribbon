@@ -23,7 +23,7 @@ import RibbonCtrl from './RibbonCtrl';
 import RibbonTask from './RibbonTask';
 import RibbonTaskManager from './RibbonTaskManager';
 import RibbonTaskExecuter from './RibbonTaskExecuter';
-import Utility from './utility';
+import Utility from './Utility';
 import Data from './data';
 
 const ReactRibbon = {

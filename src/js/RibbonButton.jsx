@@ -9,7 +9,7 @@ import ClassNames from 'classnames';
 import RibbonItem from './RibbonItem';
 import RibbonTooltip from './RibbonTooltip';
 import RibbonTooltipData from './data/RibbonTooltipData';
-import { newGUID } from './utility';
+import { newGUID, stderr } from './Utility';
 
 /**
  * RibbonButton
@@ -146,7 +146,7 @@ export default class RibbonButton extends RibbonItem {
     if( !data ) return;
 
     if( !(data instanceof RibbonTooltipData) && data )
-      return console.log( '%c[RibbonButton] Input tooltip data is invalid.', 'color:red;' );
+      return stderr( '%c[RibbonButton] Input tooltip data is invalid.', 'color:red;' );
 
     const updateTooltip = ( id, data ) => {
       let tooltip = scope.state.tooltip;
