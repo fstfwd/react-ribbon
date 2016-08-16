@@ -111,7 +111,7 @@ gulp.task( 'scripts:uglify', [ 'lint' ], ()  => {
       moduleName: 'ReactRibbon',
       moduleId: 'react-ribbon',
       sourceMap: true,
-      dest: 'dist/bundle.mim.js',
+      dest: 'dist/bundle.min.js',
       globals: {
         'react': 'React',
         'react-dom': 'ReactDOM',
