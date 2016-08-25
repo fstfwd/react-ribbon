@@ -1,6 +1,6 @@
 {
   "name": "react-ribbon",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Office Ribbon like ui written in ReactJS.",
   "main": "./dist/bundle.js",
   "jsnext:main": "./src/js/index.js",
@@ -41,6 +41,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^4.1.0",
     "gulp-eslint": "^3.0.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "react": "^15.2.1",
