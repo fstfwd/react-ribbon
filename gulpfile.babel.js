@@ -172,10 +172,14 @@ gulp.task( 'scripts:test', [ 'lint:test' ], ()  => {
 
 gulp.task( 'styleSheets', ()  => {
   return gulp.src( './src/css/index.css' )
-          .pipe( concat( 'bundle.css' ) )
           .pipe( sourcemaps.init( { loadMaps: true } ) )
+          .pipe( concat( 'bundle.css' ) )
           .pipe( cleanCSS() )
-          .pipe( sourcemaps.write( '.' ) )
+          .pipe( sourcemaps.write( '.', {
+            sourceRoot: function() {
+              return '../src/css';
+            }
+          }))
           .pipe( gulp.dest( 'dist' ) )
           .pipe( connect.reload() );
 });
