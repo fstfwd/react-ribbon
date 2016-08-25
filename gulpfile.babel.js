@@ -4,7 +4,7 @@ import eslint from 'gulp-eslint';
 import sourcemaps from 'gulp-sourcemaps';
 import cleanCSS from 'gulp-clean-css';
 import concat from 'gulp-concat';
-import rename from 'gulp-rename';
+import replace from 'gulp-replace';
 import { rollup } from 'rollup';
 import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
@@ -176,8 +176,13 @@ gulp.task( 'styleSheets', ()  => {
           .pipe( sourcemaps.init( { loadMaps: true } ) )
           .pipe( concat( 'bundle.css' ) )
           .pipe( cleanCSS() )
-          .pipe( sourcemaps.write( '.' ) )
-          .pipe( rename( { dirname:'../src/css' } ) )
+          .pipe( sourcemaps.write( '.', {
+            sourceRoot: 'src/css'
+          }))
+          .pipe( replace(
+              '"sourceRoot":"src/css"',
+              '"sourceRoot":"../src/css"'
+          ))
           .pipe( gulp.dest( 'dist' ) )
           .pipe( connect.reload() );
 });
