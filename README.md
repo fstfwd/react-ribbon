@@ -6,9 +6,10 @@ Here is the [Demo](http://yiskang.github.io/react-ribbon/).
 
 ## Dependencies
 
-- react: ^15.2.1
-- react-dom: ^115.2.1
-- classnames: ^22.2.5
+- react: ^15.3.2
+- react-dom: ^15.3.2
+- classnames: ^2.2.5
+- visionmedia-debug: ^2.2.0
 
 ## Installation
 
