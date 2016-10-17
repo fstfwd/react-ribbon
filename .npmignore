@@ -1,1 +1,9 @@
+**/.*
+gulpfile.js
+gulpfile.babel.js
+jsconfig.json
+typings.json
+test.*
+.vscode/
+typings/
 test/
